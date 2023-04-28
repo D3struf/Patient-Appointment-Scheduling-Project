@@ -1,0 +1,2 @@
+Name,Department,Schedule,Email,Contact_Number
+Dr. John Smith,OPD,Monday to Friday - 9:00am to 5:00pm,john.smith@tupmc.com,09123456789

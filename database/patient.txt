@@ -1,3 +1,2 @@
-Name,Age,Sex,Birthday,ContactNumber
-Jeanne May Carolino,female,11/22/03,09123456789,19
-John Paul S. Monter,male,11/22/03,09123456789,19
+Name,Sex,Birthday,Contact_Number,Appointment_Date,Age
+John Paul Monter,male,11/11/11,12312312312,Apr 29 2023,19
