@@ -179,11 +179,12 @@ void patient_Information()
     strcpy(x.appointment_doctor, "\0");
     strcpy(x.appointment_doctor_contact_number, "\0");
     strcpy(x.appointment_code, "\0");
-    x.payment_status = 0;
+    x.payment_status = 1;
 
     add_Account(x);
     printf("\nAccount Created Successfully!!\n");
     system("pause");
+    display();
 }
 
 int search_Account()
@@ -224,9 +225,14 @@ void display()
 
     while (p != NULL)
     {
-        printf("%s %s\n", p->accounts.username, p->accounts.password);
-        printf("%s\n", p->accounts.appointment_code);
-        printf("%d\n", p->accounts.age);
+        printf("USERNAME:           %s\n", p->accounts.username);
+        printf("PASSWORD:           %s\n", p->accounts.password);
+        printf("NAME:               %s\n", p->accounts.name);
+        printf("AGE:                %d\n", p->accounts.age);
+        printf("SEX:                %s\n", p->accounts.sex);
+        printf("BIRTHDAY:           %s\n", p->accounts.bday);
+        printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
+        printf("%s\n", p->accounts.appointment_date);
         p = p->next;
     }
     system("pause");
@@ -332,8 +338,8 @@ void appointment_Schedule()
             {
                 break;
             }
-                
         }
+        q = q->next;
     }
 
     // get the current date and time
@@ -371,7 +377,7 @@ void appointment_Schedule()
 
     // Get the user input
     int choice;
-    char *code = malloc(sizeof(char) * 5);
+    char *code;
     while (1)
     {
         int full = 0;
@@ -526,7 +532,7 @@ void payment_Method()
     {
         if (strcmp(q->accounts.username, global_Username) == 0)
         {
-            if (q->accounts.payment_status == 1)
+            if (q->accounts.payment_status == 2)
             {
                 printf("You have already paid your appointment\n");
                 system("pause");
@@ -537,6 +543,7 @@ void payment_Method()
                 break;
             }
         }
+        q = q->next;
     }
 
     int choice;
@@ -567,7 +574,7 @@ void payment_Method()
     }
 
     // Prompt for payment details
-    int amount, status = 0;
+    int amount, status = 1;
     char bank_name[101], account_number[101];
     char *temp = malloc(sizeof(char) * 5);
     if (choice == 2)
@@ -586,7 +593,7 @@ void payment_Method()
             printf("Payment Successful\n");
             printf("Thank You For Using our Program!!\n");
             system("pause");
-            status = 1;
+            status = 2;
         }
         else if (amount > RESERVATION_FEE)
         {
@@ -596,7 +603,7 @@ void payment_Method()
             printf("Change: %d.00\n", amount - RESERVATION_FEE);
             printf("Thank You For Using our Program!!\n");
             system("pause");
-            status = 1;
+            status = 2;
         }
         else 
         {
@@ -604,17 +611,17 @@ void payment_Method()
             system("pause");
             return;
         }
-        // Update the payment status
-        LIST *p;
-        p = L;
+    }
+    // Update the payment status
+    LIST *p;
+    p = L;
 
-        while (p != NULL)
+    while (p != NULL)
+    {
+        if (strcmp(p->accounts.username, global_Username) == 0)
         {
-            if (strcmp(p->accounts.username, global_Username) == 0)
-            {
-                p->accounts.payment_status = 1;
-                break;
-            }
+            p->accounts.payment_status = status;
+            break;
         }
     }
     return;
@@ -631,7 +638,7 @@ char *appointment_code()
     
     // generate a random number
     srand(time(NULL));
-    num = rand() % 999 + 100;
+    num = rand() % 899 + 100;
     num2 = rand() % 26 + 65;
 
     // convert the number to character
@@ -676,6 +683,8 @@ void init()
 
 void save()
 {
+    LIST *p;
+    p = L;
     FILE *outFile, *outFile2, *outFile3;
 
     outFile = fopen(ACCOUNT_FILE, "w+");
@@ -690,18 +699,19 @@ void save()
     else
     {
         fprintf(outFile, "Username,Password\n");
-        fprintf(outFile2, "Name,Sex,Birthday,Contact_Number,Appointment_Date,Age\n");
-        fprintf(outFile3, "Name,Department,Schedule,Email,Contact_Number,Code,Payment_Status\n");
-        while (L != NULL)
+        fprintf(outFile2, "Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n");
+        fprintf(outFile3, "Name,Department,Schedule,Email,Contact_Number,Payment_Status\n");
+        while (p != NULL)
         {
-            fprintf(outFile, "%s,%s\n", L->accounts.username, L->accounts.password);
-            fprintf(outFile2, "%s,%s,%s,%s,%s,%s,%d,%d\n", L->accounts.name, L->accounts.sex, L->accounts.bday, L->accounts.contact_number, L->accounts.appointment_date, L->accounts.appointment_code, L->accounts.payment_status, L->accounts.age);
-            fprintf(outFile3, "%s,%s,%s,%s,%s\n", L->accounts.appointment_doctor, L->accounts.appointment_doctor_department, L->accounts.appointment_doctor_schedule, L->accounts.appointment_doctor_email, L->accounts.appointment_doctor_contact_number);
-            L = L->next;
+            fprintf(outFile, "%s,%s\n", p->accounts.username, p->accounts.password);
+            fprintf(outFile2, "%s,%s,%s,%s,%s,%s,%d\n", p->accounts.name, p->accounts.sex, p->accounts.bday, p->accounts.contact_number, p->accounts.appointment_date, p->accounts.appointment_code, p->accounts.age);
+            fprintf(outFile3, "%s,%s,%s,%s,%s,%d\n", p->accounts.appointment_doctor, p->accounts.appointment_doctor_department, p->accounts.appointment_doctor_schedule, p->accounts.appointment_doctor_email, p->accounts.appointment_doctor_contact_number, p->accounts.payment_status);
+            p = p->next;
         }
     }
     fclose(outFile);
     fclose(outFile2);
+    fclose(outFile3);
 }
 
 void retrieve()
@@ -709,11 +719,11 @@ void retrieve()
     FILE *inFile, *inFile2, *inFile3;
     ACCOUNT z;
     int i = 0;
-    char line[41], line2[81], line3[101];
+    char line[1001], line2[1001], line3[1001];
 
-    inFile = fopen(ACCOUNT_FILE, "r+");
-    inFile2 = fopen(PATIENT_FILE, "r+");
-    inFile3 = fopen(DOCTOR_FILE, "r+");
+    inFile = fopen(ACCOUNT_FILE, "r");
+    inFile2 = fopen(PATIENT_FILE, "r");
+    inFile3 = fopen(DOCTOR_FILE, "r");
 
     if (inFile == NULL || inFile2 == NULL || inFile3 == NULL)
     {
@@ -722,24 +732,26 @@ void retrieve()
     }
     else
     {
+        fscanf(inFile, "%s\n", line);
+        fscanf(inFile2, "%s\n", line2);
+        fscanf(inFile3, "%s\n", line3);
+
         while (!feof(inFile))
         {
             if (i == 0)
             {
-                fscanf(inFile, "%s\n", line);
-                fscanf(inFile2, "%s\n", line2);
-                fscanf(inFile3, "%s\n", line3);
                 i = 1;
             }
             else
             {
                 fscanf(inFile, " %[^,],%s\n", z.username, z.password);
-                fscanf(inFile2, " %[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.name, z.sex, z.bday, z.contact_number, z.appointment_date, z.appointment_code, &z.payment_status, &z.age);
-                fscanf(inFile3, " %[^,],%[^,],%[^,],%[^,],%[^,]\n", z.appointment_doctor, z.appointment_doctor_department, z.appointment_doctor_schedule, z.appointment_doctor_email, z.appointment_doctor_contact_number);
+                fscanf(inFile2, " %[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.name, z.sex, z.bday, z.contact_number, z.appointment_date, z.appointment_code, &z.age);
+                fscanf(inFile3, " %[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.appointment_doctor, z.appointment_doctor_department, z.appointment_doctor_schedule, z.appointment_doctor_email, z.appointment_doctor_contact_number, &z.payment_status);
                 add_Account(z);
             }
         }
     }
     fclose(inFile);
     fclose(inFile2);
+    fclose(inFile3);
 }

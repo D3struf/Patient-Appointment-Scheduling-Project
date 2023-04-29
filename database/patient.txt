@@ -1,3 +1,5 @@
-Name,Sex,Birthday,Contact_Number,Appointment_Date,Age
-Almira Jill Garcia,Female,11/22/03,0981234567,May 01 2023,W129,1,19
-John Paul Monter,Male,03/24/06,09987234125,May 01 2023,T763,1,19
+Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age
+Almira Jill Garcia,Female,11/22/03,0981234567,May 01 2023,W190,19
+Jeanne May Carolino,Female,11/22/03,09123543567,May 01 2023,U405,19
+John Paul Monter,Male,03/24/06,09987234125,May 01 2023,T673,19
+Kent Henry,male,11/12/00,0981726354,May 02 2023,N485,23
