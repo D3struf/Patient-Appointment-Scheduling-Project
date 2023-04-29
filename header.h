@@ -11,6 +11,8 @@
 #define PATIENT_FILE "./database/patient.txt"
 #define DOCTOR_FILE "./database/doctor.txt"
 #define FOLDER "./database/Schedules/"
+#define HOSPITAL_NAME "TUP-Manila Medical Center"
+#define RESERVATION_FEE 150
 #define ENTER 13
 #define TAB 9
 #define BKSP 8
@@ -36,6 +38,7 @@ typedef struct account {
     char appointment_doctor_contact_number[12];
     char appointment_code[5];
     int age;
+    int payment_status;
 }ACCOUNT;
 
 typedef struct appointments {
@@ -91,6 +94,8 @@ void appointment_Schedule();
 void view_Schedule();
 DOCTOR appoint_Doctor();
 char *appointment_code();
+void payment_Method();
+char *confirmation_code();
 
 // ===============================
 // Database Functions

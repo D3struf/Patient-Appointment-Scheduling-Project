@@ -37,7 +37,7 @@ int main(void)
     // Main Menu
     while(1)
     {
-        choice2 = menu(2);
+        choice2 = menu(3);
         switch (choice2)
         {
             case 1: display_Patient_Information(); 
@@ -46,7 +46,7 @@ int main(void)
                     break;
             case 3: view_Schedule();
                     break;
-            case 4: 
+            case 4: payment_Method();
                     break;
             case 5: save(); 
                     exit(0); 
@@ -178,6 +178,8 @@ void patient_Information()
     strcpy(x.appointment_date, "\0");
     strcpy(x.appointment_doctor, "\0");
     strcpy(x.appointment_doctor_contact_number, "\0");
+    strcpy(x.appointment_code, "\0");
+    x.payment_status = 0;
 
     add_Account(x);
     printf("\nAccount Created Successfully!!\n");
@@ -223,6 +225,8 @@ void display()
     while (p != NULL)
     {
         printf("%s %s\n", p->accounts.username, p->accounts.password);
+        printf("%s\n", p->accounts.appointment_code);
+        printf("%d\n", p->accounts.age);
         p = p->next;
     }
     system("pause");
@@ -235,9 +239,10 @@ void display()
 int menu(int x)
 {
     int choice;
-    system("cls");
+    
     if (x == 1)
     {
+        system("cls");
         printf("[1] Log in Account\n");
         printf("[2] Create Account\n");
         printf("[3] Exit\n");
@@ -245,8 +250,18 @@ int menu(int x)
         scanf("%d", &choice);
         return choice;
     }
+    else if (x == 2)
+    {
+        printf("[1] Cash\n");
+        printf("[2] Online Transaction\n");
+        printf("[3] Back Menu\n");
+        printf("Enter Choice: ");
+        scanf("%d", &choice);
+        return choice;
+    }
     else 
     {
+        system("cls");
         printf("[1] View Patient Information\n");
         printf("[2] Schedule an Appointment\n");
         printf("[3] View Schedule\n");
@@ -356,7 +371,7 @@ void appointment_Schedule()
 
     // Get the user input
     int choice;
-    //char *code;
+    char *code = malloc(sizeof(char) * 5);
     while (1)
     {
         int full = 0;
@@ -378,12 +393,11 @@ void appointment_Schedule()
                     else
                     {
                         y = appoint_Doctor();
-                        //code = appointment_code();
-                        //printf("Your Appointment Code is %s\n", code);
+                        code = appointment_code();
                         printf("You have Successfully created an Appointment Schedule\n");
                         printf("Your Appointment Schedule is on %s\n", x[choice-1].date);
                         printf("Your Doctor is %s\n", y.name);
-                        
+                        printf("Your Appointment Code is %s\n", code);
                         x[choice-1].num_patients++;
                         break;
                     }
@@ -410,7 +424,7 @@ void appointment_Schedule()
             strcpy(p->accounts.appointment_doctor_schedule, y.schedule);
             strcpy(p->accounts.appointment_doctor_email, y.email);
             strcpy(p->accounts.appointment_doctor_contact_number, y.contact_number);
-            //strcpy(p->accounts.appointment_code, code);
+            strcpy(p->accounts.appointment_code, code);
             break;
         }
     }
@@ -472,7 +486,7 @@ void view_Schedule()
             printf("USERNAME:           %s\n", p->accounts.username);
             printf("NAME:               %s\n", p->accounts.name);
             printf("APPOINTMENT DATE:   %s\n", p->accounts.appointment_date);
-            printf("===========================CODE: %s============================\n", p->accounts.appointment_code);
+            printf("===========================CODE: %s===========================\n", p->accounts.appointment_code);
             printf("\nDOCTOR DETAILS\n");
             printf("APPOINTMENT DOCTOR: %s\n", p->accounts.appointment_doctor);
             printf("DEPARTMENT:         %s\n", p->accounts.appointment_doctor_department);
@@ -503,26 +517,151 @@ DOCTOR appoint_Doctor()
     return doctors[num];
 }
 
+void payment_Method()
+{
+    // Check if the user has already paid the appointment
+    LIST *q;
+    q = L;
+    while (q != NULL)
+    {
+        if (strcmp(q->accounts.username, global_Username) == 0)
+        {
+            if (q->accounts.payment_status == 1)
+            {
+                printf("You have already paid your appointment\n");
+                system("pause");
+                return;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    int choice;
+    while(1)
+    {
+        system("cls");
+        printf("================================================================\n");
+        printf("                     Payment Method                             \n");
+        printf("================================================================\n");
+        printf("                   Mode of Transaction                          \n");
+        
+        switch(choice = menu(2))
+        {
+            case 1: printf("Mode of Transaction is Cash\n");
+                    printf("Go to the nearest %s for your payment\n", HOSPITAL_NAME);
+                    system("pause");
+                    break;
+            case 2: printf("================================================================\n");
+                    printf("                 Mode of Transaction: Online                    \n");
+                    printf("================================================================\n");
+                    break;
+            case 3: return;
+            default: printf("Invalid Input\n");
+                    system("pause");
+        }
+        if (choice > 0 && choice <= 3)
+            break;
+    }
+
+    // Prompt for payment details
+    int amount, status = 0;
+    char bank_name[101], account_number[101];
+    char *temp = malloc(sizeof(char) * 5);
+    if (choice == 2)
+    {
+        printf("Reservation Fee: %d.00\n", RESERVATION_FEE);
+        printf("Enter your Bank Name: ");
+        scanf("%s", bank_name);
+        printf("Enter your Account Number: ");
+        scanf("%s", account_number);
+        printf("Enter Amount: ");
+        scanf("%d", &amount);
+        if (amount == RESERVATION_FEE)
+        {
+            temp = confirmation_code();
+            printf("Your Confirmation Code is: %s\n", temp);
+            printf("Payment Successful\n");
+            printf("Thank You For Using our Program!!\n");
+            system("pause");
+            status = 1;
+        }
+        else if (amount > RESERVATION_FEE)
+        {
+            temp = confirmation_code();
+            printf("Your Confirmation Code is: %s\n", temp);
+            printf("Payment Successful\n");
+            printf("Change: %d.00\n", amount - RESERVATION_FEE);
+            printf("Thank You For Using our Program!!\n");
+            system("pause");
+            status = 1;
+        }
+        else 
+        {
+            printf("Payment Failed\n");
+            system("pause");
+            return;
+        }
+        // Update the payment status
+        LIST *p;
+        p = L;
+
+        while (p != NULL)
+        {
+            if (strcmp(p->accounts.username, global_Username) == 0)
+            {
+                p->accounts.payment_status = 1;
+                break;
+            }
+        }
+    }
+    return;
+}
+
 char *appointment_code()
 {
     // FORMAT CODE: CDDD 
     char code[5], 
         *temp;
     int num, num2 = 0;
+
+    temp = malloc(sizeof(char) * 5);
     
     // generate a random number
     srand(time(NULL));
     num = rand() % 999 + 100;
-    while(num2 > 90 || num2 < 65)
-    {
-        num2 = rand() % 90;
-    }
+    num2 = rand() % 26 + 65;
 
     // convert the number to character
     sprintf(code, "%c%d", num2, num);
     strcpy(temp, code);
-    printf("%s\n", temp);
-    system("pause");
+    return temp;
+}
+
+char *confirmation_code()
+{
+    char code[5];
+    char *temp;
+    temp = malloc(sizeof(char) * 5);
+    int num[5];
+
+    // generate a random code
+    srand(time(NULL));
+    for (int i = 0; i < 5; i++)
+    {
+        if (i % 2 == 0)
+        {
+            num[i] = rand() % 26 + 65;
+        }
+        else 
+        {
+            num[i] = rand() % 10;
+        }
+    }
+    sprintf(code, "%c%d%c%d%c", num[0], num[1], num[2], num[3], num[4]);
+    strcpy(temp, code);
     return temp;
 }
 
@@ -552,11 +691,11 @@ void save()
     {
         fprintf(outFile, "Username,Password\n");
         fprintf(outFile2, "Name,Sex,Birthday,Contact_Number,Appointment_Date,Age\n");
-        fprintf(outFile3, "Name,Department,Schedule,Email,Contact_Number\n");
+        fprintf(outFile3, "Name,Department,Schedule,Email,Contact_Number,Code,Payment_Status\n");
         while (L != NULL)
         {
             fprintf(outFile, "%s,%s\n", L->accounts.username, L->accounts.password);
-            fprintf(outFile2, "%s,%s,%s,%s,%s,%d\n", L->accounts.name, L->accounts.sex, L->accounts.bday, L->accounts.contact_number, L->accounts.appointment_date, L->accounts.age);
+            fprintf(outFile2, "%s,%s,%s,%s,%s,%s,%d,%d\n", L->accounts.name, L->accounts.sex, L->accounts.bday, L->accounts.contact_number, L->accounts.appointment_date, L->accounts.appointment_code, L->accounts.payment_status, L->accounts.age);
             fprintf(outFile3, "%s,%s,%s,%s,%s\n", L->accounts.appointment_doctor, L->accounts.appointment_doctor_department, L->accounts.appointment_doctor_schedule, L->accounts.appointment_doctor_email, L->accounts.appointment_doctor_contact_number);
             L = L->next;
         }
@@ -595,7 +734,7 @@ void retrieve()
             else
             {
                 fscanf(inFile, " %[^,],%s\n", z.username, z.password);
-                fscanf(inFile2, " %[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.name, z.sex, z.bday, z.contact_number, z.appointment_date, &z.age);
+                fscanf(inFile2, " %[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.name, z.sex, z.bday, z.contact_number, z.appointment_date, z.appointment_code, &z.payment_status, &z.age);
                 fscanf(inFile3, " %[^,],%[^,],%[^,],%[^,],%[^,]\n", z.appointment_doctor, z.appointment_doctor_department, z.appointment_doctor_schedule, z.appointment_doctor_email, z.appointment_doctor_contact_number);
                 add_Account(z);
             }
