@@ -6,7 +6,9 @@
 #include <string.h>
 #include <conio.h>
 #include <time.h>
+#include <windows.h>
 
+#define DATABASE_FILE "./database"
 #define ACCOUNT_FILE "./database/account.txt"
 #define PATIENT_FILE "./database/patient.txt"
 #define DOCTOR_FILE "./database/doctor.txt"
@@ -104,5 +106,11 @@ void save();
 void retrieve();
 int check_Patients_Slot_File(char *);
 void save_Patients_Slot_File(char *, int );
+
+// ===============================
+// UI Functions
+// ===============================
+void gotoxy(int x, int y);
+void Box();
 
 #endif // HEADER_H_INCLUDED

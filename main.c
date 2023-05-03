@@ -3,34 +3,71 @@
 // #include "./functions/accounts.c"
 // #include "./functions/menu.c"
 
+void Box()
+{
+    int a = 205; //Horizontal
+    int b = 186; //Vertical
+    int c = 187; //Corner Top Right
+    int d = 201; // Corner Top Left
+    int e = 190; //Corner Bottom Right
+    int f = 200; //Corner Bottom Left
+    //Starting Line < Alignment < End Line
+    //W = 4 < x < 23
+    // H = 11 < x < 110
+    for (int i = 0; i < 100; i++) //Width
+    {
+        gotoxy(10+i,3);printf("%c", a);// Top Width
+        gotoxy(10+i,23);printf("%c", a);// Bottom Width
+    }
+    for (int j = 0; j < 20; j++)
+    {
+        gotoxy(10,3+j);  printf("%c", b); //Left Height Line
+        gotoxy(110,3+j);printf("%c", b); //Right Height Line
+    }   gotoxy(110,3);  printf("%c", c); //Corner Top Right
+        gotoxy(10,3);    printf("%c", d); //Corner Top Left
+        gotoxy(110,23); printf("%c", e);//188); //Corner Bottom Right
+        gotoxy(10,23);   printf("%c", f); //Corner Bottom Left
+}
+
 int main(void)
 {
     int choice1, choice2, login, create;
     char folder_path[101];
-
+    char database_folder[101];
+    system("cls");
+    Box();
     // Create the folder path
+    snprintf(database_folder, sizeof(database_folder), "%s", DATABASE_FILE);
+    mkdir(database_folder, 0777); // full permission to all
+
     snprintf(folder_path, sizeof(folder_path), "%s", FOLDER);
     mkdir(folder_path, 0777); // full permission to all
 
     init();
     retrieve();
-    display();
-
+    //display();
     // Ask for user Account
     while (1)
     {
         switch(choice1 = menu(1))
         {
-            case 1: login = login_Account();
+
+            case 1: system("cls");
+                    Box();
+                    login = login_Account();
                     break;
-            case 2: create = patient_Information();
-                    break; 
-            case 3: save();
+            case 2: system("cls");
+                    Box();
+                    create = patient_Information();
+                    break;
+            case 3:
+                    save();
+                    gotoxy(25,21);printf("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May\n\n\n\n");
                     exit(0);
                     break;
-            default: printf("Invalid Choice, Try Again!!\n"); break;
+            default: gotoxy(51,17);printf("Invalid Choice, Try Again!!\n"); break;
         }
-        if ((choice1 == 2 && create == 1) || (choice1 == 1 && login == 1))
+        if ((choice1 == 2 && create == 0) || (choice1 == 1 && login == 1))
             break;
     }
 
@@ -40,7 +77,7 @@ int main(void)
         choice2 = menu(3);
         switch (choice2)
         {
-            case 1: display_Patient_Information(); 
+            case 1: display_Patient_Information();
                     break;
             case 2: appointment_Schedule();
                     break;
@@ -48,11 +85,12 @@ int main(void)
                     break;
             case 4: payment_Method();
                     break;
-            case 5: save(); 
-                    exit(0); 
+            case 5: save();
+                    gotoxy(25,21);printf("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May\n\n\n\n");
+                    exit(0);
                     break;
-            default: printf("Invalid Choice, Try Again!!\n"); 
-                    system("pause");
+            default: gotoxy(46,21);printf("Invalid Choice, Try Again!!\n");
+                    gotoxy(46,22);system("pause");
                     break;
         }
     }
@@ -70,10 +108,15 @@ int login_Account()
     p = L;
     int tries = 3;
     char *pass;
-    
+
     system("cls");
-    printf("Enter Username: ");
-    scanf(" %[^\n]s", y.username);
+    Box();
+    system("COLOR 0E");
+    gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+    gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+    gotoxy(20,8);printf("==============================================================================\n");
+    gotoxy(20,10);printf("Enter Username: ");
+    gotoxy(37,10);scanf(" %[^\n]s", y.username);
     strcpy(global_Username, y.username);
 
     while (p != NULL)
@@ -83,23 +126,30 @@ int login_Account()
             while(tries != 0)
             {
                 pass = get_Password("Enter Password: ", y.password);
-                
+
                 if (strcmp(pass, p->accounts.password) == 0)
                 {
                     strcpy(y.password, pass);
-                    printf("\nLog in Successful!!\n");
-                    system("pause");
+                    gotoxy(20,14);printf("==============================================================================\n");
+                    gotoxy(20,15);printf("                              Log in Successful!!\n");
+                    gotoxy(20,16);printf("==============================================================================\n");
+                    gotoxy(20,17);system("pause");
                     return 1;
                 }
                 else
                 {
                     tries--;
-                    printf("\nIncorrect Password, you have %d trials left.\n", tries);
+                    gotoxy(37,13);printf("                         ");
+                    gotoxy(20,14);printf("==============================================================================\n");
+                    gotoxy(20,15);printf("Incorrect Password, you have %d trials left.\n", tries);
+                    gotoxy(20,16);printf("==============================================================================\n");
 
                     if (tries == 0)
                     {
-                        printf("\nYou have exceeded the number of tries\n");
-                        printf("Please try again later\n");
+                        gotoxy(20,17);printf("==============================================================================\n");
+                        gotoxy(20,18);printf("You have exceeded the number of tries\n");
+                        gotoxy(20,19);printf("Please try again later\n");
+                        gotoxy(20,20);printf("==============================================================================\n\n\n\n");
                         exit(0);
                     }
                 }
@@ -109,11 +159,13 @@ int login_Account()
     }
     if (p == NULL)
     {
-        printf("Your account is not in the database\n");
-        printf("Create account first.\n");
-        system("pause");
-        return 0;
+        gotoxy(20,13);printf("==============================================================================\n");
+        gotoxy(20,14);printf("Your account is not in the database\n");
+        gotoxy(20,15);printf("Create account first.\n");
+        gotoxy(20,16);printf("==============================================================================\n");
+        gotoxy(20,17);system("pause");
     }
+    return 0;
 }
 
 char *get_Password(char *string, char *PASSWORD)
@@ -123,8 +175,8 @@ char *get_Password(char *string, char *PASSWORD)
         pwd[101];
     int i = 0;
 
-    printf("%s", string);
-    printf("%s", PASSWORD);
+    gotoxy(20,13); printf("%s", string);
+    gotoxy(37,13);printf("%s", PASSWORD);
 
     while (1)
     {
@@ -150,7 +202,7 @@ char *get_Password(char *string, char *PASSWORD)
         }
     }
     temp = pwd;
-    return temp; 
+    return temp;
 }
 
 int patient_Information()
@@ -158,12 +210,14 @@ int patient_Information()
     ACCOUNT x;
     char *temp;
     system("cls");
-    printf("\n\n\tPLEASE FILL UP THE FOLLOWING INFORMATION\n");
-    
-    printf("Username: ");
-    scanf(" %[^\n]s", x.username);
+    Box();
+    gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+    gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+    gotoxy(20,8);printf("==============================================================================\n");
+    gotoxy(38,10);printf("---PLEASE FILL UP THE FOLLOWING INFORMATION---");
+    gotoxy(20,12);printf("Username: ");
+    gotoxy(30,12);scanf(" %[^\n]s", x.username);
     strcpy(global_Username, x.username);
-    
     //  Validate Username
     LIST *p;
     p = L;
@@ -171,37 +225,36 @@ int patient_Information()
     {
         if (strcmp(p->accounts.username, x.username) == 0)
         {
-            printf("\nUsername already exists!!\n");
-            system("pause");
+            gotoxy(20,13);printf("Username already exists!!\n");
+            gotoxy(20,14);system("pause");
             return 1;
         }
         p = p->next;
     }
-    printf("Enter Name (FIRST NAME MIDDLE INITIAL SURNAME): ");
-    scanf(" %[^\n]s", x.name);
-    printf("Enter Age: ");
-    scanf("%d", &x.age);
-    printf("Sex: ");
-    scanf(" %[^\n]s", x.sex);
-    printf("Enter Birthday (MM/DD/YY): ");
-    scanf(" %[^\n]s", x.bday);
-    printf("Enter Contact No: ");
-    scanf(" %[^\n]s", x.contact_number);
     temp = get_Password("Enter Password: ", x.password);
     strcpy(x.password, temp);
+    gotoxy(20,14);printf("Enter Name (FIRST NAME MIDDLE INITIAL SURNAME): ");
+    gotoxy(68,14);scanf(" %[^\n]s", x.name);
+    gotoxy(20,15);printf("Enter Age: ");
+    gotoxy(31,15);scanf("%d", &x.age);
+    gotoxy(20,16);printf("Sex (M|F): ");
+    gotoxy(32,16);scanf(" %[^\n]s", x.sex);
+    gotoxy(20,17);printf("Enter Birthday (MM/DD/YY): ");
+    gotoxy(47,17);scanf(" %[^\n]s", x.bday);
+    gotoxy(20,18);printf("Enter Contact No: ");
+    gotoxy(38,18);scanf(" %[^\n]s", x.contact_number);
     strcpy(x.appointment_date, "\0");
-    strcpy(x.appointment_code, "\0");
     strcpy(x.appointment_doctor, "\0");
     strcpy(x.appointment_doctor_contact_number, "\0");
-    strcpy(x.appointment_doctor_department, "\0");
-    strcpy(x.appointment_doctor_email, "\0");
-    strcpy(x.appointment_doctor_schedule, "\0");
+    strcpy(x.appointment_code, "\0");
     x.payment_status = 1;
 
     add_Account(x);
-    printf("\nAccount Created Successfully!!\n");
-    system("pause");
-    display();
+    gotoxy(20,19);printf("==============================================================================\n");
+    gotoxy(20,20);printf("                          Account Created Successfully");
+    gotoxy(20,21);printf("==============================================================================\n");
+    gotoxy(20,22);system("pause");
+    return 0;
 }
 
 int search_Account()
@@ -224,8 +277,7 @@ int search_Account()
 
 int add_Account(ACCOUNT x)
 {
-    LIST *p, *q, *newNode;
-    p = q = L;
+    LIST *newNode;
 
     newNode = (LIST *)malloc(sizeof(LIST));
     newNode->accounts = x;
@@ -242,17 +294,17 @@ void display()
 
     while (p != NULL)
     {
-        printf("USERNAME:           %s\n", p->accounts.username);
-        printf("PASSWORD:           %s\n", p->accounts.password);
-        printf("NAME:               %s\n", p->accounts.name);
-        printf("AGE:                %d\n", p->accounts.age);
-        printf("SEX:                %s\n", p->accounts.sex);
-        printf("BIRTHDAY:           %s\n", p->accounts.bday);
-        printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
-        printf("%s\n", p->accounts.appointment_date);
+        gotoxy(20,14);printf("USERNAME:           %s\n", p->accounts.username);
+        gotoxy(20,15);printf("PASSWORD:           %s\n", p->accounts.password);
+        gotoxy(20,16);printf("NAME:               %s\n", p->accounts.name);
+        gotoxy(20,17);printf("AGE:                %d\n", p->accounts.age);
+        gotoxy(20,18);printf("SEX:                %s\n", p->accounts.sex);
+        gotoxy(20,19);printf("BIRTHDAY:           %s\n", p->accounts.bday);
+        gotoxy(20,20);printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
+        gotoxy(20,21);printf("%s\n", p->accounts.appointment_date);
         p = p->next;
     }
-    system("pause");
+    gotoxy(20,22);system("pause");
 }
 
 // ===============================================
@@ -262,64 +314,93 @@ void display()
 int menu(int x)
 {
     int choice;
-    
+
     if (x == 1)
     {
         system("cls");
-        printf("[1] Log in Account\n");
-        printf("[2] Create Account\n");
-        printf("[3] Exit\n");
-        printf("Enter Choice: ");
-        scanf("%d", &choice);
+        Box();
+        system("COLOR 0E");
+        gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+        gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+        gotoxy(41,8);printf("=======================================\n");
+        gotoxy(51,9); printf("[1] LOG IN ACCOUNT\n");
+        gotoxy(41,10);printf("=======================================\n");
+        gotoxy(51,11);printf("[2] CREATE ACCOUNT\n");
+        gotoxy(41,12);printf("=======================================\n");
+        gotoxy(51,13);printf("[3] EXIT\n");
+        gotoxy(41,14);printf("=======================================\n");
+        gotoxy(51,15);printf("ENTER CHOICE: ");
+        gotoxy(41,16);printf("=======================================\n");
+        gotoxy(35,18);printf("X|||||||||||||||||||||||||||||||||||||||||||||||||X\n");
+        gotoxy(35,19);printf("X|||||||||||||||||||||||||||||||||||||||||||||||||X\n");
+        gotoxy(65,15);scanf("%d", &choice);
         return choice;
     }
     else if (x == 2)
     {
-        printf("[1] Cash\n");
-        printf("[2] Online Transaction\n");
-        printf("[3] Back Menu\n");
-        printf("Enter Choice: ");
-        scanf("%d", &choice);
+        gotoxy(41,13);printf("=======================================\n");
+        gotoxy(51,14);printf("[1] Cash\n");
+        gotoxy(41,15);printf("=======================================\n");
+        gotoxy(51,16);printf("[2] Online Transaction\n");
+        gotoxy(41,17);printf("=======================================\n");
+        gotoxy(51,18);printf("[3] Back Menu\n");
+        gotoxy(41,19);printf("=======================================\n");
+        gotoxy(51,20);printf("Enter Choice: ");
+        gotoxy(41,21);printf("=======================================\n");
+        gotoxy(68,20);scanf("%d", &choice);
         return choice;
     }
-    else 
+    else
     {
         system("cls");
-        printf("[1] View Patient Information\n");
-        printf("[2] Schedule an Appointment\n");
-        printf("[3] View Schedule\n");
-        printf("[4] Payment for Appointment\n");
-        printf("[5] Sign Out\n");
-        printf("Enter Choice: ");
-        scanf("%d", &choice);
+        Box();
+        gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+        gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+        gotoxy(41,8);printf("=======================================\n");
+        gotoxy(46,9);printf("[1] View Patient Information\n");
+        gotoxy(41,10);printf("=======================================\n");
+        gotoxy(46,11);printf("[2] Schedule an Appointment\n");
+        gotoxy(41,12);printf("=======================================\n");
+        gotoxy(46,13);printf("[3] View Schedule\n");
+        gotoxy(41,14);printf("=======================================\n");
+        gotoxy(46,15);printf("[4] Payment for Appointment\n");
+        gotoxy(41,16);printf("=======================================\n");
+        gotoxy(46,17);printf("[5] Sign Out\n");
+        gotoxy(41,18);printf("=======================================\n");
+        gotoxy(46,19);printf("Enter Choice: ");
+        gotoxy(41,20);printf("=======================================\n");
+        gotoxy(65,19);scanf("%d", &choice);
         return choice;
     }
-    
+
 }
 
 void display_Patient_Information()
 {
     LIST *p;
     p = L;
-    
+
     while (p != NULL)
     {
         if (strcmp(p->accounts.username, global_Username) == 0)
         {
             system("cls");
-            printf("================================================================\n");
-            printf("                     Patient Information                        \n");
-            printf("================================================================\n");
-            printf("USERNAME:           %s\n", p->accounts.username);
-            printf("PASSWORD:           %s\n", p->accounts.password);
-            printf("NAME:               %s\n", p->accounts.name);
-            printf("AGE:                %d\n", p->accounts.age);
-            printf("SEX:                %s\n", p->accounts.sex);
-            printf("BIRTHDAY:           %s\n", p->accounts.bday);
-            printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
-            printf("================================================================\n\t");
-            system("pause");
-            printf("================================================================\n");
+            Box();
+            gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+            gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+            gotoxy(30,8);printf("================================================================\n");
+            gotoxy(30,9);printf("                     Patient Information                        \n");
+            gotoxy(30,10);printf("================================================================\n");
+            gotoxy(30,11);;printf("USERNAME:           %s\n", p->accounts.username);
+            gotoxy(30,12);printf("PASSWORD:           %s\n", p->accounts.password);
+            gotoxy(30,13);printf("NAME:               %s\n", p->accounts.name);
+            gotoxy(30,14);printf("AGE:                %d\n", p->accounts.age);
+            gotoxy(30,15);printf("SEX:                %s\n", p->accounts.sex);
+            gotoxy(30,16);printf("BIRTHDAY:           %s\n", p->accounts.bday);
+            gotoxy(30,17);printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
+            gotoxy(30,18);printf("================================================================\n\t");
+            gotoxy(30,19);system("pause");
+            gotoxy(30,20);printf("================================================================\n");
             break;
         }
         p = p->next;
@@ -332,9 +413,12 @@ void appointment_Schedule()
     DOCTOR y;
 
     system("cls");
-    printf("================================================================\n");
-    printf("                     Appointment Schedule                       \n");
-    printf("================================================================\n");
+    Box();
+    gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+    gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+    gotoxy(30,8);printf("================================================================\n");
+    gotoxy(30,9);printf("                     Appointment Schedule                       \n");
+    gotoxy(30,10);printf("================================================================\n");
 
     // Check if the user has already scheduled an appointment
     LIST *q;
@@ -345,10 +429,10 @@ void appointment_Schedule()
         {
             if (strcmp(q->accounts.appointment_date, "\0") != 0)
             {
-                printf("\nYou have already scheduled an appointment\n");
-                printf("Check your appointment schedule in the View Schedule Menu\n");
-                printf("================================================================\n");
-                system("pause");
+                gotoxy(30,12);printf("You have already scheduled an appointment");
+                gotoxy(30,13);printf("Check your appointment schedule in the View Schedule Menu");
+                gotoxy(30,14);printf("================================================================");
+                gotoxy(30,15);system("pause");
                 return;
             }
             else
@@ -384,12 +468,12 @@ void appointment_Schedule()
         x[i].num_patients = check_Patients_Slot_File(x[i].date);
     }
 
-    printf("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE \n\n");
+    gotoxy(30,12);printf("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE \n\n");
 
     // MENU for Appointment Dates
     for (int i = 0, n = 1; i < DAYS; i++)
     {
-        printf("[%i]    %s         %d                       (%d/%d)\n", n++, x[i].date, x[i].num_patients, x[i].num_patients, MAX_PATIENTS);
+        gotoxy(30,13+i);printf("[%i]    %s         %d                       (%d/%d)\n", n++, x[i].date, x[i].num_patients, x[i].num_patients, MAX_PATIENTS);
     }
 
     // Get the user input
@@ -398,18 +482,18 @@ void appointment_Schedule()
     while (1)
     {
         int full = 0;
-        printf("\nEnter Choice: ");
-        scanf("%d", &choice);
-        printf("================================================================\n");
+        gotoxy(30,17);printf("Enter Choice: ");
+        gotoxy(45,17);scanf("%d", &choice);
+        gotoxy(30,18);printf("================================================================");
         switch (choice)
         {
-            case 1: 
+            case 1:
             case 2:
-            case 3: 
+            case 3:
                     if (x[choice-1].num_patients >= MAX_PATIENTS)
                     {
-                        printf("Sorry, the slots are already full\n");
-                        printf("Please choose another date\n");
+                        gotoxy(30,19);printf("Sorry, the slots are already full");
+                        gotoxy(30,20);printf("Please choose another date");
                         full = 1;
                         break;
                     }
@@ -417,20 +501,27 @@ void appointment_Schedule()
                     {
                         y = appoint_Doctor();
                         code = appointment_code();
-                        printf("You have Successfully created an Appointment Schedule\n");
-                        printf("Your Appointment Schedule is on %s\n", x[choice-1].date);
-                        printf("Your Doctor is %s\n", y.name);
-                        printf("Your Appointment Code is %s\n", code);
+                        system("cls");
+                        Box();
+                        gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+                        gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+                        gotoxy(30,8);printf("================================================================\n");
+                        gotoxy(30,9);printf("                     Appointment Schedule                       \n");
+                        gotoxy(30,10);printf("================================================================\n");
+                        gotoxy(30,12);printf("You have Successfully created an Appointment Schedule\n");
+                        gotoxy(30,13);printf("Your Appointment Schedule is on %s\n", x[choice-1].date);
+                        gotoxy(30,14); printf("Your Doctor is %s\n", y.name);
+                        gotoxy(30,15);printf("Your Appointment Code is %s\n", code);
                         x[choice-1].num_patients++;
                         break;
                     }
-                    
-            default: printf("Invalid Choice\n");
+
+            default:gotoxy(30,19);printf("Invalid Choice\n");
                     break;
         }
-        printf("================================================================\n");
-        system("pause");
-        if ((choice > 0 && choice <= 3) && full == 0)
+        gotoxy(30,20);printf("================================================================\n");
+        gotoxy(30,21);system("pause");
+        if ((choice > 0 && choice <= 3) || full == 0)
             break;
     }
 
@@ -459,7 +550,7 @@ void save_Patients_Slot_File(char *DTIME, int x)
 {
     FILE *outFile;
     char file_path[101];
-    
+
     // Format the file path
     snprintf(file_path, sizeof(file_path), "%s%s", FOLDER, DTIME);
 
@@ -497,28 +588,29 @@ void view_Schedule()
 {
     LIST *p;
     p = L;
-    
+
     while (p != NULL)
     {
         if (strcmp(p->accounts.username, global_Username) == 0)
         {
             system("cls");
-            printf("================================================================\n");
-            printf("                     Appointment Schedule                       \n");
-            printf("================================================================\n");
-            printf("USERNAME:           %s\n", p->accounts.username);
-            printf("NAME:               %s\n", p->accounts.name);
-            printf("APPOINTMENT DATE:   %s\n", p->accounts.appointment_date);
-            printf("===========================CODE: %s===========================\n", p->accounts.appointment_code);
-            printf("\nDOCTOR DETAILS\n");
-            printf("APPOINTMENT DOCTOR: %s\n", p->accounts.appointment_doctor);
-            printf("DEPARTMENT:         %s\n", p->accounts.appointment_doctor_department);
-            printf("SCHEDULE:           %s\n", p->accounts.appointment_doctor_schedule);
-            printf("EMAIL:              %s\n", p->accounts.appointment_doctor_email);
-            printf("CONTACT NUMBER:     %s\n", p->accounts.appointment_doctor_contact_number);
-            printf("================================================================\n\t");
-            system("pause");
-            printf("================================================================\n");
+            Box();
+            gotoxy(30,4);printf("================================================================\n");
+            gotoxy(30,5);printf("                     Appointment Schedule                       \n");
+            gotoxy(30,6);printf("================================================================\n");
+            gotoxy(30,8);printf("USERNAME:           %s\n", p->accounts.username);
+            gotoxy(30,9);printf("NAME:               %s\n", p->accounts.name);
+            gotoxy(30,10);printf("APPOINTMENT DATE:   %s\n", p->accounts.appointment_date);
+            gotoxy(30,12);printf("===========================CODE: %s===========================\n", p->accounts.appointment_code);
+            gotoxy(30,14);;printf("DOCTOR DETAILS");
+            gotoxy(30,15);printf("APPOINTMENT DOCTOR: %s\n", p->accounts.appointment_doctor);
+            gotoxy(30,16);printf("DEPARTMENT:         %s\n", p->accounts.appointment_doctor_department);
+            gotoxy(30,17);printf("SCHEDULE:           %s\n", p->accounts.appointment_doctor_schedule);
+            gotoxy(30,18);printf("EMAIL:              %s\n", p->accounts.appointment_doctor_email);
+            gotoxy(30,19);printf("CONTACT NUMBER:     %s\n", p->accounts.appointment_doctor_contact_number);
+            gotoxy(30,20);printf("================================================================\n\t");
+            gotoxy(30,21);system("pause");
+            gotoxy(30,22);printf("================================================================\n");
             break;
         }
         p = p->next;
@@ -527,13 +619,12 @@ void view_Schedule()
 
 DOCTOR appoint_Doctor()
 {
-    char *temp;
     DOCTOR doctors[MAX_DOCTORS] = {
         {"Dr. John Smith", "OPD", "Monday to Friday - 9:00am to 5:00pm", "john.smith@tupmc.com", "09123456789"},
         {"Dr. Sarah Lee", "OPD", "Tuesday to Saturday - 10:00am to 6:00pm", "sarah.lee@hospital.com", "09987654321"}
         };
 
-    // generate a number 
+    // generate a number
     srand(time(NULL));
     int num = rand() % MAX_DOCTORS ;
 
@@ -551,8 +642,18 @@ void payment_Method()
         {
             if (q->accounts.payment_status == 2)
             {
-                printf("You have already paid your appointment\n");
-                system("pause");
+                system ("cls");
+                Box();
+                gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+                gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+                gotoxy(30,8);printf("================================================================\n");
+                gotoxy(30,9);printf("                     Payment for Appointment                       \n");
+                gotoxy(30,10);printf("================================================================\n");
+                gotoxy(30,12);printf("You have already paid your appointment\n");
+                gotoxy(30,14);printf("================================================================\n");
+                gotoxy(30,13);system("pause");
+
+
                 return;
             }
             else
@@ -567,24 +668,38 @@ void payment_Method()
     while(1)
     {
         system("cls");
-        printf("================================================================\n");
-        printf("                     Payment Method                             \n");
-        printf("================================================================\n");
-        printf("                   Mode of Transaction                          \n");
-        
+        Box();
+        gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+        gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+        gotoxy(30,8);printf("================================================================\n");
+        gotoxy(30,9);printf("                        Payment Method                             \n");
+        gotoxy(30,10);printf("================================================================\n");
+        gotoxy(30,11);printf("                     Mode of Transaction                          \n");
+
         switch(choice = menu(2))
         {
-            case 1: printf("Mode of Transaction is Cash\n");
-                    printf("Go to the nearest %s for your payment\n", HOSPITAL_NAME);
-                    system("pause");
+            case 1: system("cls");
+                    Box();
+                    gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+                    gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+                    gotoxy(30,8);printf("================================================================\n");
+                    gotoxy(30,9);printf("                        Payment Method                             \n");
+                    gotoxy(30,10);printf("================================================================\n");
+                    gotoxy(30,13);printf("Mode of Transaction is Cash\n");
+                    gotoxy(30,14);printf("Go to the nearest %s for your payment\n", HOSPITAL_NAME);
+                    gotoxy(30,15);printf("================================================================\n");
+                    gotoxy(30,16);system("pause");
                     break;
-            case 2: printf("================================================================\n");
-                    printf("                 Mode of Transaction: Online                    \n");
-                    printf("================================================================\n");
+            case 2:
+                    gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+                    gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+                    gotoxy(30,8);printf("================================================================\n");
+                    gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
+                    gotoxy(30,10);printf("================================================================\n");
                     break;
             case 3: return;
-            default: printf("Invalid Input\n");
-                    system("pause");
+            default: gotoxy(30,21);printf("Invalid Input\n");
+                    gotoxy(30,22);system("pause");
         }
         if (choice > 0 && choice <= 3)
             break;
@@ -596,36 +711,64 @@ void payment_Method()
     char *temp = malloc(sizeof(char) * 5);
     if (choice == 2)
     {
-        printf("Reservation Fee: %d.00\n", RESERVATION_FEE);
-        printf("Enter your Bank Name: ");
-        scanf("%s", bank_name);
-        printf("Enter your Account Number: ");
-        scanf("%s", account_number);
-        printf("Enter Amount: ");
-        scanf("%d", &amount);
+        system("cls");
+        Box();
+        gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+        gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+        gotoxy(30,8);printf("================================================================\n");
+        gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
+        gotoxy(30,10);printf("================================================================\n");
+        gotoxy(30,12);printf("Reservation Fee: %d.00\n", RESERVATION_FEE);
+        gotoxy(30,13);printf("Enter your Bank Name: ");
+        gotoxy(52,13);scanf("%s", bank_name);
+        gotoxy(30,14);printf("Enter your Account Number: ");
+        gotoxy(58,14);scanf("%s", account_number);
+        gotoxy(30,15);printf("Enter Amount: ");
+        gotoxy(45,15);scanf("%d", &amount);
         if (amount == RESERVATION_FEE)
         {
+            system("cls");
+            Box();
+            gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+            gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+            gotoxy(30,8);printf("================================================================\n");
+            gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
+            gotoxy(30,10);printf("================================================================\n");
             temp = confirmation_code();
-            printf("Your Confirmation Code is: %s\n", temp);
-            printf("Payment Successful\n");
-            printf("Thank You For Using our Program!!\n");
-            system("pause");
+             gotoxy(30,13);printf("Your Confirmation Code is: %s\n", temp);
+             gotoxy(30,14);printf("Payment Successful\n");
+             gotoxy(30,15);printf("Thank You For Using our Program!!\n");
+             gotoxy(30,16);system("pause");
             status = 2;
         }
         else if (amount > RESERVATION_FEE)
         {
+            system("cls");
+            Box();
+            gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+            gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+            gotoxy(30,8);printf("================================================================\n");
+            gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
+            gotoxy(30,10);printf("================================================================\n");
             temp = confirmation_code();
-            printf("Your Confirmation Code is: %s\n", temp);
-            printf("Payment Successful\n");
-            printf("Change: %d.00\n", amount - RESERVATION_FEE);
-            printf("Thank You For Using our Program!!\n");
-            system("pause");
+            gotoxy(30,13);printf("Your Confirmation Code is: %s\n", temp);
+            gotoxy(30,14);printf("Payment Successful\n");
+            gotoxy(30,15);printf("Change: %d.00\n", amount - RESERVATION_FEE);
+            gotoxy(30,16);printf("Thank You For Using our Program!!\n");
+            gotoxy(30,17);system("pause");
             status = 2;
         }
-        else 
+        else
         {
-            printf("Payment Failed\n");
-            system("pause");
+            system("cls");
+            Box();
+            gotoxy(35,5);printf("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n");
+            gotoxy(35,6);printf("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n");
+            gotoxy(30,8);printf("================================================================\n");
+            gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
+            gotoxy(30,10);printf("================================================================\n");
+            gotoxy(30,13);printf("Payment Failed\n");
+            gotoxy(30,14);system("pause");
             return;
         }
     }
@@ -646,13 +789,13 @@ void payment_Method()
 
 char *appointment_code()
 {
-    // FORMAT CODE: CDDD 
-    char code[5], 
+    // FORMAT CODE: CDDD
+    char code[5],
         *temp;
     int num, num2 = 0;
 
     temp = malloc(sizeof(char) * 5);
-    
+
     // generate a random number
     srand(time(NULL));
     num = rand() % 899 + 100;
@@ -679,7 +822,7 @@ char *confirmation_code()
         {
             num[i] = rand() % 26 + 65;
         }
-        else 
+        else
         {
             num[i] = rand() % 10;
         }
@@ -738,14 +881,13 @@ void retrieve()
     int i = 0;
     char line[1001], line2[1001], line3[1001];
 
-    inFile = fopen(ACCOUNT_FILE, "r");
-    inFile2 = fopen(PATIENT_FILE, "r");
-    inFile3 = fopen(DOCTOR_FILE, "r");
+    inFile = fopen(ACCOUNT_FILE, "r+");
+    inFile2 = fopen(PATIENT_FILE, "r+");
+    inFile3 = fopen(DOCTOR_FILE, "r+");
 
     if (inFile == NULL || inFile2 == NULL || inFile3 == NULL)
     {
-        printf("Error opening file\n");
-        system("pause");
+        gotoxy(30,19);printf("Error opening file\n");
     }
     else
     {
@@ -771,4 +913,12 @@ void retrieve()
     fclose(inFile);
     fclose(inFile2);
     fclose(inFile3);
+}
+
+void gotoxy(int x, int y)
+{
+    COORD coord = {0,0};
+    coord.X=x;
+    coord.Y=y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
 }
