@@ -218,12 +218,13 @@ int patient_Information()
     gotoxy(32,16);scanf(" %[^\n]s", x.sex);
     gotoxy(20,17);printf("Enter Birthday (MM/DD/YY): ");
     gotoxy(47,17);scanf(" %[^\n]s", x.bday);
-    gotoxy(20,18);printf("Enter Contact No: ");
-    gotoxy(38,18);scanf(" %[^\n]s", x.contact_number);
+    gotoxy(20,18);printf("Enter Contact No (11 Digit Number): ");
+    gotoxy(57,18);scanf(" %[^\n]s", x.contact_number);
     strcpy(x.appointment_date, "\0");
     strcpy(x.appointment_doctor, "\0");
     strcpy(x.appointment_doctor_contact_number, "\0");
     strcpy(x.appointment_code, "\0");
+    strcpy(x.appointment_doctor_schedule, "\0");
     x.payment_status = 1;
 
     add_Account(x);
@@ -472,13 +473,13 @@ void appointment_Schedule()
     {
         if (strcmp(p->accounts.username, global_Username) == 0)
         {
-            strcpy(p->accounts.appointment_date, x[choice-1].date);
+            strncpy(p->accounts.appointment_date, x[choice-1].date, sizeof(x[choice-1].date));
             strcpy(p->accounts.appointment_doctor, y.name);
             strcpy(p->accounts.appointment_doctor_department, y.department);
             strcpy(p->accounts.appointment_doctor_schedule, y.schedule);
             strcpy(p->accounts.appointment_doctor_email, y.email);
             strcpy(p->accounts.appointment_doctor_contact_number, y.contact_number);
-            strcpy(p->accounts.appointment_code, code);
+            strncpy(p->accounts.appointment_code, code, sizeof(code));
             break;
         }
     }
@@ -593,8 +594,6 @@ void payment_Method()
                 gotoxy(30,12);printf("You have already paid your appointment\n");
                 gotoxy(30,14);printf("================================================================\n");
                 gotoxy(30,13);system("pause");
-
-
                 return;
             }
             else
@@ -778,6 +777,36 @@ char *confirmation_code()
 // DATABASE FUNCTIONS
 // ===============================================
 
+void encrypt(char *str) {
+    // encryption algorithm
+    int i = 0;
+    while (str[i]) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = 'a' + ((str[i] - 'a' + RAND_SEED) % CHAR_NUM);
+        } else if (str[i] >= '0' && str[i] <= '9') {
+            str[i] = '0' + ((str[i] - '0' + RAND_SEED) % NUM_NUM);
+        } else if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = 'A' + ((str[i] - 'A' + RAND_SEED) % CHAR_NUM);
+        }
+        i++;
+    }
+}
+
+void decrypt(char *str) {
+    // decryption algorithm
+    int i = 0;
+    while (str[i]) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            str[i] = 'a' + ((str[i] - 'a' - RAND_SEED + CHAR_NUM) % CHAR_NUM);
+        } else if (str[i] >= '0' && str[i] <= '9') {
+            str[i] = '0' + ((str[i] - '0' - RAND_SEED + NUM_NUM) % NUM_NUM);
+        } else if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = 'A' + ((str[i] - 'A' - RAND_SEED + CHAR_NUM) % CHAR_NUM);
+        }
+        i++;
+    }
+}
+
 void init()
 {
     L = NULL;
@@ -805,6 +834,11 @@ void save()
         fprintf(outFile3, "Name,Department,Schedule,Email,Contact_Number,Payment_Status\n");
         while (p != NULL)
         {
+            // Encrypt all the data before saving
+            encrypt(p->accounts.username); encrypt(p->accounts.password); encrypt(p->accounts.name); encrypt(p->accounts.sex); encrypt(p->accounts.bday); encrypt(p->accounts.contact_number);
+            encrypt(p->accounts.appointment_date); encrypt(p->accounts.appointment_code); encrypt(p->accounts.appointment_doctor); encrypt(p->accounts.appointment_doctor_department); 
+            encrypt(p->accounts.appointment_doctor_schedule); encrypt(p->accounts.appointment_doctor_email); encrypt(p->accounts.appointment_doctor_contact_number);
+
             fprintf(outFile, "%s,%s\n", p->accounts.username, p->accounts.password);
             fprintf(outFile2, "%s,%s,%s,%s,%s,%s,%d\n", p->accounts.name, p->accounts.sex, p->accounts.bday, p->accounts.contact_number, p->accounts.appointment_date, p->accounts.appointment_code, p->accounts.age);
             fprintf(outFile3, "%s,%s,%s,%s,%s,%d\n", p->accounts.appointment_doctor, p->accounts.appointment_doctor_department, p->accounts.appointment_doctor_schedule, p->accounts.appointment_doctor_email, p->accounts.appointment_doctor_contact_number, p->accounts.payment_status);
@@ -845,9 +879,13 @@ void retrieve()
             }
             else
             {
-                fscanf(inFile, " %[^,],%s\n", z.username, z.password);
+                                fscanf(inFile, " %[^,],%s\n", z.username, z.password);
                 fscanf(inFile2, " %[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.name, z.sex, z.bday, z.contact_number, z.appointment_date, z.appointment_code, &z.age);
                 fscanf(inFile3, " %[^,],%[^,],%[^,],%[^,],%[^,],%d\n", z.appointment_doctor, z.appointment_doctor_department, z.appointment_doctor_schedule, z.appointment_doctor_email, z.appointment_doctor_contact_number, &z.payment_status);
+
+                // Decrypt all the data before saving in the program
+                decrypt(z.username); decrypt(z.password); decrypt(z.name); decrypt(z.sex); decrypt(z.bday); decrypt(z.contact_number); decrypt(z.appointment_date); decrypt(z.appointment_code); decrypt(z.appointment_doctor); decrypt(z.appointment_doctor_department); decrypt(z.appointment_doctor_schedule); decrypt(z.appointment_doctor_email); decrypt(z.appointment_doctor_contact_number);
+
                 add_Account(z);
             }
         }

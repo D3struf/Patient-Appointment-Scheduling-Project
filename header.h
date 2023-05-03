@@ -21,6 +21,9 @@
 #define DAYS 3
 #define MAX_PATIENTS 20
 #define MAX_DOCTORS 2
+#define RAND_SEED 3
+#define CHAR_NUM 26
+#define NUM_NUM 10
 
 // ===============================
 // Array of Structure
@@ -75,8 +78,8 @@ char global_Username[81];
 // ===============================
 // Function Prototypes
 // ===============================
-void init();
 int menu(int x);
+void init();
 
 // ===============================
 // Account Related Functions
@@ -104,6 +107,8 @@ void save();
 void retrieve();
 int check_Patients_Slot_File(char *);
 void save_Patients_Slot_File(char *, int );
+void encrypt(char *str);
+void decrypt(char *str);
 
 // ===============================
 // UI Functions
