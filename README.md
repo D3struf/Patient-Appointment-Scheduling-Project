@@ -17,10 +17,10 @@ This has a login function for patients that in need for checkups and will create
 This program is created by the following Developers:
 Documentation
 Project Lead
-* John Paul Monter (Me)
+* @D3struf (John Paul Monter - Me)
 
 Flowchart
-* Almira Jill Garcia
+* @Almirajill
 
 User Interface
-* Jeanne May Carolino 
+* @jeannmaycarolino
