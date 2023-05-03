@@ -1,5 +1,2 @@
 Name,Department,Schedule,Email,Contact_Number,Payment_Status
 Dr. John Smith,OPD,Monday to Friday - 9:00am to 5:00pm,john.smith@tupmc.com,09123456789,2
-Dr. Sarah Lee,OPD,Tuesday to Saturday - 10:00am to 6:00pm,sarah.lee@hospital.com,09987654321,1
-Dr. John Smith,OPD,Monday to Friday - 9:00am to 5:00pm,john.smith@tupmc.com,09123456789,2
-Dr. John Smith,OPD,Monday to Friday - 9:00am to 5:00pm,john.smith@tupmc.com,09123456789,2

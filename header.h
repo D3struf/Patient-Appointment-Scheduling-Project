@@ -88,7 +88,7 @@ int search_Account();
 // ===============================
 // Patient Informations
 // ===============================
-void patient_Information();
+int patient_Information();
 void display_Patient_Information();
 void appointment_Schedule();
 void view_Schedule();

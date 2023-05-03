@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    int choice1, choice2, login;
+    int choice1, choice2, login, create;
     char folder_path[101];
 
     // Create the folder path
@@ -23,14 +23,14 @@ int main(void)
         {
             case 1: login = login_Account();
                     break;
-            case 2: patient_Information();
+            case 2: create = patient_Information();
                     break; 
             case 3: save();
                     exit(0);
                     break;
             default: printf("Invalid Choice, Try Again!!\n"); break;
         }
-        if (choice1 == 2 || (choice1 == 1 && login == 1))
+        if ((choice1 == 2 && create == 1) || (choice1 == 1 && login == 1))
             break;
     }
 
@@ -153,7 +153,7 @@ char *get_Password(char *string, char *PASSWORD)
     return temp; 
 }
 
-void patient_Information()
+int patient_Information()
 {
     ACCOUNT x;
     char *temp;
@@ -163,6 +163,20 @@ void patient_Information()
     printf("Username: ");
     scanf(" %[^\n]s", x.username);
     strcpy(global_Username, x.username);
+    
+    //  Validate Username
+    LIST *p;
+    p = L;
+    while (p != NULL)
+    {
+        if (strcmp(p->accounts.username, x.username) == 0)
+        {
+            printf("\nUsername already exists!!\n");
+            system("pause");
+            return 1;
+        }
+        p = p->next;
+    }
     printf("Enter Name (FIRST NAME MIDDLE INITIAL SURNAME): ");
     scanf(" %[^\n]s", x.name);
     printf("Enter Age: ");
@@ -176,9 +190,12 @@ void patient_Information()
     temp = get_Password("Enter Password: ", x.password);
     strcpy(x.password, temp);
     strcpy(x.appointment_date, "\0");
+    strcpy(x.appointment_code, "\0");
     strcpy(x.appointment_doctor, "\0");
     strcpy(x.appointment_doctor_contact_number, "\0");
-    strcpy(x.appointment_code, "\0");
+    strcpy(x.appointment_doctor_department, "\0");
+    strcpy(x.appointment_doctor_email, "\0");
+    strcpy(x.appointment_doctor_schedule, "\0");
     x.payment_status = 1;
 
     add_Account(x);
