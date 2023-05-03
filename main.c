@@ -1,51 +1,23 @@
 #include "header.h"
-// #include "./functions/dbms.c"
-// #include "./functions/accounts.c"
-// #include "./functions/menu.c"
-
-void Box()
-{
-    int a = 205; //Horizontal
-    int b = 186; //Vertical
-    int c = 187; //Corner Top Right
-    int d = 201; // Corner Top Left
-    int e = 190; //Corner Bottom Right
-    int f = 200; //Corner Bottom Left
-    //Starting Line < Alignment < End Line
-    //W = 4 < x < 23
-    // H = 11 < x < 110
-    for (int i = 0; i < 100; i++) //Width
-    {
-        gotoxy(10+i,3);printf("%c", a);// Top Width
-        gotoxy(10+i,23);printf("%c", a);// Bottom Width
-    }
-    for (int j = 0; j < 20; j++)
-    {
-        gotoxy(10,3+j);  printf("%c", b); //Left Height Line
-        gotoxy(110,3+j);printf("%c", b); //Right Height Line
-    }   gotoxy(110,3);  printf("%c", c); //Corner Top Right
-        gotoxy(10,3);    printf("%c", d); //Corner Top Left
-        gotoxy(110,23); printf("%c", e);//188); //Corner Bottom Right
-        gotoxy(10,23);   printf("%c", f); //Corner Bottom Left
-}
 
 int main(void)
 {
     int choice1, choice2, login, create;
     char folder_path[101];
     char database_folder[101];
+
     system("cls");
     Box();
-    // Create the folder path
+
+    // Create the folder paths
     snprintf(database_folder, sizeof(database_folder), "%s", DATABASE_FILE);
     mkdir(database_folder, 0777); // full permission to all
-
     snprintf(folder_path, sizeof(folder_path), "%s", FOLDER);
     mkdir(folder_path, 0777); // full permission to all
 
     init();
     retrieve();
-    //display();
+
     // Ask for user Account
     while (1)
     {
@@ -119,10 +91,13 @@ int login_Account()
     gotoxy(37,10);scanf(" %[^\n]s", y.username);
     strcpy(global_Username, y.username);
 
+    // Check if the username is in the database
     while (p != NULL)
     {
+        // If the username is in the database
         if (strcmp(p->accounts.username, y.username) == 0)
         {
+            // Prompt for password and check if it is correct 3 trials only
             while(tries != 0)
             {
                 pass = get_Password("Enter Password: ", y.password);
@@ -175,6 +150,7 @@ char *get_Password(char *string, char *PASSWORD)
         pwd[101];
     int i = 0;
 
+    // Prompt user for password
     gotoxy(20,13); printf("%s", string);
     gotoxy(37,13);printf("%s", PASSWORD);
 
@@ -218,6 +194,7 @@ int patient_Information()
     gotoxy(20,12);printf("Username: ");
     gotoxy(30,12);scanf(" %[^\n]s", x.username);
     strcpy(global_Username, x.username);
+
     //  Validate Username
     LIST *p;
     p = L;
@@ -257,24 +234,6 @@ int patient_Information()
     return 0;
 }
 
-int search_Account()
-{
-    LIST *p;
-    p = L;
-    int marker = 1;
-
-    while (p != NULL)
-    {
-        if (strcmp(p->accounts.username, global_Username) == 0)
-        {
-            return marker;
-        }
-        p = p->next;
-        marker++;
-    }
-    return -1;
-}
-
 int add_Account(ACCOUNT x)
 {
     LIST *newNode;
@@ -285,26 +244,6 @@ int add_Account(ACCOUNT x)
     newNode->next = L;
     L = newNode;
     return 0;
-}
-
-void display()
-{
-    LIST *p;
-    p = L;
-
-    while (p != NULL)
-    {
-        gotoxy(20,14);printf("USERNAME:           %s\n", p->accounts.username);
-        gotoxy(20,15);printf("PASSWORD:           %s\n", p->accounts.password);
-        gotoxy(20,16);printf("NAME:               %s\n", p->accounts.name);
-        gotoxy(20,17);printf("AGE:                %d\n", p->accounts.age);
-        gotoxy(20,18);printf("SEX:                %s\n", p->accounts.sex);
-        gotoxy(20,19);printf("BIRTHDAY:           %s\n", p->accounts.bday);
-        gotoxy(20,20);printf("CONTACT NUMBER:     %s\n", p->accounts.contact_number);
-        gotoxy(20,21);printf("%s\n", p->accounts.appointment_date);
-        p = p->next;
-    }
-    gotoxy(20,22);system("pause");
 }
 
 // ===============================================
@@ -380,6 +319,7 @@ void display_Patient_Information()
     LIST *p;
     p = L;
 
+    // Look for the username
     while (p != NULL)
     {
         if (strcmp(p->accounts.username, global_Username) == 0)
@@ -609,8 +549,8 @@ void view_Schedule()
             gotoxy(30,18);printf("EMAIL:              %s\n", p->accounts.appointment_doctor_email);
             gotoxy(30,19);printf("CONTACT NUMBER:     %s\n", p->accounts.appointment_doctor_contact_number);
             gotoxy(30,20);printf("================================================================\n\t");
-            gotoxy(30,21);system("pause");
             gotoxy(30,22);printf("================================================================\n");
+            gotoxy(30,21);system("pause");
             break;
         }
         p = p->next;
@@ -628,6 +568,7 @@ DOCTOR appoint_Doctor()
     srand(time(NULL));
     int num = rand() % MAX_DOCTORS ;
 
+    // return the selected doctor
     return doctors[num];
 }
 
@@ -735,10 +676,10 @@ void payment_Method()
             gotoxy(30,9);printf("                 Mode of Transaction: Online                              \n");
             gotoxy(30,10);printf("================================================================\n");
             temp = confirmation_code();
-             gotoxy(30,13);printf("Your Confirmation Code is: %s\n", temp);
-             gotoxy(30,14);printf("Payment Successful\n");
-             gotoxy(30,15);printf("Thank You For Using our Program!!\n");
-             gotoxy(30,16);system("pause");
+            gotoxy(30,13);printf("Your Confirmation Code is: %s\n", temp);
+            gotoxy(30,14);printf("Payment Successful\n");
+            gotoxy(30,15);printf("Thank You For Using our Program!!\n");
+            gotoxy(30,16);system("pause");
             status = 2;
         }
         else if (amount > RESERVATION_FEE)
@@ -827,6 +768,7 @@ char *confirmation_code()
             num[i] = rand() % 10;
         }
     }
+    // format the code and return
     sprintf(code, "%c%d%c%d%c", num[0], num[1], num[2], num[3], num[4]);
     strcpy(temp, code);
     return temp;
@@ -913,6 +855,36 @@ void retrieve()
     fclose(inFile);
     fclose(inFile2);
     fclose(inFile3);
+}
+
+// ===============================================
+// UI FUNCTIONS
+// ===============================================
+
+void Box()
+{
+    int a = 205; //Horizontal
+    int b = 186; //Vertical
+    int c = 187; //Corner Top Right
+    int d = 201; // Corner Top Left
+    int e = 190; //Corner Bottom Right
+    int f = 200; //Corner Bottom Left
+    //Starting Line < Alignment < End Line
+    //W = 4 < x < 23
+    // H = 11 < x < 110
+    for (int i = 0; i < 100; i++) //Width
+    {
+        gotoxy(10+i,3);printf("%c", a);// Top Width
+        gotoxy(10+i,23);printf("%c", a);// Bottom Width
+    }
+    for (int j = 0; j < 20; j++)
+    {
+        gotoxy(10,3+j);  printf("%c", b); //Left Height Line
+        gotoxy(110,3+j);printf("%c", b); //Right Height Line
+    }   gotoxy(110,3);  printf("%c", c); //Corner Top Right
+        gotoxy(10,3);    printf("%c", d); //Corner Top Left
+        gotoxy(110,23); printf("%c", e);//188); //Corner Bottom Right
+        gotoxy(10,23);   printf("%c", f); //Corner Bottom Left
 }
 
 void gotoxy(int x, int y)

@@ -84,8 +84,6 @@ int menu(int x);
 int login_Account();
 int add_Account(ACCOUNT );
 char *get_Password(char *, char *);
-void display();
-int search_Account();
 
 // ===============================
 // Patient Informations
