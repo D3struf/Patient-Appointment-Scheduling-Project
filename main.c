@@ -473,13 +473,13 @@ void appointment_Schedule()
     {
         if (strcmp(p->accounts.username, global_Username) == 0)
         {
-            strncpy(p->accounts.appointment_date, x[choice-1].date, sizeof(x[choice-1].date));
+            strcpy(p->accounts.appointment_date, x[choice-1].date);
             strcpy(p->accounts.appointment_doctor, y.name);
             strcpy(p->accounts.appointment_doctor_department, y.department);
             strcpy(p->accounts.appointment_doctor_schedule, y.schedule);
             strcpy(p->accounts.appointment_doctor_email, y.email);
             strcpy(p->accounts.appointment_doctor_contact_number, y.contact_number);
-            strncpy(p->accounts.appointment_code, code, sizeof(code));
+            strcpy(p->accounts.appointment_code, code);
             break;
         }
     }
