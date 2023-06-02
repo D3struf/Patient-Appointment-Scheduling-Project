@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1682491724 source:c:\users\johnp\onedrive\desktop\scheduling system\main.c
+	"header.h"
+	"./functions/dbms.c"
+	"./functions/menu.c"
+
+1682507519 c:\users\johnp\onedrive\desktop\scheduling system\header.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1682491879 c:\users\johnp\onedrive\desktop\scheduling system\functions\dbms.c
+	"header.h"
+
+1682491038 c:\users\johnp\onedrive\desktop\scheduling system\functions\menu.c
+
