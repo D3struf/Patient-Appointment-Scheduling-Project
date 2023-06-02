@@ -25,7 +25,7 @@ class Variables {
 public class Main {
     // Linked List Declaration
     private LinkedList<LIST> L;
-    private LinkedList<ACCOUNT> accounts;
+    String globalUsername;
 
     public void display() {
         int count = 0;
@@ -83,7 +83,8 @@ public class Main {
         // Main Menu
         while (true) {
             switch (obj.menu(3)) {
-            case 1: // display_Patient_Information();
+            case 1:
+                obj.displayPatientInformation();
                 break;
             case 2: // schedule_Appointment();
                 break;
@@ -446,6 +447,9 @@ public class Main {
             return false;
         }
 
+        // If does not exists store in global variable
+        globalUsername = username;
+
         String password = get_Password("Enter Password: ");
 
         System.out.print("Enter Name (FIRST NAME MIDDLE INITIAL SURNAME): ");
@@ -467,6 +471,11 @@ public class Main {
         ACCOUNT acc = new ACCOUNT(username, password, name, age, sex, bday,
                 contact_number);
         add(acc);
+
+        System.out.println("===================================================");
+        System.out.println("Account Created Successfully!!");
+        System.out.println("===================================================");
+        pause();
         return true;
     }
 
@@ -491,6 +500,9 @@ public class Main {
             return false;
         }
 
+        // If exists store in global variable
+        globalUsername = username;
+
         // Temporary Account List for validation
         LIST tempAccountList = new LIST();
         for (LIST lists : L) {
@@ -511,6 +523,7 @@ public class Main {
                 System.out.println("===================================================");
                 System.out.println("Login Successful!!");
                 System.out.println("===================================================");
+                pause();
                 return true;
             }
             else {
@@ -519,6 +532,7 @@ public class Main {
                 System.out.println("Incorrect Password!!");
                 System.out.printf("You have %d Tries Left\n", tries);
                 System.out.println("===================================================");
+                pause();
 
                 if (tries == 0) {
                     System.out.println(
@@ -527,6 +541,7 @@ public class Main {
                     System.out.println("Please try again later.");
                     System.out.println(
                             "===================================================");
+                    pause();
                     System.exit(0);
                 }
             }
@@ -536,6 +551,7 @@ public class Main {
 
     public int menu(int x) {
         Scanner scan = new Scanner(System.in);
+        clearScreen();
         if (x == 1) {
             System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
             System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
@@ -581,6 +597,40 @@ public class Main {
             System.out.println("Enter Choice: ");
             System.out.println("=======================================");
             return scan.nextInt();
+        }
+    }
+
+    // ===============================================
+    // Patient Methods
+    // ===============================================
+
+    public void displayPatientInformation() {
+        for (LIST current : L) {
+            if (current.accounts.username.equals(globalUsername)) {
+                System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
+                System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
+                System.out.println("===================================================");
+                System.out.println("|||               PATIENT INFORMATION           |||");
+                System.out.println("===================================================");
+                System.out.println(
+                        "USERNAME       :           " + current.accounts.getUsername());
+                System.out.println(
+                        "PASSWORD       :           " + current.accounts.getPassword());
+                System.out.println(
+                        "NAME           :           " + current.accounts.getName());
+                System.out.println(
+                        "AGE            :           " + current.accounts.getAge());
+                System.out.println(
+                        "SEX            :           " + current.accounts.getSex());
+                System.out.println(
+                        "BIRTHDAY       :           " + current.accounts.getBday());
+                System.out.println("CONTACT NUMBER :           "
+                        + current.accounts.getContactNumber());
+                System.out.println("===================================================");
+                pause();
+                System.out.println("===================================================");
+                break;
+            }
         }
     }
 
@@ -665,6 +715,12 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
             pause.close();
         }
+    }
+
+    void clearScreen() {
+        // Clear the console by printing multiple empty lines
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }
