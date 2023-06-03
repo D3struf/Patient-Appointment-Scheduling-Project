@@ -33,12 +33,10 @@ public class Main {
         int count = 0;
 
         for (LIST current : L) {
-            System.out.println(++count + ".) Username: " + current.accounts.username
-                    + " | Password: " + current.accounts.password + " | Name: "
-                    + current.accounts.name + " | Age: " + current.accounts.age
-                    + " | Sex: " + current.accounts.sex + " | Birthday: "
-                    + current.accounts.bday + " | Contact Number: "
-                    + current.accounts.contact_number);
+            System.out.println(++count + ".) Username: " + current.accounts.username + " | Password: "
+                    + current.accounts.password + " | Name: " + current.accounts.name + " | Age: "
+                    + current.accounts.age + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday
+                    + " | Contact Number: " + current.accounts.contact_number);
             current = current.next;
         }
     }
@@ -67,8 +65,7 @@ public class Main {
                 break;
             case 3:
                 obj.save();
-                System.out.println(
-                        "Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
+                System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
                 System.exit(0);
                 break;
             default:
@@ -91,14 +88,15 @@ public class Main {
             case 2:
                 obj.appointmentSchedule();
                 break;
-            case 3: // obj.displayAppointmentSchedules();
+            case 3:
+                obj.viewSchedule();
                 break;
-            case 4: // payment_Method();
+            case 4:
+                obj.paymentMethod();
                 break;
             case 5:
                 obj.save();
-                System.out.println(
-                        "Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
+                System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
                 System.exit(0);
                 break;
             default:
@@ -130,8 +128,8 @@ public class Main {
         private int age;
         private int payment_status;
 
-        ACCOUNT(String username, String password, String name, int age, String sex,
-                String bday, String contact_number) {
+        ACCOUNT(String username, String password, String name, int age, String sex, String bday,
+                String contact_number) {
             this.setUsername(username);
             this.setPassword(password);
             this.setName(name);
@@ -287,8 +285,7 @@ public class Main {
             this.appointment_doctor_email = appointment_doctor_email;
         }
 
-        public void setAppointmentDoctorContactNumber(
-                String appointment_doctor_contact_number) {
+        public void setAppointmentDoctorContactNumber(String appointment_doctor_contact_number) {
             this.appointment_doctor_contact_number = appointment_doctor_contact_number;
         }
 
@@ -339,8 +336,7 @@ public class Main {
         private String email;
         private String contact_number;
 
-        DOCTOR(String name, String department, String schedule, String email,
-                String contact_number) {
+        DOCTOR(String name, String department, String schedule, String email, String contact_number) {
             this.setName(name);
             this.setDepartment(department);
             this.setSchedule(schedule);
@@ -438,6 +434,7 @@ public class Main {
 
     public boolean inputPatientInformation() {
         Scanner scan = new Scanner(System.in);
+        clearScreen();
         System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
         System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
         System.out.println("===================================================");
@@ -474,8 +471,7 @@ public class Main {
         System.out.print("Enter Contact Number (11 Digit Number): ");
         String contact_number = scan.nextLine();
 
-        ACCOUNT acc = new ACCOUNT(username, password, name, age, sex, bday,
-                contact_number);
+        ACCOUNT acc = new ACCOUNT(username, password, name, age, sex, bday, contact_number);
         add(acc);
 
         System.out.println("===================================================");
@@ -487,6 +483,7 @@ public class Main {
 
     public boolean login_Account() {
         Scanner scan = new Scanner(System.in);
+        clearScreen();
         System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
         System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
         System.out.println("===================================================");
@@ -503,6 +500,7 @@ public class Main {
         if (!isUsernameExists(username)) {
             System.out.println("Username does not exists!!");
             System.out.println("Please Create an Account first.");
+            pause();
             return false;
         }
 
@@ -524,8 +522,7 @@ public class Main {
             String password = get_Password("Enter Password: ");
 
             // Validate Password
-            if (tempAccountList != null
-                    && password.equals(tempAccountList.accounts.password)) {
+            if (tempAccountList != null && password.equals(tempAccountList.accounts.password)) {
                 System.out.println("===================================================");
                 System.out.println("Login Successful!!");
                 System.out.println("===================================================");
@@ -541,12 +538,10 @@ public class Main {
                 pause();
 
                 if (tries == 0) {
-                    System.out.println(
-                            "===================================================");
+                    System.out.println("===================================================");
                     System.out.println("You have exceeded the maximum number of tries!!");
                     System.out.println("Please try again later.");
-                    System.out.println(
-                            "===================================================");
+                    System.out.println("===================================================");
                     pause();
                     System.exit(0);
                 }
@@ -613,28 +608,22 @@ public class Main {
     public void displayPatientInformation() {
         for (LIST current : L) {
             if (current.accounts.username.equals(globalUsername)) {
+                clearScreen();
                 System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
                 System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-                System.out.println("===================================================");
+                System.out.println("================================================================");
                 System.out.println("|||               PATIENT INFORMATION           |||");
-                System.out.println("===================================================");
-                System.out.println(
-                        "USERNAME       :           " + current.accounts.getUsername());
-                System.out.println(
-                        "PASSWORD       :           " + current.accounts.getPassword());
-                System.out.println(
-                        "NAME           :           " + current.accounts.getName());
-                System.out.println(
-                        "AGE            :           " + current.accounts.getAge());
-                System.out.println(
-                        "SEX            :           " + current.accounts.getSex());
-                System.out.println(
-                        "BIRTHDAY       :           " + current.accounts.getBday());
-                System.out.println("CONTACT NUMBER :           "
-                        + current.accounts.getContactNumber());
-                System.out.println("===================================================");
+                System.out.println("================================================================");
+                System.out.println("USERNAME       :           " + current.accounts.getUsername());
+                System.out.println("PASSWORD       :           " + current.accounts.getPassword());
+                System.out.println("NAME           :           " + current.accounts.getName());
+                System.out.println("AGE            :           " + current.accounts.getAge());
+                System.out.println("SEX            :           " + current.accounts.getSex());
+                System.out.println("BIRTHDAY       :           " + current.accounts.getBday());
+                System.out.println("CONTACT NUMBER :           " + current.accounts.getContactNumber());
+                System.out.println("================================================================");
                 pause();
-                System.out.println("===================================================");
+                System.out.println("================================================================");
                 break;
             }
         }
@@ -646,8 +635,7 @@ public class Main {
 
         for (int i = 0; i < Variables.DAYS; i++) {
             APPOINTMENT patientslot = new APPOINTMENT();
-            patientslot.date = tomorrowdate
-                    .format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
+            patientslot.date = tomorrowdate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
             // Chech the Slot Number in the File
             patientslot.num_patients = checkPatientSlotFile(patientslot.date);
@@ -659,18 +647,14 @@ public class Main {
     }
 
     private static void displayAppointmentSchedules(APPOINTMENT[] slot) {
-        System.out.println(
-                "================================================================");
-        System.out.println(
-                "|||     DATE       NUMBER OF PATIENTS       SLOTS AVAILABLE  |||");
-        System.out.println(
-                "================================================================");
+        System.out.println("================================================================");
+        System.out.println("|||     DATE       NUMBER OF PATIENTS       SLOTS AVAILABLE  |||");
+        System.out.println("================================================================");
 
         for (int i = 0; i < Variables.DAYS; i++) {
             APPOINTMENT sched = slot[i];
-            System.out.printf("[%d]    %s              %d                   (%d/%d)\n",
-                    (i + 1), sched.getDate(), sched.getNumPatients(),
-                    sched.getNumPatients(), Variables.MAX_PATIENTS);
+            System.out.printf("[%d]    %s              %d                   (%d/%d)\n", (i + 1), sched.getDate(),
+                    sched.getNumPatients(), sched.getNumPatients(), Variables.MAX_PATIENTS);
         }
     }
 
@@ -715,11 +699,10 @@ public class Main {
 
     public DOCTOR appointDoctor() {
         DOCTOR[] doctors = {
-                new DOCTOR("Dr. John Smith", "OPD", "Monday to Friday - 9:00am to 5:00pm",
-                        "john.smith@tupmc.com", "09123456789"),
-                new DOCTOR("Dr. Sarah Lee", "OPD",
-                        "Tuesday to Saturday - 10:00am to 6:00pm",
-                        "sarah.lee@hospital.com", "09987654321") };
+                new DOCTOR("Dr. John Smith", "OPD", "Monday to Friday - 9:00am to 5:00pm", "john.smith@tupmc.com",
+                        "09123456789"),
+                new DOCTOR("Dr. Sarah Lee", "OPD", "Tuesday to Saturday - 10:00am to 6:00pm", "sarah.lee@hospital.com",
+                        "09987654321") };
 
         Random random = new Random();
         int randNum = random.nextInt(Variables.MAX_DOCTORS);
@@ -727,8 +710,7 @@ public class Main {
         return doctors[randNum];
     }
 
-    private static void updatePatientAppointment(LIST current, APPOINTMENT sched,
-            DOCTOR doc, String code) {
+    private static void updatePatientAppointment(LIST current, APPOINTMENT sched, DOCTOR doc, String code) {
         current.accounts.setAppointmentCode(code);
         current.accounts.setAppointmentDate(sched.getDate());
         current.accounts.setAppointmentDoctor(doc.getName());
@@ -740,10 +722,10 @@ public class Main {
 
     public LIST getCurrentUserAccount() {
         for (LIST current : L) {
-            if (current != null && current.accounts != null
-                    && current.accounts.getUsername() != null
-                    && current.accounts.getUsername().equals(globalUsername)) {
-                return current;
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current;
+                }
             }
         }
         return null;
@@ -763,23 +745,17 @@ public class Main {
         LIST currentAccount = getCurrentUserAccount();
         if (currentAccount != null && currentAccount.accounts.getAppointmentDate() != null
                 && !currentAccount.accounts.getAppointmentDate().isEmpty()) {
-            System.out.println(
-                    "================================================================");
+            System.out.println("================================================================");
             System.out.println("You have already scheduled an appointment");
-            System.out
-                    .println("Check your appointment schedule in the View Schedule Menu");
-            System.out.println(
-                    "================================================================");
+            System.out.println("Check your appointment schedule in the View Schedule Menu");
+            System.out.println("================================================================");
             pause();
             return;
         }
 
-        System.out.println(
-                "================================================================");
-        System.out.println(
-                "|||                   APPOINTMENT SCHEDULE                   |||");
-        System.out.println(
-                "================================================================");
+        System.out.println("================================================================");
+        System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
+        System.out.println("================================================================");
 
         // Display Appointment Schedule
         displayAppointmentSchedules(scheduledSlots);
@@ -788,12 +764,9 @@ public class Main {
         int choice;
         String code;
         while (true) {
-            System.out.println(
-                    "================================================================");
-            System.out.println(
-                    "|||                     CHOOSE A SCHEDULE                    |||");
-            System.out.println(
-                    "================================================================");
+            System.out.println("================================================================");
+            System.out.println("|||                     CHOOSE A SCHEDULE                    |||");
+            System.out.println("================================================================");
             System.out.println("Enter Choice");
             choice = scan.nextInt();
 
@@ -820,28 +793,177 @@ public class Main {
             clearScreen();
             System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
             System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-            System.out.println(
-                    "================================================================");
-            System.out.println(
-                    "|||                   APPOINTMENT SCHEDULE                   |||");
-            System.out.println(
-                    "================================================================\n");
+            System.out.println("================================================================");
+            System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
+            System.out.println("================================================================\n");
             System.out.println("You have Successfully Created an Appointment Schedule.");
             System.out.println("Your Appointment Code is: " + code);
-            System.out
-                    .println("Your Appointment Schedule is on " + selectedSlot.getDate());
+            System.out.println("Your Appointment Schedule is on " + selectedSlot.getDate());
             System.out.println("Your Doctor is " + selectedDoctor.getName());
 
             selectedSlot.num_patients++;
             updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code);
-            System.out.println(
-                    "================================================================\n");
+            System.out.println("================================================================\n");
             scan.nextLine();
             pause();
             break;
         }
-        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(),
-                scheduledSlots[choice - 1].num_patients);
+        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), scheduledSlots[choice - 1].num_patients);
+    }
+
+    public void viewSchedule() {
+        LIST currentAccount = getCurrentUserAccount();
+
+        clearScreen();
+        System.out.println("================================================================");
+        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
+        System.out.println("================================================================");
+        System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
+        System.out.println("================================================================");
+        System.out.println("USERNAME           :           " + currentAccount.accounts.getUsername());
+        System.out.println("NAME               :           " + currentAccount.accounts.getName());
+        System.out.println("APPOINTMENT DATE   :           " + currentAccount.accounts.getAppointmentDate());
+        System.out.println("=============================CODE: " + currentAccount.accounts.getAppointmentCode()
+                + " ===========================");
+        System.out.println("DOCTOR DETAILS");
+        System.out.println("APPOINTMENT DOCTOR :           " + currentAccount.accounts.getAppointmentDoctor());
+        System.out
+                .println("DEPARTMENT         :           " + currentAccount.accounts.getAppointmentDoctorDepartment());
+        System.out.println("SCHEDULE           :           " + currentAccount.accounts.getAppointmentDoctorSchedule());
+        System.out.println("EMAIL              :           " + currentAccount.accounts.getAppointmentDoctorEmail());
+        System.out.println(
+                "CONTACT NUMBER     :           " + currentAccount.accounts.getAppointmentDoctorContactNumber());
+        System.out.println("================================================================");
+        pause();
+    }
+
+    private static String confirmationCode() {
+        Random random = new Random();
+        StringBuffer code = new StringBuffer();
+        int length = 5;
+
+        // Generate confirmation code
+        for (int i = 0; i < length; i++) {
+            if (i % 2 == 0) {
+                char randChar = (char) (random.nextInt(26) + 'A');
+                code.append(randChar);
+            }
+            else {
+                int randNum = random.nextInt(10);
+                code.append(randNum);
+            }
+        }
+        return code.toString();
+    }
+
+    private static void onlinePayment(LIST currentAccount) {
+        Main obj = new Main();
+        Scanner scan = new Scanner(System.in);
+        obj.clearScreen();
+        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
+        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
+        System.out.println("================================================================");
+        System.out.println("                  ONLINE TRANSACTION                   ");
+        System.out.println("================================================================");
+        System.out.println("RESERVATION FEE     : PHP " + Variables.RESERVATION_FEE + ".00");
+        System.out.print("Enter your Bank Name (Ex. GCASH): ");
+        String bankName = scan.nextLine();
+        System.out.print("Enter your Account Number: ");
+        String accountNumber = scan.nextLine();
+        System.out.print("Enter Amount: ");
+        int amount = scan.nextInt();
+        scan.nextLine();
+
+        if (amount >= Variables.RESERVATION_FEE) {
+            System.out.println("================================================================");
+            System.out.println("Transaction Successful!!");
+            String code = confirmationCode();
+            System.out.println("Your Confirmation Code: " + code);
+
+            if (amount > Variables.RESERVATION_FEE) {
+                System.out.println("Your Change: PHP" + (amount - Variables.RESERVATION_FEE) + ".00");
+            }
+
+            System.out.println("Thank You For Using Our Program!");
+            System.out.println("================================================================");
+            obj.pause();
+        }
+        else {
+            System.out.println("================================================================");
+            System.out.println("Transaction Failed!!");
+            System.out.println("Insufficient Amount");
+            System.out.println("================================================================");
+            obj.pause();
+            return;
+        }
+        // Update Payment Status
+        if (currentAccount != null && currentAccount.accounts != null) {
+            currentAccount.accounts.setPaymentStatus(1);
+        }
+        return;
+    }
+
+    public void paymentMethod() {
+        clearScreen();
+        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
+        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
+        System.out.println("================================================================");
+        System.out.println("                  PAYMENT METHOD                   ");
+
+        // Check if the user has already paid the appointment
+        LIST currentAccount = getCurrentUserAccount();
+        if (currentAccount != null && currentAccount.accounts.getPaymentStatus() == 1) {
+            System.out.println("================================================================");
+            System.out.println("You have already paid the appointment");
+            System.out.println("================================================================");
+            pause();
+            return;
+        }
+
+        // If user doesn't have appointment yet
+        if (currentAccount != null && currentAccount.accounts.getAppointmentDate() != null
+                && currentAccount.accounts.getAppointmentDate().isEmpty()) {
+            System.out.println("================================================================");
+            System.out.println("YOU DO NOT HAVE AN APPOINTMENT YET!");
+            System.out.println("================================================================");
+            pause();
+            return;
+        }
+
+        // Ask for Payment Method
+        int choice;
+        while (true) {
+            choice = menu(2);
+
+            // Validate Choice
+            if (choice < 1 || choice > 3) {
+                System.out.println("Invalid Choice");
+                pause();
+                continue;
+            }
+
+            // If Cash
+            if (choice == 1) {
+                System.out.println("================================================================");
+                System.out.println("                  Mode of Transaction: CASH                     ");
+                System.out.println("Go to the nearest " + Variables.HOSPITAL_NAME + "for your payment");
+                System.out.println("================================================================");
+                pause();
+                return;
+            }
+            else if (choice == 2) {
+                System.out.println("================================================================");
+                System.out.println("                  Mode of Transaction: ONLINE                   ");
+                System.out.println("================================================================");
+                pause();
+                onlinePayment(currentAccount);
+                break;
+            }
+            else {
+                return;
+            }
+        }
+        return;
     }
 
     // ===============================================
@@ -849,23 +971,66 @@ public class Main {
     // ===============================================
 
     public void save() {
-        try (BufferedWriter outFile = new BufferedWriter(
-                new FileWriter(Variables.ACCOUNT_FILE));
-                BufferedWriter outFile2 = new BufferedWriter(
-                        new FileWriter(Variables.PATIENT_FILE));) {
+        Encryption encryptions = new Encryption();
+
+        try (BufferedWriter outFile = new BufferedWriter(new FileWriter(Variables.ACCOUNT_FILE));
+                BufferedWriter outFile2 = new BufferedWriter(new FileWriter(Variables.PATIENT_FILE));
+                BufferedWriter outFile3 = new BufferedWriter(new FileWriter(Variables.DOCTOR_FILE));) {
+
             outFile.write("Username, Password\n");
-            outFile2.write(
-                    "Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n");
+            outFile2.write("Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n");
+            outFile3.write("Name,Department,Schedule,Email,Contact_Number,Payment_Status\n");
 
             for (LIST current : L) {
-                outFile.write(current.accounts.getUsername() + ","
-                        + current.accounts.getPassword() + "\n");
-                outFile2.write(current.accounts.getName() + ","
-                        + current.accounts.getSex() + "," + current.accounts.getBday()
-                        + "," + current.accounts.getContactNumber() + ","
-                        + current.accounts.getAppointmentDate() + ","
-                        + current.accounts.getAppointmentCode() + ","
-                        + current.accounts.getAge() + "\n");
+                // Encrypt the File Informations
+                String encryptedUsername = encryptions.encryptDecrypt(current.accounts.getUsername());
+                String encryptedPassword = encryptions.encryptDecrypt(current.accounts.getPassword());
+                String encryptedName = encryptions.encryptDecrypt(current.accounts.getName());
+                String encryptedSex = encryptions.encryptDecrypt(current.accounts.getSex());
+                String encryptedBday = encryptions.encryptDecrypt(current.accounts.getBday());
+                String encryptedContactNumber = encryptions.encryptDecrypt(current.accounts.getContactNumber());
+                String encryptedAppointmentDate = encryptions.encryptDecrypt(current.accounts.getAppointmentDate());
+                String encryptedAppointmentCode = encryptions.encryptDecrypt(current.accounts.getAppointmentCode());
+                String encryptedAge = encryptions.encryptDecrypt(Integer.toString(current.accounts.getAge()));
+                String encryptedAppointmentDoctor = encryptions.encryptDecrypt(current.accounts.getAppointmentDoctor());
+                String encryptedAppointmentDoctorDepartment = encryptions
+                        .encryptDecrypt(current.accounts.getAppointmentDoctorDepartment());
+                String encryptedAppointmentDoctorSchedule = encryptions
+                        .encryptDecrypt(current.accounts.getAppointmentDoctorSchedule());
+                String encryptedAppointmentDoctorEmail = encryptions
+                        .encryptDecrypt(current.accounts.getAppointmentDoctorEmail());
+                String encryptedAppointmentDoctorContactNumber = encryptions
+                        .encryptDecrypt(current.accounts.getAppointmentDoctorContactNumber());
+                String encryptedPaymentStatus = encryptions
+                        .encryptDecrypt(Integer.toString(current.accounts.getPaymentStatus()));
+
+                // Encoded the Encrypted Texts with Base64
+                String encodedUsername = encryptions.encodeToBase64(encryptedUsername);
+                String encodedPassword = encryptions.encodeToBase64(encryptedPassword);
+                String encodedName = encryptions.encodeToBase64(encryptedName);
+                String encodedSex = encryptions.encodeToBase64(encryptedSex);
+                String encodedBday = encryptions.encodeToBase64(encryptedBday);
+                String encodedContactNumber = encryptions.encodeToBase64(encryptedContactNumber);
+                String encodedAppointmentDate = encryptions.encodeToBase64(encryptedAppointmentDate);
+                String encodedAppointmentCode = encryptions.encodeToBase64(encryptedAppointmentCode);
+                String encodedAge = encryptions.encodeToBase64(encryptedAge);
+                String encodedAppointmentDoctor = encryptions.encodeToBase64(encryptedAppointmentDoctor);
+                String encodedAppointmentDoctorDepartment = encryptions
+                        .encodeToBase64(encryptedAppointmentDoctorDepartment);
+                String encodedAppointmentDoctorSchedule = encryptions
+                        .encodeToBase64(encryptedAppointmentDoctorSchedule);
+                String encodedAppointmentDoctorEmail = encryptions.encodeToBase64(encryptedAppointmentDoctorEmail);
+                String encodedAppointmentDoctorContactNumber = encryptions
+                        .encodeToBase64(encryptedAppointmentDoctorContactNumber);
+                String encodedPaymentStatus = encryptions.encodeToBase64(encryptedPaymentStatus);
+
+                // Write in the File
+                outFile.write(encodedUsername + "," + encodedPassword + "\n");
+                outFile2.write(encodedName + "," + encodedSex + "," + encodedBday + "," + encodedContactNumber + ","
+                        + encodedAppointmentDate + "," + encodedAppointmentCode + "," + encodedAge + "\n");
+                outFile3.write(encodedAppointmentDoctor + "," + encodedAppointmentDoctorDepartment + ","
+                        + encodedAppointmentDoctorSchedule + "," + encodedAppointmentDoctorEmail + ","
+                        + encodedAppointmentDoctorContactNumber + "," + encodedPaymentStatus + "\n");
             }
         }
         catch (IOException e) {
@@ -875,32 +1040,99 @@ public class Main {
     }
 
     public void retrieve() {
-        try (BufferedReader inFile = new BufferedReader(
-                new FileReader(Variables.ACCOUNT_FILE));
-                BufferedReader inFile2 = new BufferedReader(
-                        new FileReader(Variables.PATIENT_FILE));) {
+        Encryption encryptions = new Encryption();
+        try (BufferedReader inFile = new BufferedReader(new FileReader(Variables.ACCOUNT_FILE));
+                BufferedReader inFile2 = new BufferedReader(new FileReader(Variables.PATIENT_FILE));
+                BufferedReader inFile3 = new BufferedReader(new FileReader(Variables.DOCTOR_FILE));) {
             // Skip First Line
             inFile.readLine();
             inFile2.readLine();
+            inFile3.readLine();
 
-            String line1, line2;
-            while ((line1 = inFile.readLine()) != null
-                    && (line2 = inFile2.readLine()) != null) {
+            String line1, line2, line3;
+            while ((line1 = inFile.readLine()) != null && (line2 = inFile2.readLine()) != null
+                    && (line3 = inFile3.readLine()) != null) {
                 // Read the data from the file and split it
                 String[] accountList = line1.split(",");
                 String[] patientList = line2.split(",");
+                String[] doctorlist = line3.split(",");
+
+                // Decode the encrypted texts using Base64
+                byte[] decodeUsername = encryptions.decodeToBase64(accountList[0]);
+                byte[] decodePassword = encryptions.decodeToBase64(accountList[1]);
+                byte[] decodeName = encryptions.decodeToBase64(patientList[0]);
+                byte[] decodeSex = encryptions.decodeToBase64(patientList[1]);
+                byte[] decodeBday = encryptions.decodeToBase64(patientList[2]);
+                byte[] decodeContactNumber = encryptions.decodeToBase64(patientList[3]);
+                byte[] decodeAppointmentDate = encryptions.decodeToBase64(patientList[4]);
+                byte[] decodeAppointmentCode = encryptions.decodeToBase64(patientList[5]);
+                byte[] decodeAge = encryptions.decodeToBase64(patientList[6]);
+                byte[] decodeAppointmentDoctor = encryptions.decodeToBase64(doctorlist[0]);
+                byte[] decodeAppointmentDoctorDepartment = encryptions.decodeToBase64(doctorlist[1]);
+                byte[] decodeAppointmentDoctorSchedule = encryptions.decodeToBase64(doctorlist[2]);
+                byte[] decodeAppointmentDoctorEmail = encryptions.decodeToBase64(doctorlist[3]);
+                byte[] decodeAppointmentDoctorContactNumber = encryptions.decodeToBase64(doctorlist[4]);
+                byte[] decodePaymentStatus = encryptions.decodeToBase64(doctorlist[5]);
+
+                // Convert the decoded arrays to Strings
+                String convertToStringUsername = encryptions.convertToString(decodeUsername);
+                String convertToStringPassword = encryptions.convertToString(decodePassword);
+                String convertToStringName = encryptions.convertToString(decodeName);
+                String convertToStringSex = encryptions.convertToString(decodeSex);
+                String convertToStringBday = encryptions.convertToString(decodeBday);
+                String convertToStringContactNumber = encryptions.convertToString(decodeContactNumber);
+                String convertToStringAppointmentDate = encryptions.convertToString(decodeAppointmentDate);
+                String convertToStringAppointmentCode = encryptions.convertToString(decodeAppointmentCode);
+                String convertToStringAge = encryptions.convertToString(decodeAge);
+                String convertToStringAppointmentDoctor = encryptions.convertToString(decodeAppointmentDoctor);
+                String convertToStringAppointmentDoctorDepartment = encryptions
+                        .convertToString(decodeAppointmentDoctorDepartment);
+                String convertToStringAppointmentDoctorSchedule = encryptions
+                        .convertToString(decodeAppointmentDoctorSchedule);
+                String convertToStringAppointmentDoctorEmail = encryptions
+                        .convertToString(decodeAppointmentDoctorEmail);
+                String convertToStringAppointmentDoctorContactNumber = encryptions
+                        .convertToString(decodeAppointmentDoctorContactNumber);
+                String convertToStringPaymentStatus = encryptions.convertToString(decodePaymentStatus);
+
+                // Decrypt the Strings
+                String decryptedUsername = encryptions.encryptDecrypt(convertToStringUsername);
+                String decryptedPassword = encryptions.encryptDecrypt(convertToStringPassword);
+                String decryptedName = encryptions.encryptDecrypt(convertToStringName);
+                String decryptedSex = encryptions.encryptDecrypt(convertToStringSex);
+                String decryptedBday = encryptions.encryptDecrypt(convertToStringBday);
+                String decryptedContactNumber = encryptions.encryptDecrypt(convertToStringContactNumber);
+                String decryptedAppointmentDate = encryptions.encryptDecrypt(convertToStringAppointmentDate);
+                String decryptedAppointmentCode = encryptions.encryptDecrypt(convertToStringAppointmentCode);
+                String decryptedAge = encryptions.encryptDecrypt(convertToStringAge);
+                String decryptedAppointmentDoctor = encryptions.encryptDecrypt(convertToStringAppointmentDoctor);
+                String decryptedAppointmentDoctorDepartment = encryptions
+                        .encryptDecrypt(convertToStringAppointmentDoctorDepartment);
+                String decryptedAppointmentDoctorSchedule = encryptions
+                        .encryptDecrypt(convertToStringAppointmentDoctorSchedule);
+                String decryptedAppointmentDoctorEmail = encryptions
+                        .encryptDecrypt(convertToStringAppointmentDoctorEmail);
+                String decryptedAppointmentDoctorContactNumber = encryptions
+                        .encryptDecrypt(convertToStringAppointmentDoctorContactNumber);
+                String decryptedPaymentStatus = encryptions.encryptDecrypt(convertToStringPaymentStatus);
 
                 // Create an ACCOUNT Objects
                 ACCOUNT account = new ACCOUNT();
-                account.setUsername(accountList[0]);
-                account.setPassword(accountList[1]);
-                account.setName(patientList[0]);
-                account.setSex(patientList[1]);
-                account.setBday(patientList[2]);
-                account.setContactNumber(patientList[3]);
-                account.setAppointmentDate(patientList[4]);
-                account.setAppointmentCode(patientList[5]);
-                account.setAge(Integer.parseInt(patientList[6]));
+                account.setUsername(decryptedUsername);
+                account.setPassword(decryptedPassword);
+                account.setName(decryptedName);
+                account.setSex(decryptedSex);
+                account.setBday(decryptedBday);
+                account.setContactNumber(decryptedContactNumber);
+                account.setAppointmentDate(decryptedAppointmentDate);
+                account.setAppointmentCode(decryptedAppointmentCode);
+                account.setAge(Integer.parseInt(decryptedAge));
+                account.setAppointmentDoctor(decryptedAppointmentDoctor);
+                account.setAppointmentDoctorDepartment(decryptedAppointmentDoctorDepartment);
+                account.setAppointmentDoctorSchedule(decryptedAppointmentDoctorSchedule);
+                account.setAppointmentDoctorEmail(decryptedAppointmentDoctorEmail);
+                account.setAppointmentDoctorContactNumber(decryptedAppointmentDoctorContactNumber);
+                account.setPaymentStatus(Integer.parseInt(decryptedPaymentStatus));
 
                 add(account);
             }
