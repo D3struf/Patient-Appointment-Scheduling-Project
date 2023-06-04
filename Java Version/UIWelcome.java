@@ -1,19 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class welcome {
-
+public class UIWelcome {
     public static void main(String[] args) {
-
-        new welcome();
-
+        new UIWelcome();
     }
 
     // Frame
     JFrame welcomeFrame;
     JProgressBar progressBar;
 
-    welcome() {
+    UIWelcome() {
         welcomeFrame = new JFrame();
         progressBar = new JProgressBar();
 
@@ -42,7 +39,7 @@ public class welcome {
         // Labels for Image
         JLabel bgImageLabel = new JLabel();
         bgImageLabel.setIcon(bgicon);
-        bgImageLabel.setBounds(0, 0, 683, 768);
+        bgImageLabel.setBounds(0, -30, 683, 768);
 
         // JLayeredPane
         JLayeredPane bgImage = new JLayeredPane();
@@ -75,26 +72,26 @@ public class welcome {
 
         JLabel JavaLogo = new JLabel();
         JavaLogo.setIcon(jicon);
-        JavaLogo.setBounds(40, 600, 65, 65);
+        JavaLogo.setBounds(40, 660, 65, 65);
         JavaLogo.setVerticalAlignment(JLabel.CENTER);
         JavaLogo.setHorizontalAlignment(JLabel.LEFT);
 
         JLabel JavaText = new JLabel();
         JavaText.setText("Java 20");
-        JavaText.setBounds(115, 620, 100, 40);
+        JavaText.setBounds(115, 680, 100, 40);
         JavaText.setFont(new Font("Dialog", Font.BOLD, 24));
         JavaText.setForeground(Color.GRAY);
         JavaText.setHorizontalAlignment(JLabel.LEFT);
 
         JLabel TupLogo = new JLabel();
         TupLogo.setIcon(ticon);
-        TupLogo.setBounds(250, 610, 55, 55);
+        TupLogo.setBounds(250, 670, 55, 55);
         TupLogo.setVerticalAlignment(JLabel.CENTER);
         TupLogo.setHorizontalAlignment(JLabel.LEFT);
 
         JLabel TupText = new JLabel();
         TupText.setText("TUP - Manila Students");
-        TupText.setBounds(310, 620, 500, 40);
+        TupText.setBounds(315, 680, 500, 40);
         TupText.setFont(new Font("Dialog", Font.BOLD, 24));
         TupText.setForeground(Color.GRAY);
         TupText.setHorizontalAlignment(JLabel.LEFT);
@@ -130,7 +127,7 @@ public class welcome {
 
         // Progress Bar
         progressBar.setValue(0);
-        progressBar.setBounds(0, 720, 1366, 10);
+        progressBar.setBounds(0, 758, 1366, 10);
         progressBar.setForeground(new Color(0xBA324F));
 
         // Style the Frame
@@ -139,6 +136,8 @@ public class welcome {
         welcomeFrame.getContentPane().setBackground(new Color(0xFFFFFF));
 
         welcomeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        welcomeFrame.setUndecorated(true);
+        centerFrameOnScreen(welcomeFrame);
         welcomeFrame.setLayout(null);
         welcomeFrame.setSize(1366, 768);
         welcomeFrame.setVisible(true);
@@ -164,7 +163,6 @@ public class welcome {
 
     private void progressFill() {
         int counter = 0;
-
         while (counter <= 100) {
             progressBar.setValue(counter);
             try {
@@ -175,5 +173,13 @@ public class welcome {
             }
             counter++;
         }
+        welcomeFrame.dispose();
+    }
+
+    private static void centerFrameOnScreen(JFrame frame) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (screenSize.width - frame.getWidth()) / 8;
+        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        frame.setLocation(centerX, centerY);
     }
 }
