@@ -43,6 +43,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        welcome Welcome = new welcome();
+        return;
+
         // Create Directory
         File folder_path = new File(Variables.FOLDER);
         folder_path.mkdir();
@@ -55,7 +58,7 @@ public class Main {
         // Ask for user Account
         while (true) {
             boolean create = true, login = true;
-            int choice1, choice2;
+            int choice1;
             switch (choice1 = obj.menu(1)) {
             case 1:
                 login = obj.login_Account();
