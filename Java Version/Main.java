@@ -43,9 +43,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        welcome Welcome = new welcome();
-        return;
-
         // Create Directory
         File folder_path = new File(Variables.FOLDER);
         folder_path.mkdir();
