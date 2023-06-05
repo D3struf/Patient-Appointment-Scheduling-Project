@@ -3,5 +3,9 @@
     "[java]": {
         "editor.insertSpaces": true,
         "editor.detectIndentation": true
-    }
+    },
+    "java.project.referencedLibraries": [
+        "Java Version/lib/JDatePicker.jar",
+        "c:\\Users\\johnp\\Downloads\\jar_files\\jdatepicker-2.0.3.jar"
+    ]
 }
