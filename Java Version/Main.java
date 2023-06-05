@@ -52,59 +52,63 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
+        new UIWelcome();
+        new UILogin(obj);
         // Ask for user Account
-        while (true) {
-            boolean create = true, login = true;
-            int choice1;
-            switch (choice1 = obj.menu(1)) {
-            case 1:
-                login = obj.login_Account();
-                break;
-            case 2:
-                create = obj.inputPatientInformation();
-                break;
-            case 3:
-                obj.save();
-                System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid Choice, Try Again!!");
-                obj.pause();
-                break;
-            }
-            if ((choice1 == 2 && create) || (choice1 == 1 && login))
-                break;
-        }
+        // while (true) {
+        // boolean create = true, login = true;
+        // int choice1;
+        // switch (choice1 = obj.menu(1)) {
+        // case 1:
+        // // login = obj.login_Account();
+        // break;
+        // case 2:
+        // create = obj.inputPatientInformation();
+        // break;
+        // case 3:
+        // obj.save();
+        // System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill |
+        // Carolino, Jeanne May");
+        // System.exit(0);
+        // break;
+        // default:
+        // System.out.println("Invalid Choice, Try Again!!");
+        // obj.pause();
+        // break;
+        // }
+        // if ((choice1 == 2 && create) || (choice1 == 1 && login))
+        // break;
+        // }
 
-        obj.display();
+        // obj.display();
 
-        // Main Menu
-        while (true) {
-            switch (obj.menu(3)) {
-            case 1:
-                obj.displayPatientInformation();
-                break;
-            case 2:
-                obj.appointmentSchedule();
-                break;
-            case 3:
-                obj.viewSchedule();
-                break;
-            case 4:
-                obj.paymentMethod();
-                break;
-            case 5:
-                obj.save();
-                System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid Choice, Try Again!!");
-                obj.pause();
-                break;
-            }
-        }
+        // // Main Menu
+        // while (true) {
+        // switch (obj.menu(3)) {
+        // case 1:
+        // obj.displayPatientInformation();
+        // break;
+        // case 2:
+        // obj.appointmentSchedule();
+        // break;
+        // case 3:
+        // obj.viewSchedule();
+        // break;
+        // case 4:
+        // obj.paymentMethod();
+        // break;
+        // case 5:
+        // obj.save();
+        // System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill |
+        // Carolino, Jeanne May");
+        // System.exit(0);
+        // break;
+        // default:
+        // System.out.println("Invalid Choice, Try Again!!");
+        // obj.pause();
+        // break;
+        // }
+        // }
     }
 
     // ===============================================
@@ -481,72 +485,25 @@ public class Main {
         return true;
     }
 
-    public boolean login_Account() {
-        Scanner scan = new Scanner(System.in);
-        clearScreen();
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-        System.out.println("===================================================");
-        System.out.println("|||               LOG IN ACCOUNT                |||");
-        System.out.println("===================================================");
-        System.out.println("|||      PLEASE ENTER YOUR ACCOUNT DETAILS      |||");
-        System.out.println("===================================================");
-
-        // Ask for Username
-        System.out.print("Enter Username: ");
-        String username = scan.nextLine();
-
-        // Validate Username
-        if (!isUsernameExists(username)) {
-            System.out.println("Username does not exists!!");
-            System.out.println("Please Create an Account first.");
-            pause();
-            return false;
-        }
-
+    public boolean login_Account(String username, String password) {
         // If exists store in global variable
         globalUsername = username;
 
-        // Temporary Account List for validation
-        LIST tempAccountList = new LIST();
+        // Validate Username
         for (LIST lists : L) {
             if (lists.accounts.username.equals(username)) {
-                tempAccountList = lists;
-                break;
-            }
-        }
-
-        // Ask for Password 3 times
-        int tries = 3;
-        while (tries > 0) {
-            String password = get_Password("Enter Password: ");
-
-            // Validate Password
-            if (tempAccountList != null && password.equals(tempAccountList.accounts.password)) {
-                System.out.println("===================================================");
-                System.out.println("Login Successful!!");
-                System.out.println("===================================================");
-                pause();
-                return true;
-            }
-            else {
-                tries--;
-                System.out.println("===================================================");
-                System.out.println("Incorrect Password!!");
-                System.out.printf("You have %d Tries Left\n", tries);
-                System.out.println("===================================================");
-                pause();
-
-                if (tries == 0) {
-                    System.out.println("===================================================");
-                    System.out.println("You have exceeded the maximum number of tries!!");
-                    System.out.println("Please try again later.");
-                    System.out.println("===================================================");
-                    pause();
-                    System.exit(0);
+                System.out.println("username meron");
+                if (lists != null && lists.accounts.password.equals(password)) {
+                    System.out.println("password tama");
+                    return true;
+                }
+                else {
+                    System.out.println("password mali");
+                    return false;
                 }
             }
         }
+        System.out.println("username wala");
         return false;
     }
 
@@ -971,7 +928,7 @@ public class Main {
     // ===============================================
 
     public void save() {
-        Encryption encryptions = new Encryption();
+        Encryption encryptions = new Encryption(); // instantiation
 
         try (BufferedWriter outFile = new BufferedWriter(new FileWriter(Variables.ACCOUNT_FILE));
                 BufferedWriter outFile2 = new BufferedWriter(new FileWriter(Variables.PATIENT_FILE));

@@ -21,12 +21,12 @@ public class Encryption {
     public String encryptDecrypt(String input) {
         List<Byte> inputBytes = new ArrayList<Byte>();
         for (byte b : input.getBytes()) {
-            inputBytes.add(b);
+            inputBytes.add(b); // 121-65-89
         }
 
         List<Byte> result = new ArrayList<Byte>(inputBytes.size());
         for (byte bb : inputBytes) {
-            result.add((byte) (bb ^ (globalkey & ByteFF)));
+            result.add((byte) (bb ^ (globalkey & ByteFF))); // XOR
         }
 
         StringBuilder converted = new StringBuilder();
@@ -37,4 +37,5 @@ public class Encryption {
     }
 
     // DITO LALAGAY YUNG PROMPT FOR USER TO EDIT KEY
+
 }
