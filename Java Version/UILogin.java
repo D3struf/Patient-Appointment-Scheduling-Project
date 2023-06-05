@@ -16,7 +16,6 @@ public class UILogin extends JFrame implements ActionListener {
     JButton createAccountButton;
     JTextField username;
     JPasswordField password;
-    JLabel messageLabel = new JLabel();
 
     UILogin(Main main) {
         this.main = main;
@@ -145,10 +144,6 @@ public class UILogin extends JFrame implements ActionListener {
         createAccountLabel.setBounds(790, 520, 400, 20);
         createAccountLabel.setFocusable(false);
 
-        // Message
-        messageLabel.setBounds(790, 540, 400, 20);
-        messageLabel.setFont(new Font("Dialog", Font.ITALIC, 18));
-
         // JLayeredPane
         JLayeredPane bgImage = new JLayeredPane();
         bgImage.setBounds(0, 0, 1366, 768);
@@ -184,7 +179,6 @@ public class UILogin extends JFrame implements ActionListener {
         bgImage.add(seperator2, JLayeredPane.MODAL_LAYER);
         bgImage.add(createAccountButton, JLayeredPane.MODAL_LAYER);
         bgImage.add(createAccountLabel, JLayeredPane.MODAL_LAYER);
-        bgImage.add(messageLabel, JLayeredPane.MODAL_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
@@ -196,6 +190,8 @@ public class UILogin extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ImageIcon success = new ImageIcon("images/success.png");
+        ImageIcon wrong = new ImageIcon("images/wrong.png");
         if (e.getSource() == loginButton) {
             loginButton.setEnabled(false);
             String username2 = String.valueOf(username.getText());
@@ -204,19 +200,20 @@ public class UILogin extends JFrame implements ActionListener {
             boolean validation = main.login_Account(username2, password2);
             System.out.println(validation);
             if (validation) {
-                JOptionPane.showMessageDialog(null, "Login Successful");
+                JOptionPane.showMessageDialog(null, "Login Successful!", "Patient Appointment Scheduling System",
+                        JOptionPane.INFORMATION_MESSAGE, success);
                 this.dispose();
                 // call next UI
             }
             else {
-                JOptionPane.showMessageDialog(null, "Username or Password is incorrect!");
+                JOptionPane.showMessageDialog(null, "Username or Password is incorrect!",
+                        "Patient Appointment Scheduling System", JOptionPane.ERROR_MESSAGE, wrong);
                 loginButton.setEnabled(true);
             }
         }
         if (e.getSource() == createAccountButton) {
             createAccountButton.setEnabled(false);
             this.dispose();
-            System.exit(0);
             // new UICreateAccount();
         }
     }

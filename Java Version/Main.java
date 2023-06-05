@@ -52,7 +52,7 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
-        new UIWelcome();
+        // new UIWelcome();
         new UILogin(obj);
         // Ask for user Account
         // while (true) {
