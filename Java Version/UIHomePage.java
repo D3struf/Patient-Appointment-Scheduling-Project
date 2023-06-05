@@ -14,7 +14,7 @@ public class UIHomePage extends JFrame implements ActionListener {
     UIHomePage() {
 
         ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon bgImage = new ImageIcon("images/bghome.jpg");
+        ImageIcon bgImage = new ImageIcon("images/bghome.png");
 
         // Resize Image
         Image tempImage = bgImage.getImage();
