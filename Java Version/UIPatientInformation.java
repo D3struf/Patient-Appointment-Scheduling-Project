@@ -3,19 +3,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIHomePage extends JFrame implements ActionListener {
-
+public class UIPatientInformation extends JFrame implements ActionListener {
     public static void main(String[] args) {
-        new UIHomePage();
+        new UIPatientInformation();
     }
 
-    // Frame
-
-    UIHomePage() {
+    UIPatientInformation() {
 
         ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon bgImage = new ImageIcon("images/bghome.png");
-
+        ImageIcon bgImage = new ImageIcon("images/patientView.png");
         // Resize Image
         Image tempImage = bgImage.getImage();
         Image tempImage2 = tempImage.getScaledInstance(1366, 730, Image.SCALE_SMOOTH);
@@ -25,6 +21,11 @@ public class UIHomePage extends JFrame implements ActionListener {
         JLabel bgImageLabel = new JLabel();
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
+
+        // JLayered for layers
+        JLayeredPane bgImageLayer = new JLayeredPane();
+        bgImageLayer.setBounds(0, 0, 1366, 768);
+        bgImageLayer.add(bgImageLabel, JLayeredPane.DEFAULT_LAYER);
 
         JButton button = new JButton();
         button.setText("Patient Information");
@@ -73,33 +74,6 @@ public class UIHomePage extends JFrame implements ActionListener {
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
 
-        JTextField sched = new JTextField();
-        sched.setBounds(445, 480, 380, 35);
-        sched.setFont(new Font("Dialog", Font.PLAIN, 18));
-        sched.setForeground(Color.BLACK);
-        sched.setBackground(new Color(0x698f9a));
-        sched.setCaretColor(Color.WHITE);
-        sched.setBorder(BorderFactory.createEmptyBorder());
-        // JButton account = new JButton("Account");
-        // account.setBounds(120, 480, 400, 50);
-        // account.setFont(new Font("Dialog", Font.BOLD, 18));
-        // account.setForeground(Color.WHITE);
-        // account.setBackground(new Color(0x44546b));
-        // account.setOpaque(true);
-        // account.setFocusable(false);
-
-        // JButton appointment = new JButton("Appointment");
-        // appointment.setBounds(100, 100, 400, 50);
-        // appointment.setFont(new Font("Dialog", Font.BOLD, 18));
-        // appointment.setForeground(Color.WHITE);
-        // appointment.setBackground(new Color(0x44546b));
-        // appointment.setOpaque(true);
-
-        // JLayered for layers
-        JLayeredPane bgImageLayer = new JLayeredPane();
-        bgImageLayer.setBounds(0, 0, 1366, 768);
-        bgImageLayer.add(bgImageLabel, JLayeredPane.DEFAULT_LAYER);
-
         // Style the Frame
         this.setIconImage(icon.getImage());
         this.setTitle("Patient Appointment Scheduling System");
@@ -112,16 +86,14 @@ public class UIHomePage extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setResizable(false);
 
-        // add Objects
+        // add objects
         this.add(bgImageLayer);
-        // bgImageLayer.add(account, JLayeredPane.PALETTE_LAYER);
-        // bgImageLayer.add(appointment, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(sched, JLayeredPane.PALETTE_LAYER);
+
     }
 
     private static void centerFrameOnScreen(JFrame frame) {

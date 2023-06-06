@@ -214,7 +214,7 @@ public class UILogin extends JFrame implements ActionListener {
         if (e.getSource() == createAccountButton) {
             createAccountButton.setEnabled(false);
             this.dispose();
-            // new UICreateAccount();
+            new UICreate();
         }
     }
 }
