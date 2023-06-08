@@ -59,7 +59,7 @@ public class UIPatientInfo extends JFrame implements ActionListener {
         button2.setBounds(60, 452, 250, 50);
 
         JButton button3 = new JButton();
-        button3.setText("Logout");
+        button3.setText("Back");
         button3.setFont(new Font("Dialog", Font.BOLD, 18));
         button3.setForeground(Color.WHITE);
         button3.setBackground(new Color(0xD62839));
