@@ -10,8 +10,8 @@ public class UIPatientInformation extends JFrame implements ActionListener {
 
     UIPatientInformation() {
 
-        ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon bgImage = new ImageIcon("images/patientView.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/patientView.png"));
         // Resize Image
         Image tempImage = bgImage.getImage();
         Image tempImage2 = tempImage.getScaledInstance(1366, 730, Image.SCALE_SMOOTH);
@@ -45,7 +45,7 @@ public class UIPatientInformation extends JFrame implements ActionListener {
         button1.setOpaque(true);
         button1.setFocusable(false);
         button1.addActionListener(this);
-        button1.setBounds(60, 382, 250, 50);
+        button1.setBounds(60, 384, 250, 50);
 
         JButton button2 = new JButton();
         button2.setText("Payment");
