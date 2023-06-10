@@ -3,19 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIHomePage extends JFrame implements ActionListener {
+public class UIAppSched extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
-        new UIHomePage();
+        new UIAppSched();
     }
 
-    // Frame
-
-    UIHomePage() {
+    UIAppSched() {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/bghomepage.png"));
-
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/appSched.png"));
         // Resize Image
         Image tempImage = bgImage.getImage();
         Image tempImage2 = tempImage.getScaledInstance(1366, 730, Image.SCALE_SMOOTH);
@@ -25,6 +22,11 @@ public class UIHomePage extends JFrame implements ActionListener {
         JLabel bgImageLabel = new JLabel();
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
+
+        // JLayered for layers
+        JLayeredPane bgImageLayer = new JLayeredPane();
+        bgImageLayer.setBounds(0, 0, 1366, 768);
+        bgImageLayer.add(bgImageLabel, JLayeredPane.DEFAULT_LAYER);
 
         JButton button = new JButton();
         button.setText("Patient Information");
@@ -40,7 +42,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         button1.setText("Schedule");
         button1.setFont(new Font("Dialog", Font.BOLD, 18));
         button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLUE);
+        button1.setBackground(new Color(0x698f9a));
         button1.setOpaque(true);
         button1.setFocusable(false);
         button1.addActionListener(this);
@@ -57,7 +59,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         button2.setBounds(60, 452, 250, 50);
 
         JButton button3 = new JButton();
-        button3.setText("Logout");
+        button3.setText("Back");
         button3.setFont(new Font("Dialog", Font.BOLD, 18));
         button3.setForeground(Color.WHITE);
         button3.setBackground(new Color(0xD62839));
@@ -66,6 +68,18 @@ public class UIHomePage extends JFrame implements ActionListener {
         button3.addActionListener(this);
         button3.setBounds(60, 655, 250, 50);
 
+        JButton edit = new JButton();
+        edit.setText("Create");
+        edit.setFont(new Font("Dialog", Font.BOLD, 18));
+        edit.setForeground(Color.BLACK);
+        edit.setBackground(new Color(0xFFD600));
+        edit.setOpaque(true);
+        edit.setFocusable(false);
+        edit.addActionListener(this);
+        edit.setBounds(1025, 591, 250, 50);
+        edit.setBorder(BorderFactory.createEmptyBorder());
+
+        // Text Fields
         JTextField username = new JTextField();
         username.setBounds(1035, 23, 250, 35);
         username.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -73,20 +87,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
 
-        JTextField sched = new JTextField();
-        sched.setBounds(445, 480, 380, 35);
-        sched.setFont(new Font("Dialog", Font.PLAIN, 18));
-        sched.setForeground(Color.BLACK);
-        sched.setBackground(new Color(0x698f9a));
-        sched.setCaretColor(Color.WHITE);
-        sched.setBorder(BorderFactory.createEmptyBorder());
-
-        // JLayered for layers
-        JLayeredPane bgImageLayer = new JLayeredPane();
-        bgImageLayer.setBounds(0, 0, 1366, 768);
-        bgImageLayer.add(bgImageLabel, JLayeredPane.DEFAULT_LAYER);
-
-        // Style the Frame
+       // Style the Frame
         this.setIconImage(icon.getImage());
         this.setTitle("Patient Appointment Scheduling System");
         this.getContentPane().setBackground(new Color(0xFFFFFF));
@@ -98,14 +99,14 @@ public class UIHomePage extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setResizable(false);
 
-        // add Objects
+        // add objects
         this.add(bgImageLayer);
         bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(edit, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(sched, JLayeredPane.PALETTE_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {

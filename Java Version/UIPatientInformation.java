@@ -45,7 +45,7 @@ public class UIPatientInformation extends JFrame implements ActionListener {
         button1.setOpaque(true);
         button1.setFocusable(false);
         button1.addActionListener(this);
-        button1.setBounds(60, 382, 250, 50);
+        button1.setBounds(60, 384, 250, 50);
 
         JButton button2 = new JButton();
         button2.setText("Payment");
