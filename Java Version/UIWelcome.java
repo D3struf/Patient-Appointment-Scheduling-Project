@@ -2,9 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UIWelcome {
-    public static void main(String[] args) {
-        new UIWelcome();
-    }
 
     // Frame
     JFrame welcomeFrame;
@@ -14,10 +11,10 @@ public class UIWelcome {
         welcomeFrame = new JFrame();
         progressBar = new JProgressBar();
 
-        ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon bgicon = new ImageIcon("images/bgicon.jpg");
-        ImageIcon jicon = new ImageIcon("images/java.png");
-        ImageIcon ticon = new ImageIcon("images/tup.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
+        ImageIcon bgicon = new ImageIcon(getClass().getClassLoader().getResource("images/bgicon.jpg"));
+        ImageIcon jicon = new ImageIcon(getClass().getClassLoader().getResource("images/java.png"));
+        ImageIcon ticon = new ImageIcon(getClass().getClassLoader().getResource("images/tup.png"));
 
         // Resize Image
         Image tempImage = icon.getImage();

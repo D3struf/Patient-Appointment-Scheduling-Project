@@ -4,18 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UICreate extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new UICreate();
-    }
+    private Main main;
 
-    JTextField username, name;
+    JTextField username, name, contactNo;
     JPasswordField password;
+    JButton createAccountButton;
+    JComboBox<String> age;
+    JComboBox<String> genderBox;
+    JComboBox<String> bdayMonth, bdayDays, bdayYears;
 
-    UICreate() {
+    UICreate(Main main) {
+        this.main = main;
 
-        ImageIcon icon = new ImageIcon("images/logo.png");
-
-        ImageIcon icon2 = new ImageIcon("images/bgImage.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
+        ImageIcon icon2 = new ImageIcon(getClass().getClassLoader().getResource("images/bgImage.jpg"));
 
         // Resize Image
         Image tempImage = icon2.getImage();
@@ -66,11 +68,11 @@ public class UICreate extends JFrame implements ActionListener {
         signUpText.setText("Sign up");
         signUpText.setFont(new Font("Dialog", Font.BOLD, 36));
         signUpText.setForeground(Color.BLACK);
-        signUpText.setBounds(750, 100, 1366, 45);
+        signUpText.setBounds(750, 85, 1366, 45);
 
         // Text Fields for Username and Password
         username = new JTextField();
-        username.setBounds(750, 200, 400, 36);
+        username.setBounds(750, 170, 400, 36);
         username.setFont(new Font("Dialog", Font.PLAIN, 18));
         username.setForeground(Color.BLACK);
         username.setBackground(Color.WHITE);
@@ -80,10 +82,10 @@ public class UICreate extends JFrame implements ActionListener {
         usernameLabel.setText("Username");
         usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
         usernameLabel.setForeground(Color.GRAY);
-        usernameLabel.setBounds(750, 180, 400, 20);
+        usernameLabel.setBounds(750, 150, 400, 20);
 
         password = new JPasswordField();
-        password.setBounds(750, 260, 400, 36);
+        password.setBounds(750, 235, 400, 36);
         password.setFont(new Font("Dialog", Font.PLAIN, 18));
         password.setForeground(Color.BLACK);
         password.setBackground(Color.WHITE);
@@ -93,10 +95,10 @@ public class UICreate extends JFrame implements ActionListener {
         passwordLabel.setText("Password");
         passwordLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
         passwordLabel.setForeground(Color.GRAY);
-        passwordLabel.setBounds(750, 240, 400, 20);
+        passwordLabel.setBounds(750, 215, 400, 20);
 
-        name = new JPasswordField();
-        name.setBounds(750, 320, 400, 36);
+        name = new JTextField();
+        name.setBounds(750, 300, 400, 36);
         name.setFont(new Font("Dialog", Font.PLAIN, 18));
         name.setForeground(Color.BLACK);
         name.setBackground(Color.WHITE);
@@ -106,7 +108,7 @@ public class UICreate extends JFrame implements ActionListener {
         nameLabel.setText("Name");
         nameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
         nameLabel.setForeground(Color.GRAY);
-        nameLabel.setBounds(750, 300, 400, 20);
+        nameLabel.setBounds(750, 280, 400, 20);
 
         String[] ages = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
                 "18", "19", "20", "22", "23", "24", "25", "26", "27", "28", "29", "30", "32", "33", "34", "35", "36",
@@ -114,8 +116,8 @@ public class UICreate extends JFrame implements ActionListener {
                 "56", "57", "58", "59", "60", "62", "63", "64", "65", "66", "67", "68", "69", "70", "72", "73", "74",
                 "75", "76", "77", "78", "79", "80", "82", "83", "84", "85", "86", "87", "88", "89", "90", "92", "93",
                 "94", "95", "96", "97", "98", "99", "100" };
-        JComboBox<String> age = new JComboBox<>(ages);
-        age.setBounds(750, 380, 400, 36);
+        age = new JComboBox<>(ages);
+        age.setBounds(750, 365, 190, 36);
         age.setFont(new Font("Dialog", Font.PLAIN, 18));
         age.setForeground(Color.BLACK);
         age.setBackground(Color.WHITE);
@@ -125,11 +127,11 @@ public class UICreate extends JFrame implements ActionListener {
         ageLabel.setText("Age");
         ageLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
         ageLabel.setForeground(Color.GRAY);
-        ageLabel.setBounds(750, 360, 400, 20);
+        ageLabel.setBounds(750, 345, 180, 20);
 
         String[] gender = { "Male", "Female", "I Prefer not to say" };
-        JComboBox<String> genderBox = new JComboBox<>(gender);
-        genderBox.setBounds(750, 440, 400, 36);
+        genderBox = new JComboBox<>(gender);
+        genderBox.setBounds(960, 365, 190, 36);
         genderBox.setFont(new Font("Dialog", Font.PLAIN, 18));
         genderBox.setForeground(Color.BLACK);
         genderBox.setBackground(Color.WHITE);
@@ -139,7 +141,68 @@ public class UICreate extends JFrame implements ActionListener {
         genderLabel.setText("Sex");
         genderLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
         genderLabel.setForeground(Color.GRAY);
-        genderLabel.setBounds(750, 420, 400, 20);
+        genderLabel.setBounds(960, 345, 180, 20);
+
+        String[] month = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
+                "October", "November", "December" };
+        String[] days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+                "18", "19", "20", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+        String[] years = { "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930",
+                "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943",
+                "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956",
+                "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969",
+                "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982",
+                "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995",
+                "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008",
+                "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021",
+                "2022", "2023"};
+
+        bdayMonth = new JComboBox<>(month);
+        bdayMonth.setBounds(750, 430, 150, 35);
+        bdayMonth.setFont(new Font("Dialog", Font.PLAIN, 18));
+        bdayMonth.setForeground(Color.BLACK);
+        bdayMonth.setBackground(Color.WHITE);
+
+        bdayDays = new JComboBox<>(days);
+        bdayDays.setBounds(920, 430, 100, 35);
+        bdayDays.setFont(new Font("Dialog", Font.PLAIN, 18));
+        bdayDays.setForeground(Color.BLACK);
+        bdayDays.setBackground(Color.WHITE);
+
+        bdayYears = new JComboBox<>(years);
+        bdayYears.setBounds(1040, 430, 110, 35);
+        bdayYears.setFont(new Font("Dialog", Font.PLAIN, 18));
+        bdayYears.setForeground(Color.BLACK);
+        bdayYears.setBackground(Color.WHITE);
+        bdayYears.setSelectedIndex(103);
+
+        JLabel bdayLabel = new JLabel();
+        bdayLabel.setText("Birthday");
+        bdayLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+        bdayLabel.setForeground(Color.GRAY);
+        bdayLabel.setBounds(750, 410, 180, 20);
+
+        contactNo = new JTextField();
+        contactNo.setBounds(750, 495, 400, 36);
+        contactNo.setFont(new Font("Dialog", Font.PLAIN, 18));
+        contactNo.setForeground(Color.BLACK);
+        contactNo.setBackground(Color.WHITE);
+        contactNo.setOpaque(true);
+
+        JLabel contactNoLabel = new JLabel();
+        contactNoLabel.setText("Contact Number");
+        contactNoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+        contactNoLabel.setForeground(Color.GRAY);
+        contactNoLabel.setBounds(750, 475, 180, 20);
+
+        createAccountButton = new JButton("Create Account");
+        createAccountButton.setBounds(750, 560, 400, 50);
+        createAccountButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        createAccountButton.setForeground(Color.WHITE);
+        createAccountButton.setBackground(new Color(0x40ab28));
+        createAccountButton.setOpaque(true);
+        createAccountButton.setFocusable(false);
+        createAccountButton.addActionListener(this);
 
         // JLayeredPane
         JLayeredPane bgImage = new JLayeredPane();
@@ -176,6 +239,13 @@ public class UICreate extends JFrame implements ActionListener {
         bgImage.add(ageLabel, JLayeredPane.MODAL_LAYER);
         bgImage.add(genderBox, JLayeredPane.MODAL_LAYER);
         bgImage.add(genderLabel, JLayeredPane.MODAL_LAYER);
+        bgImage.add(bdayMonth, JLayeredPane.MODAL_LAYER);
+        bgImage.add(bdayDays, JLayeredPane.MODAL_LAYER);
+        bgImage.add(bdayYears, JLayeredPane.MODAL_LAYER);
+        bgImage.add(bdayLabel, JLayeredPane.MODAL_LAYER);
+        bgImage.add(contactNo, JLayeredPane.MODAL_LAYER);
+        bgImage.add(contactNoLabel, JLayeredPane.MODAL_LAYER);
+        bgImage.add(createAccountButton, JLayeredPane.MODAL_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
@@ -187,6 +257,34 @@ public class UICreate extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ImageIcon success = new ImageIcon(getClass().getClassLoader().getResource("images/success.png"));
+        ImageIcon wrong = new ImageIcon(getClass().getClassLoader().getResource("images/wrong.png"));
+        if (e.getSource() == createAccountButton) {
+            createAccountButton.setEnabled(false);
+            String username2 = String.valueOf(username.getText());
+            String password2 = String.valueOf(password.getPassword());
+            String name2 = String.valueOf(name.getText());
+            int age2 = Integer.parseInt(String.valueOf(age.getSelectedItem()));
+            String gender2 = String.valueOf(genderBox.getSelectedItem());
+            String bdayMonth2 = String.valueOf(bdayMonth.getSelectedItem());
+            String bdayDays2 = String.valueOf(bdayDays.getSelectedItem());
+            String bdayYears2 = String.valueOf(bdayYears.getSelectedItem());
+            String contactNo2 = String.valueOf(contactNo.getText());
 
+            String birthday = bdayMonth2 + " " + bdayDays2 + " " + bdayYears2;
+            System.out.println(birthday);
+
+            if (main.inputPatientInformation(username2, password2, name2, age2, gender2, birthday, contactNo2)) {
+                JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Patient Appointment Scheduling System",
+                        JOptionPane.INFORMATION_MESSAGE, success);
+                this.dispose();
+                new UIHomePage();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Username is already taken! Please try again.",
+                        "Patient Appointment Scheduling System", JOptionPane.ERROR_MESSAGE, wrong);
+                createAccountButton.setEnabled(true);
+            }
+        }
     }
 }
