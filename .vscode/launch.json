@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UIPatientInfo",
+            "request": "launch",
+            "mainClass": "UIPatientInfo",
+            "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
+        },
+        {
+            "type": "java",
+            "name": "UIOnlinePayment",
+            "request": "launch",
+            "mainClass": "UIOnlinePayment",
+            "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
+        },
+        {
+            "type": "java",
             "name": "UIPayment",
             "request": "launch",
             "mainClass": "UIPayment",
