@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class UIPayment extends JFrame implements ActionListener {
 
-    // public static void main(String[] args) {
-    //     new UIPayment();
-    // }
+    public static void main(String[] args) {
+        new UIPayment();
+    }
 
     UIPayment() {
 

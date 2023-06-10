@@ -272,13 +272,12 @@ public class UICreate extends JFrame implements ActionListener {
             String contactNo2 = String.valueOf(contactNo.getText());
 
             String birthday = bdayMonth2 + " " + bdayDays2 + " " + bdayYears2;
-            System.out.println(birthday);
 
             if (main.inputPatientInformation(username2, password2, name2, age2, gender2, birthday, contactNo2)) {
                 JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Patient Appointment Scheduling System",
                         JOptionPane.INFORMATION_MESSAGE, success);
+                new UIHomePage(main);
                 this.dispose();
-                new UIHomePage();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Username is already taken! Please try again.",

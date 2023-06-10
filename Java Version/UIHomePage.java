@@ -2,11 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class UIHomePage extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new UIHomePage();
-    }
+    private Main main;
 
     JButton patientViewButton;
     JButton scheduleButton;
@@ -14,7 +13,10 @@ public class UIHomePage extends JFrame implements ActionListener {
     JButton logoutButton;
 
     // Frame
-    UIHomePage() {
+    UIHomePage(Main main) {
+        this.main = main;
+        String currentName = main.getCurrentUserName();
+        String currentDate = main.getCurrentSchedule();
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/bghomepage.png"));
@@ -49,7 +51,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         scheduleButton.addActionListener(this);
         scheduleButton.setBounds(60, 384, 250, 50);
 
-        JButton paymentButton = new JButton();
+        paymentButton = new JButton();
         paymentButton.setText("Payment");
         paymentButton.setFont(new Font("Dialog", Font.BOLD, 18));
         paymentButton.setForeground(Color.WHITE);
@@ -59,7 +61,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         paymentButton.addActionListener(this);
         paymentButton.setBounds(60, 452, 250, 50);
 
-        JButton logoutButton = new JButton();
+        logoutButton = new JButton();
         logoutButton.setText("Logout");
         logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
         logoutButton.setForeground(Color.WHITE);
@@ -70,19 +72,25 @@ public class UIHomePage extends JFrame implements ActionListener {
         logoutButton.setBounds(60, 655, 250, 50);
 
         JTextField username = new JTextField();
-        username.setBounds(1035, 23, 250, 35);
+        username.setHorizontalAlignment(SwingConstants.RIGHT);
+        username.setText("Welcome, " + currentName);
+        username.setBounds(1085, 23, 200, 35);
         username.setFont(new Font("Dialog", Font.PLAIN, 18));
         username.setForeground(Color.BLACK);
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
+        username.setEditable(false);
 
         JTextField sched = new JTextField();
+        sched.setHorizontalAlignment(SwingConstants.LEFT);
+        sched.setText("Next Appointment: ");
         sched.setBounds(445, 480, 380, 35);
         sched.setFont(new Font("Dialog", Font.PLAIN, 18));
         sched.setForeground(Color.BLACK);
         sched.setBackground(new Color(0x698f9a));
         sched.setCaretColor(Color.WHITE);
         sched.setBorder(BorderFactory.createEmptyBorder());
+        sched.setEditable(false);
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -124,13 +132,24 @@ public class UIHomePage extends JFrame implements ActionListener {
             new UIPatientInformation();
         }
         if (e.getSource() == scheduleButton) {
-            new UIPatientInfo();
+            if (main.getCurrentSchedule().isEmpty()) {
+                new UIAppSched();
+            }
+            else {
+                new UIPatientInfo();
+            }
         }
         if (e.getSource() == paymentButton) {
+            if (main.getCurrentPayment() == 1) {
+                // new UIAlreadyPaid();
+            }
+            else {
+                // new UIPayment();
+            }
             new UIPayment();
         }
         if (e.getSource() == logoutButton) {
-            //new UILogin();
+            new UILogin(main);
         }
         this.dispose();
     }

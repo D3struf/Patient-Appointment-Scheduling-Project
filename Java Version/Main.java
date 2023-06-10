@@ -434,11 +434,6 @@ public class Main {
         return false;
     }
 
-    private String get_Password(String prompt) {
-        char[] passwordChars = System.console().readPassword(prompt);
-        return new String(passwordChars);
-    }
-
     public boolean inputPatientInformation(String username, String password, String name, int age, String sex, String bday,
             String contact_number) {
         if (isUsernameExists(username)) {
@@ -656,31 +651,54 @@ public class Main {
         return null;
     }
 
+    public String getCurrentUserName() {
+        return globalUsername;
+    }
+
+    public String getCurrentPassword() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getPassword();
+                }
+            }
+        }
+        return null;
+    }
+
+    public String getCurrentSchedule() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDate();
+                }
+            }
+        }
+        return "";
+    }
+
+    public int getCurrentPayment() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getPaymentStatus();
+                }
+            }
+        }
+        return 0;
+    }
+
     public void appointmentSchedule() {
         Scanner scan = new Scanner(System.in);
-
         // Generate Appointment Schedules
         APPOINTMENT[] scheduledSlots = generateAppointmentSchedules();
-
-        clearScreen();
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
 
         // Check if meron ng Schedule
         LIST currentAccount = getCurrentUserAccount();
         if (currentAccount != null && currentAccount.accounts.getAppointmentDate() != null
                 && !currentAccount.accounts.getAppointmentDate().isEmpty()) {
-            System.out.println("================================================================");
-            System.out.println("You have already scheduled an appointment");
-            System.out.println("Check your appointment schedule in the View Schedule Menu");
-            System.out.println("================================================================");
-            pause();
             return;
         }
-
-        System.out.println("================================================================");
-        System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
-        System.out.println("================================================================");
 
         // Display Appointment Schedule
         displayAppointmentSchedules(scheduledSlots);
