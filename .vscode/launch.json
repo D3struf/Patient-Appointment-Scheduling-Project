@@ -9,6 +9,20 @@
             "name": "UIPayment",
             "request": "launch",
             "mainClass": "UIPayment",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
+            "name": "UIAppointmentSched",
+            "request": "launch",
+            "mainClass": "UIAppointmentSched",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
+            "name": "UIPayment",
+            "request": "launch",
+            "mainClass": "UIPayment",
             "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
         },
         {
