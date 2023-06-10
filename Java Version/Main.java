@@ -52,8 +52,11 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
-        new UIWelcome();
+        //new UIWelcome();
         new UILogin(obj);
+        //new UICreate(obj);
+        
+        
         // Ask for user Account
         // while (true) {
         // boolean create = true, login = true;
@@ -436,52 +439,17 @@ public class Main {
         return new String(passwordChars);
     }
 
-    public boolean inputPatientInformation() {
-        Scanner scan = new Scanner(System.in);
-        clearScreen();
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-        System.out.println("===================================================");
-        System.out.println("|||               CREATE ACCOUNT                 |||");
-        System.out.println("===================================================");
-        System.out.println("|||   PLEASE FILL UP THE FOLLOWING INFORMATION   |||");
-        System.out.println("===================================================");
-
-        System.out.print("Enter Username: ");
-        String username = scan.nextLine();
+    public boolean inputPatientInformation(String username, String password, String name, int age, String sex, String bday,
+            String contact_number) {
         if (isUsernameExists(username)) {
-            System.out.println("Username already exists!!");
             return false;
         }
 
         // If does not exists store in global variable
         globalUsername = username;
 
-        String password = get_Password("Enter Password: ");
-
-        System.out.print("Enter Name (FIRST NAME MIDDLE INITIAL SURNAME): ");
-        String name = scan.nextLine();
-
-        System.out.print("Enter Age: ");
-        int age = scan.nextInt();
-        scan.nextLine();
-
-        System.out.print("Enter Sex (M | F): ");
-        String sex = scan.nextLine();
-
-        System.out.print("Enter Birthday (MM/DD/YYYY): ");
-        String bday = scan.nextLine();
-
-        System.out.print("Enter Contact Number (11 Digit Number): ");
-        String contact_number = scan.nextLine();
-
         ACCOUNT acc = new ACCOUNT(username, password, name, age, sex, bday, contact_number);
         add(acc);
-
-        System.out.println("===================================================");
-        System.out.println("Account Created Successfully!!");
-        System.out.println("===================================================");
-        pause();
         return true;
     }
 

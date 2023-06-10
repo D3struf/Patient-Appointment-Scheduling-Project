@@ -22,8 +22,8 @@ public class UILogin extends JFrame implements ActionListener {
         loginFrame = new JFrame();
 
         // Logo
-        ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon icon2 = new ImageIcon("images/bgImage.jpg");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
+        ImageIcon icon2 = new ImageIcon(getClass().getClassLoader().getResource("images/bgImage.jpg"));
 
         // Resize Image
         Image tempImage = icon2.getImage();
@@ -190,8 +190,8 @@ public class UILogin extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ImageIcon success = new ImageIcon("images/success.png");
-        ImageIcon wrong = new ImageIcon("images/wrong.png");
+        ImageIcon success = new ImageIcon(getClass().getClassLoader().getResource("images/success.png"));
+        ImageIcon wrong = new ImageIcon(getClass().getClassLoader().getResource("images/wrong.png"));
         if (e.getSource() == loginButton) {
             loginButton.setEnabled(false);
             String username2 = String.valueOf(username.getText());
@@ -214,7 +214,7 @@ public class UILogin extends JFrame implements ActionListener {
         if (e.getSource() == createAccountButton) {
             createAccountButton.setEnabled(false);
             this.dispose();
-            new UICreate();
+            new UICreate(main);
         }
     }
 }
