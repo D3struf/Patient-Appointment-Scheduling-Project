@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UIHomePage extends JFrame implements ActionListener {
+    public static void main(String[] args) {
+        new UIHomePage();
+    }
+
     // Frame
     UIHomePage() {
 
