@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UIPatientInfo",
+            "request": "launch",
+            "mainClass": "UIPatientInfo",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
+            "name": "UIAppSched",
+            "request": "launch",
+            "mainClass": "UIAppSched",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

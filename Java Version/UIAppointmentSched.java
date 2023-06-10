@@ -67,3 +67,11 @@ public class UIAppointmentSched extends JFrame implements ActionListener {
         button3.setFocusable(false);
         button3.addActionListener(this);
         button3.setBounds(60, 655, 250, 50);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+}
