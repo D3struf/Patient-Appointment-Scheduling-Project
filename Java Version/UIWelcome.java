@@ -2,9 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UIWelcome {
-    public static void main(String[] args) {
-        new UIWelcome();
-    }
 
     // Frame
     JFrame welcomeFrame;

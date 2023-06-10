@@ -203,7 +203,7 @@ public class UILogin extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Login Successful!", "Patient Appointment Scheduling System",
                         JOptionPane.INFORMATION_MESSAGE, success);
                 this.dispose();
-                // call next UI
+                new UIHomePage();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Username or Password is incorrect!",

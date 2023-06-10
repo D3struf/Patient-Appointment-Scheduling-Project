@@ -4,9 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UICreate extends JFrame implements ActionListener {
-    // public static void main(String[] args) {
-    //     new UICreate();
-    // }
     private Main main;
 
     JTextField username, name, contactNo;
@@ -275,6 +272,7 @@ public class UICreate extends JFrame implements ActionListener {
             String contactNo2 = String.valueOf(contactNo.getText());
 
             String birthday = bdayMonth2 + " " + bdayDays2 + " " + bdayYears2;
+            System.out.println(birthday);
 
             if (main.inputPatientInformation(username2, password2, name2, age2, gender2, birthday, contactNo2)) {
                 JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Patient Appointment Scheduling System",
