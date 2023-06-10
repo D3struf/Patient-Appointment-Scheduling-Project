@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UIPayment",
+            "request": "launch",
+            "mainClass": "UIPayment",
+            "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
+        },
+        {
+            "type": "java",
             "name": "UIAppointmentSched",
             "request": "launch",
             "mainClass": "UIAppointmentSched",
