@@ -10,8 +10,8 @@ public class UIPatientInformation extends JFrame implements ActionListener {
 
     UIPatientInformation() {
 
-        ImageIcon icon = new ImageIcon("images/logo.png");
-        ImageIcon bgImage = new ImageIcon("images/patientView.png");
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/patientView.png"));
         // Resize Image
         Image tempImage = bgImage.getImage();
         Image tempImage2 = tempImage.getScaledInstance(1366, 730, Image.SCALE_SMOOTH);

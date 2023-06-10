@@ -80,20 +80,6 @@ public class UIHomePage extends JFrame implements ActionListener {
         sched.setBackground(new Color(0x698f9a));
         sched.setCaretColor(Color.WHITE);
         sched.setBorder(BorderFactory.createEmptyBorder());
-        // JButton account = new JButton("Account");
-        // account.setBounds(120, 480, 400, 50);
-        // account.setFont(new Font("Dialog", Font.BOLD, 18));
-        // account.setForeground(Color.WHITE);
-        // account.setBackground(new Color(0x44546b));
-        // account.setOpaque(true);
-        // account.setFocusable(false);
-
-        // JButton appointment = new JButton("Appointment");
-        // appointment.setBounds(100, 100, 400, 50);
-        // appointment.setFont(new Font("Dialog", Font.BOLD, 18));
-        // appointment.setForeground(Color.WHITE);
-        // appointment.setBackground(new Color(0x44546b));
-        // appointment.setOpaque(true);
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -114,8 +100,6 @@ public class UIHomePage extends JFrame implements ActionListener {
 
         // add Objects
         this.add(bgImageLayer);
-        // bgImageLayer.add(account, JLayeredPane.PALETTE_LAYER);
-        // bgImageLayer.add(appointment, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
