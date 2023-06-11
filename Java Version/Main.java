@@ -58,7 +58,8 @@ public class Main {
         obj.globalUsername = "Monter";
         //new UIHomePage(obj);
         //new UIPatientInformation(obj);
-        new UIAppSched(obj);
+        //new UIAppSched(obj);
+        new UIAppointmentSched(obj);
 
         // Ask for user Account
         // while (true) {
@@ -283,7 +284,7 @@ public class Main {
         }
     }
 
-    private class APPOINTMENT {
+    public class APPOINTMENT {
         private String date;
         private int num_patients;
 
@@ -314,7 +315,7 @@ public class Main {
         }
     }
 
-    private class DOCTOR {
+    public class DOCTOR {
         private String name;
         private String department;
         private String schedule;
@@ -565,12 +566,11 @@ public class Main {
         }
         catch (IOException e) {
             System.out.println("Error opening/reading to file: " + e.getMessage());
-            e.printStackTrace();
         }
         return 0;
     }
 
-    private static void savePatientSlotFile(String DTIME, int numPatient) {
+    public static void savePatientSlotFile(String DTIME, int numPatient) {
         String filePath = Variables.FOLDER + DTIME;
         try (BufferedWriter outFile = new BufferedWriter(new FileWriter(filePath));) {
             outFile.write(Integer.toString(numPatient));
@@ -581,7 +581,7 @@ public class Main {
         }
     }
 
-    private static String appointmentCode() {
+    public String appointmentCode() {
         Random random = new Random();
         StringBuffer code = new StringBuffer();
 
@@ -737,70 +737,12 @@ public class Main {
         }
     }
 
-    public void appointmentSchedule() {
-        Scanner scan = new Scanner(System.in);
-        // Generate Appointment Schedules
-        APPOINTMENT[] scheduledSlots = generateAppointmentSchedules();
-
-        // Check if meron ng Schedule
+    public void appointmentSchedule(APPOINTMENT selectedSlot, DOCTOR selectedDoctor, String code) {
         LIST currentAccount = getCurrentUserAccount();
-        if (currentAccount != null && currentAccount.accounts.getAppointmentDate() != null
-                && !currentAccount.accounts.getAppointmentDate().isEmpty()) {
-            return;
-        }
 
-        // Display Appointment Schedule
-        displayAppointmentSchedules(scheduledSlots);
-
-        // Ask for Schedule
-        int choice;
-        String code;
-        while (true) {
-            System.out.println("================================================================");
-            System.out.println("|||                     CHOOSE A SCHEDULE                    |||");
-            System.out.println("================================================================");
-            System.out.println("Enter Choice");
-            choice = scan.nextInt();
-
-            // Validate Choice
-            if (choice < 1 || choice > Variables.DAYS) {
-                System.out.println("Invalid Choice");
-                pause();
-                continue;
-            }
-
-            // Check if the Scheduled Slot is Full
-            APPOINTMENT selectedSlot = scheduledSlots[choice - 1];
-            if (selectedSlot.getNumPatients() >= Variables.MAX_PATIENTS) {
-                System.out.println("Sorry, The Scheduled Slot is already full.");
-                System.out.println("Please choose another schedule.");
-                pause();
-                continue;
-            }
-
-            // If not, then Schedule the Patient
-            DOCTOR selectedDoctor = appointDoctor();
-            code = appointmentCode();
-
-            clearScreen();
-            System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-            System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-            System.out.println("================================================================");
-            System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
-            System.out.println("================================================================\n");
-            System.out.println("You have Successfully Created an Appointment Schedule.");
-            System.out.println("Your Appointment Code is: " + code);
-            System.out.println("Your Appointment Schedule is on " + selectedSlot.getDate());
-            System.out.println("Your Doctor is " + selectedDoctor.getName());
-
-            selectedSlot.num_patients++;
-            updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code);
-            System.out.println("================================================================\n");
-            scan.nextLine();
-            pause();
-            break;
-        }
-        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), scheduledSlots[choice - 1].num_patients);
+        selectedSlot.num_patients++;
+        updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code);
+        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.num_patients);
     }
 
     public void viewSchedule() {

@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 
 public class UIPatientInfo extends JFrame implements ActionListener {
 
-    public static void main(String[] args) {
-        new UIPatientInfo();
-    }
+    // public static void main(String[] args) {
+    //     new UIPatientInfo();
+    // }
+    private Main main;
 
-    UIPatientInfo() {
+    UIPatientInfo(Main main) {
+        this.main = main;
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/appointmentSched.png"));

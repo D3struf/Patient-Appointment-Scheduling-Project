@@ -132,7 +132,7 @@ public class UIAppSched extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createButton) {
-            new UIAppointmentSched();
+            new UIAppointmentSched(main);
             this.dispose();
         }
         if (e.getSource() == patientViewButton) {

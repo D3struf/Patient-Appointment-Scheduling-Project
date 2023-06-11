@@ -381,7 +381,7 @@ public class UIPatientInformation extends JFrame implements ActionListener {
                 this.dispose();
             }
             else {
-                new UIPatientInfo();
+                new UIPatientInfo(main);
                 this.dispose();
             }
         }

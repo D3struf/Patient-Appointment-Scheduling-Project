@@ -137,7 +137,7 @@ public class UIHomePage extends JFrame implements ActionListener {
                 this.dispose();
             }
             else {
-                new UIPatientInfo();
+                new UIPatientInfo(main);
                 this.dispose();
             }
         }
