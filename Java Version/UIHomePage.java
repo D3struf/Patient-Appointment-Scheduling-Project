@@ -133,7 +133,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         }
         if (e.getSource() == scheduleButton) {
             if (main.getCurrentSchedule().isEmpty()) {
-                new UIAppSched();
+                new UIAppSched(main);
                 this.dispose();
             }
             else {

@@ -57,7 +57,8 @@ public class Main {
         //new UICreate(obj);
         obj.globalUsername = "Monter";
         //new UIHomePage(obj);
-        new UIPatientInformation(obj);
+        //new UIPatientInformation(obj);
+        new UIAppSched(obj);
 
         // Ask for user Account
         // while (true) {
