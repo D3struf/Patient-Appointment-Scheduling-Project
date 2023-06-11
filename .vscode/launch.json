@@ -6,6 +6,7 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "UIPatientInformation",
             "request": "launch",
             "mainClass": "UIPatientInformation",
@@ -17,6 +18,12 @@
             "request": "launch",
             "mainClass": "UIHomePage",
             "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
+=======
+            "name": "UIOnlinePayment",
+            "request": "launch",
+            "mainClass": "UIOnlinePayment",
+            "projectName": "Scheduling System_c78e9206"
+>>>>>>> f0b4ca7713e4158c312d2d2e9123a209765d5442
         },
         {
             "type": "java",
@@ -31,6 +38,20 @@
             "request": "launch",
             "mainClass": "UIOnlinePayment",
             "projectName": "Patient-Appointment-Scheduling-Project_a5c6b899"
+        },
+        {
+            "type": "java",
+            "name": "UIPayment",
+            "request": "launch",
+            "mainClass": "UIPayment",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
+            "name": "UIAppointmentSched",
+            "request": "launch",
+            "mainClass": "UIAppointmentSched",
+            "projectName": "Scheduling System_c78e9206"
         },
         {
             "type": "java",

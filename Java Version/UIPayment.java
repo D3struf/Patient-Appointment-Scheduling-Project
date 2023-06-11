@@ -5,11 +5,21 @@ import java.awt.event.ActionListener;
 
 public class UIPayment extends JFrame implements ActionListener {
 
-    public static void main(String[] args) {
-        new UIPayment();
-    }
+    // public static void main(String[] args) {
+    //     new UIPayment();
+    // }
+    private Main main;
 
-    UIPayment() {
+    JButton patientViewButton;
+    JButton scheduleButton;
+    JButton paymentButton;
+    JButton backButton;
+    JButton cashButton;
+    JButton onlineButton;
+
+    UIPayment(Main main) {
+        this.main = main;
+        String currentUserName = main.getCurrentUserName();
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/payment.png"));
@@ -28,70 +38,72 @@ public class UIPayment extends JFrame implements ActionListener {
         bgImageLayer.setBounds(0, 0, 1366, 768);
         bgImageLayer.add(bgImageLabel, JLayeredPane.DEFAULT_LAYER);
 
-        JButton button = new JButton();
-        button.setText("Patient Information");
-        button.setFont(new Font("Dialog", Font.BOLD, 18));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.BLUE);
-        button.setOpaque(true);
-        button.setFocusable(false);
-        button.addActionListener(this);
-        button.setBounds(60, 315, 250, 50);
+        patientViewButton = new JButton();
+        patientViewButton.setText("Patient Information");
+        patientViewButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        patientViewButton.setForeground(Color.WHITE);
+        patientViewButton.setBackground(Color.BLUE);
+        patientViewButton.setOpaque(true);
+        patientViewButton.setFocusable(false);
+        patientViewButton.addActionListener(this);
+        patientViewButton.setBounds(60, 315, 250, 50);
 
-        JButton button1 = new JButton();
-        button1.setText("Schedule");
-        button1.setFont(new Font("Dialog", Font.BOLD, 18));
-        button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLUE);
-        button1.setOpaque(true);
-        button1.setFocusable(false);
-        button1.addActionListener(this);
-        button1.setBounds(60, 384, 250, 50);
+        scheduleButton = new JButton();
+        scheduleButton.setText("Schedule");
+        scheduleButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        scheduleButton.setForeground(Color.WHITE);
+        scheduleButton.setBackground(Color.BLUE);
+        scheduleButton.setOpaque(true);
+        scheduleButton.setFocusable(false);
+        scheduleButton.addActionListener(this);
+        scheduleButton.setBounds(60, 384, 250, 50);
 
-        JButton button2 = new JButton();
-        button2.setText("Payment");
-        button2.setFont(new Font("Dialog", Font.BOLD, 18));
-        button2.setForeground(Color.WHITE);
-        button2.setBackground(new Color(0x698f9a));
-        button2.setOpaque(true);
-        button2.setFocusable(false);
-        button2.addActionListener(this);
-        button2.setBounds(60, 452, 250, 50);
+        paymentButton = new JButton();
+        paymentButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        paymentButton.setText("Payment");
+        paymentButton.setForeground(Color.WHITE);
+        paymentButton.setBackground(new Color(0x698f9a));
+        paymentButton.setOpaque(true);
+        paymentButton.setFocusable(false);
+        paymentButton.addActionListener(this);
+        paymentButton.setBounds(60, 452, 250, 50);
 
-        JButton button3 = new JButton();
-        button3.setText("Back");
-        button3.setFont(new Font("Dialog", Font.BOLD, 18));
-        button3.setForeground(Color.WHITE);
-        button3.setBackground(new Color(0xD62839));
-        button3.setOpaque(true);
-        button3.setFocusable(false);
-        button3.addActionListener(this);
-        button3.setBounds(60, 655, 250, 50);
+        backButton = new JButton();
+        backButton.setText("Back");
+        backButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        backButton.setForeground(Color.WHITE);
+        backButton.setBackground(new Color(0xD62839));
+        backButton.setOpaque(true);
+        backButton.setFocusable(false);
+        backButton.addActionListener(this);
+        backButton.setBounds(60, 655, 250, 50);
 
-        JButton cash = new JButton();
-        cash.setText("Cash");
-        cash.setFont(new Font("Dialog", Font.BOLD, 18));
-        cash.setForeground(Color.WHITE);
-        cash.setBackground(new Color(0x698f9a));
-        cash.setOpaque(true);
-        cash.setFocusable(false);
-        cash.addActionListener(this);
-        cash.setBounds(534, 452, 230, 50);
-        cash.setBorder(BorderFactory.createEmptyBorder());
+        cashButton = new JButton();
+        cashButton.setText("Cash");
+        cashButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        cashButton.setForeground(Color.WHITE);
+        cashButton.setBackground(new Color(0x698f9a));
+        cashButton.setOpaque(true);
+        cashButton.setFocusable(false);
+        cashButton.addActionListener(this);
+        cashButton.setBounds(534, 452, 230, 50);
+        cashButton.setBorder(BorderFactory.createEmptyBorder());
 
-        JButton ol = new JButton();
-        ol.setText("Online");
-        ol.setFont(new Font("Dialog", Font.BOLD, 18));
-        ol.setForeground(Color.WHITE);
-        ol.setBackground(new Color(0x698f9a));
-        ol.setOpaque(true);
-        ol.setFocusable(false);
-        ol.addActionListener(this);
-        ol.setBounds(996, 452, 230, 50);
-        ol.setBorder(BorderFactory.createEmptyBorder());
+        onlineButton = new JButton();
+        onlineButton.setText("Online");
+        onlineButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        onlineButton.setForeground(Color.WHITE);
+        onlineButton.setBackground(new Color(0x698f9a));
+        onlineButton.setOpaque(true);
+        onlineButton.setFocusable(false);
+        onlineButton.addActionListener(this);
+        onlineButton.setBounds(996, 452, 230, 50);
+        onlineButton.setBorder(BorderFactory.createEmptyBorder());
 
         // Text Fields
         JTextField username = new JTextField();
+        username.setHorizontalAlignment(SwingConstants.RIGHT);
+        username.setText("Welcome, " + currentUserName);
         username.setBounds(1035, 23, 250, 35);
         username.setFont(new Font("Dialog", Font.PLAIN, 18));
         username.setForeground(Color.BLACK);
@@ -112,12 +124,12 @@ public class UIPayment extends JFrame implements ActionListener {
 
         // add objects
         this.add(bgImageLayer);
-        bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(cash, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(ol, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(patientViewButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(scheduleButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(paymentButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(backButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(cashButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(onlineButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
     }
 
@@ -130,7 +142,32 @@ public class UIPayment extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+        if (e.getSource() == cashButton) {
+            ImageIcon cash = new ImageIcon(getClass().getClassLoader().getResource("images/cash.png"));
+            JOptionPane.showMessageDialog(null, "                  Mode of Transaction: CASH                     \n\nGo to the nearest " + Variables.HOSPITAL_NAME + " for your payment\n", "Payment", JOptionPane.INFORMATION_MESSAGE, cash);
+        }
+        if (e.getSource() == onlineButton) {
+            new UIOnlinePayment(main);
+            this.dispose();
+        }
+        if (e.getSource() == patientViewButton) {
+            new UIPatientInformation(main);
+            this.dispose();
+        }
+        if (e.getSource() == scheduleButton) {
+            if (main.getCurrentSchedule().isEmpty()) {
+                new UIAppSched(main);
+                this.dispose();
+            }
+            else {
+                new UIPatientInfo(main);
+                this.dispose();
+            }
+        }
+        if(e.getSource() == backButton) {
+            new UIHomePage(main);
+            this.dispose();
+        }
     }
 
 }

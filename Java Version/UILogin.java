@@ -202,8 +202,8 @@ public class UILogin extends JFrame implements ActionListener {
             if (validation) {
                 JOptionPane.showMessageDialog(null, "Login Successful!", "Patient Appointment Scheduling System",
                         JOptionPane.INFORMATION_MESSAGE, success);
+                new UIHomePage(main);
                 this.dispose();
-                new UIHomePage();
             }
             else {
                 JOptionPane.showMessageDialog(null, "Username or Password is incorrect!",
@@ -213,8 +213,8 @@ public class UILogin extends JFrame implements ActionListener {
         }
         if (e.getSource() == createAccountButton) {
             createAccountButton.setEnabled(false);
-            this.dispose();
             new UICreate(main);
+            this.dispose();
         }
     }
 }

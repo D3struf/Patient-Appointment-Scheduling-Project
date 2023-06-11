@@ -4,12 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UIHomePage extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new UIHomePage();
-    }
+    private Main main;
+
+    JButton patientViewButton;
+    JButton scheduleButton;
+    JButton paymentButton;
+    JButton logoutButton;
 
     // Frame
-    UIHomePage() {
+    UIHomePage(Main main) {
+        this.main = main;
+        String currentName = main.getCurrentUserName();
+        String currentDate = main.getCurrentSchedule();
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/bghomepage.png"));
@@ -24,60 +30,66 @@ public class UIHomePage extends JFrame implements ActionListener {
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
 
-        JButton button = new JButton();
-        button.setText("Patient Information");
-        button.setFont(new Font("Dialog", Font.BOLD, 18));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.BLUE);
-        button.setOpaque(true);
-        button.setFocusable(false);
-        button.addActionListener(this);
-        button.setBounds(60, 315, 250, 50);
+        patientViewButton = new JButton();
+        patientViewButton.setText("Patient Information");
+        patientViewButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        patientViewButton.setForeground(Color.WHITE);
+        patientViewButton.setBackground(Color.BLUE);
+        patientViewButton.setOpaque(true);
+        patientViewButton.setFocusable(false);
+        patientViewButton.addActionListener(this);
+        patientViewButton.setBounds(60, 315, 250, 50);
 
-        JButton button1 = new JButton();
-        button1.setText("Schedule");
-        button1.setFont(new Font("Dialog", Font.BOLD, 18));
-        button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLUE);
-        button1.setOpaque(true);
-        button1.setFocusable(false);
-        button1.addActionListener(this);
-        button1.setBounds(60, 384, 250, 50);
+        scheduleButton = new JButton();
+        scheduleButton.setText("Schedule");
+        scheduleButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        scheduleButton.setForeground(Color.WHITE);
+        scheduleButton.setBackground(Color.BLUE);
+        scheduleButton.setOpaque(true);
+        scheduleButton.setFocusable(false);
+        scheduleButton.addActionListener(this);
+        scheduleButton.setBounds(60, 384, 250, 50);
 
-        JButton button2 = new JButton();
-        button2.setText("Payment");
-        button2.setFont(new Font("Dialog", Font.BOLD, 18));
-        button2.setForeground(Color.WHITE);
-        button2.setBackground(Color.BLUE);
-        button2.setOpaque(true);
-        button2.setFocusable(false);
-        button2.addActionListener(this);
-        button2.setBounds(60, 452, 250, 50);
+        paymentButton = new JButton();
+        paymentButton.setText("Payment");
+        paymentButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        paymentButton.setForeground(Color.WHITE);
+        paymentButton.setBackground(Color.BLUE);
+        paymentButton.setOpaque(true);
+        paymentButton.setFocusable(false);
+        paymentButton.addActionListener(this);
+        paymentButton.setBounds(60, 452, 250, 50);
 
-        JButton button3 = new JButton();
-        button3.setText("Logout");
-        button3.setFont(new Font("Dialog", Font.BOLD, 18));
-        button3.setForeground(Color.WHITE);
-        button3.setBackground(new Color(0xD62839));
-        button3.setOpaque(true);
-        button3.setFocusable(false);
-        button3.addActionListener(this);
-        button3.setBounds(60, 655, 250, 50);
+        logoutButton = new JButton();
+        logoutButton.setText("Logout");
+        logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        logoutButton.setForeground(Color.WHITE);
+        logoutButton.setBackground(new Color(0xD62839));
+        logoutButton.setOpaque(true);
+        logoutButton.setFocusable(false);
+        logoutButton.addActionListener(this);
+        logoutButton.setBounds(60, 655, 250, 50);
 
         JTextField username = new JTextField();
-        username.setBounds(1035, 23, 250, 35);
+        username.setHorizontalAlignment(SwingConstants.RIGHT);
+        username.setText("Welcome, " + currentName);
+        username.setBounds(1085, 23, 200, 35);
         username.setFont(new Font("Dialog", Font.PLAIN, 18));
         username.setForeground(Color.BLACK);
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
+        username.setEditable(false);
 
         JTextField sched = new JTextField();
+        username.setHorizontalAlignment(SwingConstants.CENTER);
+        sched.setText(currentDate);
         sched.setBounds(445, 480, 380, 35);
-        sched.setFont(new Font("Dialog", Font.PLAIN, 18));
+        sched.setFont(new Font("Dialog", Font.BOLD, 18));
         sched.setForeground(Color.BLACK);
         sched.setBackground(new Color(0x698f9a));
         sched.setCaretColor(Color.WHITE);
         sched.setBorder(BorderFactory.createEmptyBorder());
+        sched.setEditable(false);
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -98,10 +110,10 @@ public class UIHomePage extends JFrame implements ActionListener {
 
         // add Objects
         this.add(bgImageLayer);
-        bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(patientViewButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(scheduleButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(paymentButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(sched, JLayeredPane.PALETTE_LAYER);
     }
@@ -115,7 +127,38 @@ public class UIHomePage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+        if (e.getSource() == patientViewButton) {
+            new UIPatientInformation(main);
+            this.dispose();
+        }
+        if (e.getSource() == scheduleButton) {
+            if (main.getCurrentSchedule().isEmpty()) {
+                new UIAppSched(main);
+                this.dispose();
+            }
+            else {
+                new UIPatientInfo(main);
+                this.dispose();
+            }
+        }
+        if (e.getSource() == paymentButton) {
+            if (main.getCurrentSchedule().isEmpty()) {
+                ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/error.png"));
+                JOptionPane.showMessageDialog(null, "You have not scheduled an appointment yet.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
+            }
+            else if (main.getCurrentPayment() == 1) {
+                ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/paid.png"));
+                JOptionPane.showMessageDialog(null, "You have already paid for your appointment.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
+            }
+            else {
+                new UIPayment(main);
+                this.dispose();
+            }
+        }
+        if (e.getSource() == logoutButton) {
+            new UILogin(main);
+            this.dispose();
+        }
     }
 
 }
