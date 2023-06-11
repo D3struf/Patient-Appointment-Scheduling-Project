@@ -147,7 +147,7 @@ public class UIHomePage extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "You have already paid for your appointment.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
             }
             else {
-                new UIPayment();
+                new UIPayment(main);
                 this.dispose();
             }
         }

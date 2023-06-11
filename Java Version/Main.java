@@ -59,7 +59,9 @@ public class Main {
         //new UIHomePage(obj);
         //new UIPatientInformation(obj);
         //new UIAppSched(obj);
-        new UIAppointmentSched(obj);
+        //new UIAppointmentSched(obj);
+        //new UIPatientInfo(obj);
+        new UIPayment(obj);
 
         // Ask for user Account
         // while (true) {
@@ -719,6 +721,90 @@ public class Main {
             }
         }
         return 0;
+    }
+
+    public String getCurrentAppointmentCode() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentCode() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentCode();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDate() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDate() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDate();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDoctor() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDoctor() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDoctor();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDoctorDepartment() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDoctorDepartment() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDoctorDepartment();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDoctorSchedule() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDoctorSchedule() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDoctorSchedule();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDoctorEmail() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDoctorEmail() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDoctorEmail();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentAppointmentDoctorContactNumber() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null
+                    && current.accounts.getAppointmentDoctorContactNumber() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAppointmentDoctorContactNumber();
+                }
+            }
+        }
+        return "";
     }
 
     public void updatePatientInformation (String username, String password, String name, int age, String sex, String bday,
