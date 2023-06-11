@@ -53,10 +53,12 @@ public class Main {
         obj.retrieve();
         obj.display();
         //new UIWelcome();
-        new UILogin(obj);
+        //new UILogin(obj);
         //new UICreate(obj);
-        
-        
+        obj.globalUsername = "Monter";
+        //new UIHomePage(obj);
+        new UIPatientInformation(obj);
+
         // Ask for user Account
         // while (true) {
         // boolean create = true, login = true;
@@ -156,31 +158,6 @@ public class Main {
 
         ACCOUNT() {
         }
-
-        // // Constructur for whole class
-        // ACCOUNT (ACCOUNT x) {
-        // this.Copy(x);
-        // }
-
-        // // Copy method for constructor
-        // public void Copy(ACCOUNT x) {
-        // this.setUsername(x.getUsername());
-        // this.setPassword(x.getPassword());
-        // this.setName(x.getName());
-        // this.setAge(x.getAge());
-        // this.setSex(x.getSex());
-        // this.setBday(x.getBday());
-        // this.setContactNumber(x.getContactNumber());
-        // this.appointment_date = x.appointment_date;
-        // this.appointment_doctor = x.appointment_doctor;
-        // this.appointment_doctor_department = x.appointment_doctor_department;
-        // this.appointment_doctor_schedule = x.appointment_doctor_schedule;
-        // this.appointment_doctor_email = x.appointment_doctor_email;
-        // this.appointment_doctor_contact_number =
-        // x.appointment_doctor_contact_number;
-        // this.appointment_code = x.appointment_code;
-        // this.payment_status = x.payment_status;
-        // }
 
         // Getter methods
         public String getUsername() {
@@ -677,6 +654,61 @@ public class Main {
         return "";
     }
 
+    public String getCurrentName() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getName();
+                }
+            }
+        }
+        return "";
+    }
+
+    public int getCurrentAge() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getAge();
+                }
+            }
+        }
+        return 1;
+    }
+
+    public String getCurrentContactNumber() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getContactNumber();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentSex() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getSex();
+                }
+            }
+        }
+        return "";
+    }
+
+    public String getCurrentBirthday() {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    return current.accounts.getBday();
+                }
+            }
+        }
+        return "";
+    }
+
     public int getCurrentPayment() {
         for (LIST current : L) {
             if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
@@ -686,6 +718,22 @@ public class Main {
             }
         }
         return 0;
+    }
+
+    public void updatePatientInformation (String username, String password, String name, int age, String sex, String bday,
+            String contact_number) {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    current.accounts.setUsername(username);
+                    current.accounts.setPassword(password);
+                    current.accounts.setName(name);
+                    current.accounts.setAge(age);
+                    current.accounts.setBday(bday);
+                    current.accounts.setContactNumber(contact_number);
+                }
+            }
+        }
     }
 
     public void appointmentSchedule() {

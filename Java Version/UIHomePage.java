@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 public class UIHomePage extends JFrame implements ActionListener {
     private Main main;
@@ -82,10 +81,10 @@ public class UIHomePage extends JFrame implements ActionListener {
         username.setEditable(false);
 
         JTextField sched = new JTextField();
-        sched.setHorizontalAlignment(SwingConstants.LEFT);
-        sched.setText("Next Appointment: ");
+        username.setHorizontalAlignment(SwingConstants.CENTER);
+        sched.setText(currentDate);
         sched.setBounds(445, 480, 380, 35);
-        sched.setFont(new Font("Dialog", Font.PLAIN, 18));
+        sched.setFont(new Font("Dialog", Font.BOLD, 18));
         sched.setForeground(Color.BLACK);
         sched.setBackground(new Color(0x698f9a));
         sched.setCaretColor(Color.WHITE);
@@ -129,29 +128,33 @@ public class UIHomePage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == patientViewButton) {
-            new UIPatientInformation();
+            new UIPatientInformation(main);
+            this.dispose();
         }
         if (e.getSource() == scheduleButton) {
             if (main.getCurrentSchedule().isEmpty()) {
                 new UIAppSched();
+                this.dispose();
             }
             else {
                 new UIPatientInfo();
+                this.dispose();
             }
         }
         if (e.getSource() == paymentButton) {
             if (main.getCurrentPayment() == 1) {
-                // new UIAlreadyPaid();
+                ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/paid.png"));
+                JOptionPane.showMessageDialog(null, "You have already paid for your appointment.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
             }
             else {
-                // new UIPayment();
+                new UIPayment();
+                this.dispose();
             }
-            new UIPayment();
         }
         if (e.getSource() == logoutButton) {
             new UILogin(main);
+            this.dispose();
         }
-        this.dispose();
     }
 
 }
