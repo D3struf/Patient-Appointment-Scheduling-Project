@@ -147,7 +147,7 @@ public class UIPayment extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "                  Mode of Transaction: CASH                     \n\nGo to the nearest " + Variables.HOSPITAL_NAME + " for your payment\n", "Payment", JOptionPane.INFORMATION_MESSAGE, cash);
         }
         if (e.getSource() == onlineButton) {
-            new UIOnlinePayment();
+            new UIOnlinePayment(main);
             this.dispose();
         }
         if (e.getSource() == patientViewButton) {

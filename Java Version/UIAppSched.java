@@ -140,7 +140,10 @@ public class UIAppSched extends JFrame implements ActionListener {
             this.dispose();
         }
         if (e.getSource() == paymentButton) {
-            if (main.getCurrentPayment() == 1) {
+            if (main.getCurrentAppointmentDate().isEmpty()) {
+                ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/error.png"));
+                JOptionPane.showMessageDialog(null, "You have not scheduled an appointment yet.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
+            }else if (main.getCurrentPayment() == 1) {
                 ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/paid.png"));
                 JOptionPane.showMessageDialog(null, "You have already paid for your appointment.", "Payment", JOptionPane.INFORMATION_MESSAGE, logo);
             }

@@ -52,72 +52,9 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
-        //new UIWelcome();
-        //new UILogin(obj);
-        //new UICreate(obj);
-        obj.globalUsername = "Monter";
-        //new UIHomePage(obj);
-        //new UIPatientInformation(obj);
-        //new UIAppSched(obj);
-        //new UIAppointmentSched(obj);
-        //new UIPatientInfo(obj);
-        new UIPayment(obj);
-
-        // Ask for user Account
-        // while (true) {
-        // boolean create = true, login = true;
-        // int choice1;
-        // switch (choice1 = obj.menu(1)) {
-        // case 1:
-        // // login = obj.login_Account();
-        // break;
-        // case 2:
-        // create = obj.inputPatientInformation();
-        // break;
-        // case 3:
-        // obj.save();
-        // System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill |
-        // Carolino, Jeanne May");
-        // System.exit(0);
-        // break;
-        // default:
-        // System.out.println("Invalid Choice, Try Again!!");
-        // obj.pause();
-        // break;
-        // }
-        // if ((choice1 == 2 && create) || (choice1 == 1 && login))
-        // break;
-        // }
-
-        // obj.display();
-
-        // // Main Menu
-        // while (true) {
-        // switch (obj.menu(3)) {
-        // case 1:
-        // obj.displayPatientInformation();
-        // break;
-        // case 2:
-        // obj.appointmentSchedule();
-        // break;
-        // case 3:
-        // obj.viewSchedule();
-        // break;
-        // case 4:
-        // obj.paymentMethod();
-        // break;
-        // case 5:
-        // obj.save();
-        // System.out.println("Programmed By: Monter, John Paul | Garcia, Almira Jill |
-        // Carolino, Jeanne May");
-        // System.exit(0);
-        // break;
-        // default:
-        // System.out.println("Invalid Choice, Try Again!!");
-        // obj.pause();
-        // break;
-        // }
-        // }
+        new UIWelcome();
+        new UILogin(obj);
+        obj.save();
     }
 
     // ===============================================
@@ -377,8 +314,6 @@ public class Main {
 
     private class LIST {
         private ACCOUNT accounts;
-        private APPOINTMENT slots;
-        private DOCTOR doctors;
         private LIST next;
     }
 
@@ -451,84 +386,9 @@ public class Main {
         return false;
     }
 
-    public int menu(int x) {
-        Scanner scan = new Scanner(System.in);
-        clearScreen();
-        if (x == 1) {
-            System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-            System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-            System.out.println("=======================================");
-            System.out.println("[1] LOG IN ACCOUNT");
-            System.out.println("=======================================");
-            System.out.println("[2] CREATE ACCOUNT");
-            System.out.println("=======================================");
-            System.out.println("[3] EXIT");
-            System.out.println("=======================================");
-            System.out.println("ENTER CHOICE: ");
-            System.out.println("=======================================");
-            System.out.println("X|||||||||||||||||||||||||||||||||||||||||||||||||X");
-            System.out.println("X|||||||||||||||||||||||||||||||||||||||||||||||||X");
-            return scan.nextInt();
-        }
-        else if (x == 2) {
-            System.out.println("=======================================");
-            System.out.println("[1] CASH");
-            System.out.println("=======================================");
-            System.out.println("[2] ONLINE TRANSACTION");
-            System.out.println("=======================================");
-            System.out.println("[3] BACK");
-            System.out.println("=======================================");
-            System.out.println("ENTER CHOICE: ");
-            System.out.println("=======================================");
-            return scan.nextInt();
-        }
-        else {
-            System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-            System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-            System.out.println("=======================================");
-            System.out.println("[1] View Patient Information");
-            System.out.println("=======================================");
-            System.out.println("[2] Schedule an Appointment");
-            System.out.println("=======================================");
-            System.out.println("[3] View Schedule");
-            System.out.println("=======================================");
-            System.out.println("[4] Payment for Appointment");
-            System.out.println("=======================================");
-            System.out.println("[5] Sign Out");
-            System.out.println("=======================================");
-            System.out.println("Enter Choice: ");
-            System.out.println("=======================================");
-            return scan.nextInt();
-        }
-    }
-
     // ===============================================
     // Patient Methods
     // ===============================================
-
-    public void displayPatientInformation() {
-        for (LIST current : L) {
-            if (current.accounts.username.equals(globalUsername)) {
-                clearScreen();
-                System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-                System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-                System.out.println("================================================================");
-                System.out.println("|||               PATIENT INFORMATION           |||");
-                System.out.println("================================================================");
-                System.out.println("USERNAME       :           " + current.accounts.getUsername());
-                System.out.println("PASSWORD       :           " + current.accounts.getPassword());
-                System.out.println("NAME           :           " + current.accounts.getName());
-                System.out.println("AGE            :           " + current.accounts.getAge());
-                System.out.println("SEX            :           " + current.accounts.getSex());
-                System.out.println("BIRTHDAY       :           " + current.accounts.getBday());
-                System.out.println("CONTACT NUMBER :           " + current.accounts.getContactNumber());
-                System.out.println("================================================================");
-                pause();
-                System.out.println("================================================================");
-                break;
-            }
-        }
-    }
 
     public APPOINTMENT[] generateAppointmentSchedules() {
         APPOINTMENT[] slot = new APPOINTMENT[Variables.DAYS];
@@ -545,18 +405,6 @@ public class Main {
             tomorrowdate = tomorrowdate.plusDays(1);
         }
         return slot;
-    }
-
-    private static void displayAppointmentSchedules(APPOINTMENT[] slot) {
-        System.out.println("================================================================");
-        System.out.println("|||     DATE       NUMBER OF PATIENTS       SLOTS AVAILABLE  |||");
-        System.out.println("================================================================");
-
-        for (int i = 0; i < Variables.DAYS; i++) {
-            APPOINTMENT sched = slot[i];
-            System.out.printf("[%d]    %s              %d                   (%d/%d)\n", (i + 1), sched.getDate(),
-                    sched.getNumPatients(), sched.getNumPatients(), Variables.MAX_PATIENTS);
-        }
     }
 
     private static int checkPatientSlotFile(String DTIME) {
@@ -831,33 +679,7 @@ public class Main {
         savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.num_patients);
     }
 
-    public void viewSchedule() {
-        LIST currentAccount = getCurrentUserAccount();
-
-        clearScreen();
-        System.out.println("================================================================");
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("================================================================");
-        System.out.println("|||                   APPOINTMENT SCHEDULE                   |||");
-        System.out.println("================================================================");
-        System.out.println("USERNAME           :           " + currentAccount.accounts.getUsername());
-        System.out.println("NAME               :           " + currentAccount.accounts.getName());
-        System.out.println("APPOINTMENT DATE   :           " + currentAccount.accounts.getAppointmentDate());
-        System.out.println("=============================CODE: " + currentAccount.accounts.getAppointmentCode()
-                + " ===========================");
-        System.out.println("DOCTOR DETAILS");
-        System.out.println("APPOINTMENT DOCTOR :           " + currentAccount.accounts.getAppointmentDoctor());
-        System.out
-                .println("DEPARTMENT         :           " + currentAccount.accounts.getAppointmentDoctorDepartment());
-        System.out.println("SCHEDULE           :           " + currentAccount.accounts.getAppointmentDoctorSchedule());
-        System.out.println("EMAIL              :           " + currentAccount.accounts.getAppointmentDoctorEmail());
-        System.out.println(
-                "CONTACT NUMBER     :           " + currentAccount.accounts.getAppointmentDoctorContactNumber());
-        System.out.println("================================================================");
-        pause();
-    }
-
-    private static String confirmationCode() {
+    public String confirmationCode() {
         Random random = new Random();
         StringBuffer code = new StringBuffer();
         int length = 5;
@@ -876,112 +698,13 @@ public class Main {
         return code.toString();
     }
 
-    private static void onlinePayment(LIST currentAccount) {
-        Main obj = new Main();
-        Scanner scan = new Scanner(System.in);
-        obj.clearScreen();
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-        System.out.println("================================================================");
-        System.out.println("                  ONLINE TRANSACTION                   ");
-        System.out.println("================================================================");
-        System.out.println("RESERVATION FEE     : PHP " + Variables.RESERVATION_FEE + ".00");
-        System.out.print("Enter your Bank Name (Ex. GCASH): ");
-        String bankName = scan.nextLine();
-        System.out.print("Enter your Account Number: ");
-        String accountNumber = scan.nextLine();
-        System.out.print("Enter Amount: ");
-        int amount = scan.nextInt();
-        scan.nextLine();
+    public void paymentMethod() {
+        // Check if the user has already paid the appointment
+        LIST currentAccount = getCurrentUserAccount();
 
-        if (amount >= Variables.RESERVATION_FEE) {
-            System.out.println("================================================================");
-            System.out.println("Transaction Successful!!");
-            String code = confirmationCode();
-            System.out.println("Your Confirmation Code: " + code);
-
-            if (amount > Variables.RESERVATION_FEE) {
-                System.out.println("Your Change: PHP" + (amount - Variables.RESERVATION_FEE) + ".00");
-            }
-
-            System.out.println("Thank You For Using Our Program!");
-            System.out.println("================================================================");
-            obj.pause();
-        }
-        else {
-            System.out.println("================================================================");
-            System.out.println("Transaction Failed!!");
-            System.out.println("Insufficient Amount");
-            System.out.println("================================================================");
-            obj.pause();
-            return;
-        }
         // Update Payment Status
         if (currentAccount != null && currentAccount.accounts != null) {
             currentAccount.accounts.setPaymentStatus(1);
-        }
-        return;
-    }
-
-    public void paymentMethod() {
-        clearScreen();
-        System.out.println("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X");
-        System.out.println("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X");
-        System.out.println("================================================================");
-        System.out.println("                  PAYMENT METHOD                   ");
-
-        // Check if the user has already paid the appointment
-        LIST currentAccount = getCurrentUserAccount();
-        if (currentAccount != null && currentAccount.accounts.getPaymentStatus() == 1) {
-            System.out.println("================================================================");
-            System.out.println("You have already paid the appointment");
-            System.out.println("================================================================");
-            pause();
-            return;
-        }
-
-        // If user doesn't have appointment yet
-        if (currentAccount != null && currentAccount.accounts.getAppointmentDate() != null
-                && currentAccount.accounts.getAppointmentDate().isEmpty()) {
-            System.out.println("================================================================");
-            System.out.println("YOU DO NOT HAVE AN APPOINTMENT YET!");
-            System.out.println("================================================================");
-            pause();
-            return;
-        }
-
-        // Ask for Payment Method
-        int choice;
-        while (true) {
-            choice = menu(2);
-
-            // Validate Choice
-            if (choice < 1 || choice > 3) {
-                System.out.println("Invalid Choice");
-                pause();
-                continue;
-            }
-
-            // If Cash
-            if (choice == 1) {
-                System.out.println("================================================================");
-                System.out.println("                  Mode of Transaction: CASH                     ");
-                System.out.println("Go to the nearest " + Variables.HOSPITAL_NAME + "for your payment");
-                System.out.println("================================================================");
-                pause();
-                return;
-            }
-            else if (choice == 2) {
-                System.out.println("================================================================");
-                System.out.println("                  Mode of Transaction: ONLINE                   ");
-                System.out.println("================================================================");
-                pause();
-                onlinePayment(currentAccount);
-                break;
-            }
-            else {
-                return;
-            }
         }
         return;
     }
@@ -1161,28 +884,6 @@ public class Main {
             System.out.println("Error opening/reading to file: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    // ===============================================
-    // UI FUNCTIONS
-    // ===============================================
-
-    public void pause() {
-        Scanner pause = new Scanner(System.in);
-        System.out.println("\nPRESS ENTER KEY TO CONTINUE...");
-        try {
-            pause.nextLine();
-        }
-        catch (NoSuchElementException e) {
-            System.out.println("Error: " + e.getMessage());
-            pause.close();
-        }
-    }
-
-    void clearScreen() {
-        // Clear the console by printing multiple empty lines
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
 }
