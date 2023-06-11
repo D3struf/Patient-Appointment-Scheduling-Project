@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UIOnlinePayment",
+            "request": "launch",
+            "mainClass": "UIOnlinePayment",
+            "projectName": "Scheduling System_c78e9206"
+        },
+        {
+            "type": "java",
             "name": "UIPatientInfo",
             "request": "launch",
             "mainClass": "UIPatientInfo",
