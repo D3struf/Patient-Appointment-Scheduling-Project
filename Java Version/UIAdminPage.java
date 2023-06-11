@@ -3,16 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIHomePage extends JFrame implements ActionListener {
+public class UIAdminPage extends JFrame implements ActionListener {
     public static void main(String[] args) {
-        new UIHomePage();
+        new UIAdminPage();
     }
 
     // Frame
-    UIHomePage() {
+    UIAdminPage() {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/bghomepage.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/homepage.png"));
 
         // Resize Image
         Image tempImage = bgImage.getImage();
@@ -25,7 +25,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         bgImageLabel.setBounds(0, -20, 1366, 768);
 
         JButton button = new JButton();
-        button.setText("Patient Information");
+        button.setText("Patients");
         button.setFont(new Font("Dialog", Font.BOLD, 18));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLUE);
@@ -35,7 +35,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         button.setBounds(60, 315, 250, 50);
 
         JButton button1 = new JButton();
-        button1.setText("Schedule");
+        button1.setText("Doctors");
         button1.setFont(new Font("Dialog", Font.BOLD, 18));
         button1.setForeground(Color.WHITE);
         button1.setBackground(Color.BLUE);
@@ -45,7 +45,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         button1.setBounds(60, 384, 250, 50);
 
         JButton button2 = new JButton();
-        button2.setText("Payment");
+        button2.setText("Security");
         button2.setFont(new Font("Dialog", Font.BOLD, 18));
         button2.setForeground(Color.WHITE);
         button2.setBackground(Color.BLUE);
@@ -71,14 +71,6 @@ public class UIHomePage extends JFrame implements ActionListener {
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
 
-        JTextField sched = new JTextField();
-        sched.setBounds(445, 480, 380, 35);
-        sched.setFont(new Font("Dialog", Font.PLAIN, 18));
-        sched.setForeground(Color.BLACK);
-        sched.setBackground(new Color(0x698f9a));
-        sched.setCaretColor(Color.WHITE);
-        sched.setBorder(BorderFactory.createEmptyBorder());
-
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
         bgImageLayer.setBounds(0, 0, 1366, 768);
@@ -103,7 +95,6 @@ public class UIHomePage extends JFrame implements ActionListener {
         bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(sched, JLayeredPane.PALETTE_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
