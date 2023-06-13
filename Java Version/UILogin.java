@@ -183,13 +183,13 @@ public class UILogin extends JFrame implements ActionListener {
         bgImage.add(createAccountLabel, JLayeredPane.MODAL_LAYER);
 
         this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                // Save the file here
-                main.save();
-                super.windowClosing(e);
-            }
-        });
+         @Override
+        public void windowClosing(WindowEvent e) {
+        // Save the file here
+        main.save();
+        super.windowClosing(e);
+    }
+});
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
