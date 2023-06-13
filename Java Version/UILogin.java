@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 
 public class UILogin extends JFrame implements ActionListener {
     // public static void main(String[] args) {
@@ -179,6 +182,15 @@ public class UILogin extends JFrame implements ActionListener {
         bgImage.add(seperator2, JLayeredPane.MODAL_LAYER);
         bgImage.add(createAccountButton, JLayeredPane.MODAL_LAYER);
         bgImage.add(createAccountLabel, JLayeredPane.MODAL_LAYER);
+
+        this.addWindowListener(new WindowAdapter() {
+         @Override
+        public void windowClosing(WindowEvent e) {
+        // Save the file here
+        main.save();
+        super.windowClosing(e);
+    }
+});
     }
 
     private static void centerFrameOnScreen(JFrame frame) {

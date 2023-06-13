@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 class Variables {
 
-    public static final String DATABASE_FILE = "./database";
-    public static final String ACCOUNT_FILE = "./database/account.txt";
-    public static final String PATIENT_FILE = "./database/patient.txt";
-    public static final String DOCTOR_FILE = "./database/doctor.txt";
-    public static final String FOLDER = "./database/Schedules/";
+    public static final String DATABASE_FILE = "./Java Version/database";
+    public static final String ACCOUNT_FILE = "./Java Version/database/account.txt";
+    public static final String PATIENT_FILE = "./Java Version/database/patient.txt";
+    public static final String DOCTOR_FILE = "./Java Version/database/doctor.txt";
+    public static final String FOLDER = "./Java Version/database/Schedules/";
     public static final String HOSPITAL_NAME = "TUP-Manila Medical Center";
     public static final int RESERVATION_FEE = 150;
     public static final int ENTER = 13;
@@ -55,12 +55,12 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
-        new UIAdminPage(obj);
+        // new UIAdminPage(obj);
         //new UIPatientList(obj);
         //new UIDoctorList(obj);
         // new UIWelcome();
-        // new UILogin(obj);
-        // obj.save();
+        new UILogin(obj);
+        obj.save();
     }
 
     // ===============================================
@@ -914,7 +914,6 @@ public class Main {
         }
         catch (IOException e) {
             System.out.println("Error opening/reading to file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
