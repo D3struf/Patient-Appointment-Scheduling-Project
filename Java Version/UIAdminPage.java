@@ -115,11 +115,12 @@ public class UIAdminPage extends JFrame implements ActionListener {
             this.dispose();
         }
         if (e.getSource() == securityButton) {
-            new UISecurity();
+            new UISecurity(main);
             this.dispose();
         }
         if (e.getSource() == logoutButton) {
             new UILogin(main);
+            main.save();
             this.dispose();
         }
     }

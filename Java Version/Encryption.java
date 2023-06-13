@@ -4,7 +4,8 @@ import java.util.Base64;
 
 public class Encryption {
     private static final int ByteFF = 0xFF;
-    private static final int globalkey = 70;
+    private static int globalkey;
+    private int key;
 
     public String encodeToBase64(String encyptedString) {
         return Base64.getEncoder().encodeToString(encyptedString.getBytes());
@@ -37,5 +38,14 @@ public class Encryption {
     }
 
     // DITO LALAGAY YUNG PROMPT FOR USER TO EDIT KEY
+    public int getKey() {
+        return this.key;
+    }
+
+    public void setKey(int key) {
+        globalkey = key;
+    }
+
+    
 
 }

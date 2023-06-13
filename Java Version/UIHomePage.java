@@ -157,6 +157,7 @@ public class UIHomePage extends JFrame implements ActionListener {
         }
         if (e.getSource() == logoutButton) {
             new UILogin(main);
+            main.save();
             this.dispose();
         }
     }
