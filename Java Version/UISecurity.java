@@ -3,16 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIAdminPage extends JFrame implements ActionListener {
+public class UISecurity extends JFrame implements ActionListener {
     public static void main(String[] args) {
-        new UIAdminPage();
+        new UISecurity();
     }
 
     // Frame
-    UIAdminPage() {
+    UISecurity() {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/homepage.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/security.png"));
 
         // Resize Image
         Image tempImage = bgImage.getImage();
@@ -48,14 +48,14 @@ public class UIAdminPage extends JFrame implements ActionListener {
         securityButton.setText("Security");
         securityButton.setFont(new Font("Dialog", Font.BOLD, 18));
         securityButton.setForeground(Color.WHITE);
-        securityButton.setBackground(Color.BLUE);
+        securityButton.setBackground(new Color(0x698f9a));
         securityButton.setOpaque(true);
         securityButton.setFocusable(false);
         securityButton.addActionListener(this);
         securityButton.setBounds(60, 452, 250, 50);
 
         JButton logoutButton = new JButton();
-        logoutButton.setText("Logout");
+        logoutButton.setText("Back");
         logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBackground(new Color(0xD62839));
@@ -63,6 +63,34 @@ public class UIAdminPage extends JFrame implements ActionListener {
         logoutButton.setFocusable(false);
         logoutButton.addActionListener(this);
         logoutButton.setBounds(60, 655, 250, 50);
+
+        JButton submit = new JButton();
+        submit = new JButton();
+        submit.setText("Submit");
+        submit.setFont(new Font("Dialog", Font.BOLD, 18));
+        submit.setForeground(Color.BLACK);
+        submit.setBackground(new Color(0xFFD600));
+        submit.setOpaque(true);
+        submit.setFocusable(false);
+        submit.addActionListener(this);
+        submit.setBounds(1045, 607, 250, 50);
+        submit.setBorder(BorderFactory.createEmptyBorder());
+
+         // Text Fields
+        JTextField currentKey = new JTextField();
+        currentKey.setBounds(640, 347, 250, 35);
+        currentKey.setFont(new Font("Dialog", Font.PLAIN, 18));
+        currentKey.setForeground(Color.BLACK);
+        currentKey.setBackground(Color.WHITE);
+
+        JTextField enKey = new JTextField();
+        enKey.setBounds(640, 473, 250, 35);
+        enKey.setFont(new Font("Dialog", Font.PLAIN, 18));
+        enKey.setForeground(Color.BLACK);
+        enKey.setBackground(Color.WHITE);
+
+
+        
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -87,6 +115,12 @@ public class UIAdminPage extends JFrame implements ActionListener {
         bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(currentKey, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(enKey, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(submit, JLayeredPane.PALETTE_LAYER);
+
+
+
     }
 
     private static void centerFrameOnScreen(JFrame frame) {

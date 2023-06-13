@@ -3,16 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIAdminPage extends JFrame implements ActionListener {
+public class UIPatientList extends JFrame implements ActionListener {
     public static void main(String[] args) {
-        new UIAdminPage();
+        new UIPatientList();
     }
 
     // Frame
-    UIAdminPage() {
+    UIPatientList() {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/homepage.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/patientlist.png"));
 
         // Resize Image
         Image tempImage = bgImage.getImage();
@@ -28,7 +28,7 @@ public class UIAdminPage extends JFrame implements ActionListener {
         patientButton.setText("Patients");
         patientButton.setFont(new Font("Dialog", Font.BOLD, 18));
         patientButton.setForeground(Color.WHITE);
-        patientButton.setBackground(Color.BLUE);
+        patientButton.setBackground(new Color(0x698f9a));
         patientButton.setOpaque(true);
         patientButton.setFocusable(false);
         patientButton.addActionListener(this);
@@ -55,7 +55,7 @@ public class UIAdminPage extends JFrame implements ActionListener {
         securityButton.setBounds(60, 452, 250, 50);
 
         JButton logoutButton = new JButton();
-        logoutButton.setText("Logout");
+        logoutButton.setText("Back");
         logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBackground(new Color(0xD62839));
