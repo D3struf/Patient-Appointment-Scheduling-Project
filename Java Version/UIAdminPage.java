@@ -111,15 +111,15 @@ public class UIAdminPage extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == patientButton) {
-            // new UIPatientList();
+            new UIPatientList(main);
             this.dispose();
         }
         if (e.getSource() == doctorButton) {
-            // new UIDoctorList();
+            new UIDoctorList(main);
             this.dispose();
         }
         if (e.getSource() == securityButton) {
-            // new UISecurity();
+            new UISecurity();
             this.dispose();
         }
         if (e.getSource() == logoutButton) {

@@ -17,7 +17,7 @@ class Variables {
     public static final int BKSP = 8;
     public static final int DAYS = 3;
     public static final int MAX_PATIENTS = 20;
-    public static final int MAX_DOCTORS = 2;
+    public static final int MAX_DOCTORS = 3;
     public static final int RAND_SEED = 3;
     public static final int CHAR_NUM = 26;
     public static final int NUM_NUM = 10;
@@ -29,6 +29,7 @@ class Variables {
 public class Main {
     // Linked List Declaration
     private LinkedList<LIST> L;
+    private List<DOCTOR> doctors;
     String globalUsername;
 
     public void display() {
@@ -55,6 +56,8 @@ public class Main {
         obj.retrieve();
         obj.display();
         new UIAdminPage(obj);
+        //new UIPatientList(obj);
+        //new UIDoctorList(obj);
         // new UIWelcome();
         // new UILogin(obj);
         // obj.save();
@@ -64,7 +67,7 @@ public class Main {
     // Class Attributes and Methods
     // ===============================================
 
-    private class ACCOUNT {
+    public class ACCOUNT {
         private String username;
         private String password;
         private String name;
@@ -272,6 +275,9 @@ public class Main {
             this.setContactNumber(contact_number);
         }
 
+        DOCTOR() {
+        }
+
         // getters method
         public String getName() {
             return this.name;
@@ -315,13 +321,15 @@ public class Main {
         }
     }
 
-    private class LIST {
+    public class LIST {
         private ACCOUNT accounts;
         private LIST next;
     }
 
     public Main() {
         L = new LinkedList<>();
+        doctors = new ArrayList<>();
+        listofDoctors();
     }
 
     // ===============================================
@@ -448,17 +456,19 @@ public class Main {
         return code.toString();
     }
 
-    public DOCTOR appointDoctor() {
-        DOCTOR[] doctors = {
-                new DOCTOR("Dr. John Smith", "OPD", "Monday to Friday - 9:00am to 5:00pm", "john.smith@tupmc.com",
-                        "09123456789"),
-                new DOCTOR("Dr. Sarah Lee", "OPD", "Tuesday to Saturday - 10:00am to 6:00pm", "sarah.lee@hospital.com",
-                        "09987654321") };
-
+    public DOCTOR appointDoctor() {     
         Random random = new Random();
         int randNum = random.nextInt(Variables.MAX_DOCTORS);
 
-        return doctors[randNum];
+        return doctors.get(randNum);
+    }
+
+    public void listofDoctors() {
+        doctors.add(new DOCTOR("Dr. John Smith", "OPD", "Monday to Tuesday - 9:00am to 5:00pm", "john.smith@tupmc.com",
+                        "09123456789"));
+        doctors.add(new DOCTOR("Dr. Sarah Lee", "OPD", "Wednesday to Thursday - 10:00am to 6:00pm", "sarah.lee@hospital.com",
+                        "09987654321"));
+        doctors.add(new DOCTOR("Dr. Alex Murray", "OPD", "Friday to Saturday - 9:00am to 5:00pm", "alex.murray@tupmc.com", "09918273645"));
     }
 
     private static void updatePatientAppointment(LIST current, APPOINTMENT sched, DOCTOR doc, String code) {
@@ -712,6 +722,25 @@ public class Main {
         return;
     }
 
+    public ArrayList<ACCOUNT> getAccountList() {
+        ArrayList<ACCOUNT> accountList = new ArrayList<>();
+
+        for (LIST current : L) {
+            accountList.add(current.accounts);
+        }
+
+        return accountList;
+    }
+
+    public ArrayList<DOCTOR> getDoctorList() {
+        ArrayList<DOCTOR> doctorlists = new ArrayList<>();
+
+        for (DOCTOR current : doctors) {
+            doctorlists.add(current);
+        }
+        return doctorlists;
+    }
+    
     // ===============================================
     // File Handling Methods
     // ===============================================

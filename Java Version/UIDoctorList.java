@@ -4,14 +4,25 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class UIDoctorList extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new UIDoctorList();
-    }
+    // public static void main(String[] args) {
+    //     new UIDoctorList();
+    // }
+
+    private Main main;
+
+    JButton patientButton;
+    JButton doctorButton;
+    JButton securityButton;
+    JButton logoutButton;
+    DefaultTableModel model;
+    Object[] row = new Object[5];
 
     // Frame
-    UIDoctorList() {
+    UIDoctorList(Main main) {
+        this.main = main;
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/DoctorList1.png"));
@@ -26,7 +37,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
 
-        JButton patientButton = new JButton();
+        patientButton = new JButton();
         patientButton.setText("Patients");
         patientButton.setFont(new Font("Dialog", Font.BOLD, 18));
         patientButton.setForeground(Color.WHITE);
@@ -36,7 +47,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         patientButton.addActionListener(this);
         patientButton.setBounds(60, 315, 250, 50);
 
-        JButton doctorButton = new JButton();
+        doctorButton = new JButton();
         doctorButton.setText("Doctors");
         doctorButton.setFont(new Font("Dialog", Font.BOLD, 18));
         doctorButton.setForeground(Color.WHITE);
@@ -46,7 +57,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         doctorButton.addActionListener(this);
         doctorButton.setBounds(60, 384, 250, 50);
 
-        JButton securityButton = new JButton();
+        securityButton = new JButton();
         securityButton.setText("Security");
         securityButton.setFont(new Font("Dialog", Font.BOLD, 18));
         securityButton.setForeground(Color.WHITE);
@@ -56,7 +67,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         securityButton.addActionListener(this);
         securityButton.setBounds(60, 452, 250, 50);
 
-        JButton logoutButton = new JButton();
+        logoutButton = new JButton();
         logoutButton.setText("Back");
         logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
         logoutButton.setForeground(Color.WHITE);
@@ -69,7 +80,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         //set Table
         JTable table = new JTable();
         Object[] columnNames = {"Name", "Department", "Schedule", "Email", "Contact No."};
-        DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
 
         //set columns
         model.setColumnIdentifiers(columnNames);
@@ -99,11 +110,7 @@ public class UIDoctorList extends JFrame implements ActionListener {
         scrollPane.getViewport().setBackground(Color.white);
         scrollPane.setBounds(408,300,932,391);
 
-        Object[] row = new Object[4];
-        row[2] = "Monday to Friday - 9:00am to 5:00pm";
-        model.addRow(row);
-        model.addRow(row);
-
+        loadDoctorLists();
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -129,7 +136,19 @@ public class UIDoctorList extends JFrame implements ActionListener {
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(scrollPane, JLayeredPane.PALETTE_LAYER);
+    }
 
+    private void loadDoctorLists() {
+        ArrayList<Main.DOCTOR> doctorlists = main.getDoctorList();
+        
+        for (Main.DOCTOR current : doctorlists) {
+            row[0] = current.getName();
+            row[1] = current.getDepartment();
+            row[2] = current.getSchedule();
+            row[3] = current.getEmail();
+            row[4] = current.getContactNumber();
+            model.addRow(row);
+        }
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
@@ -141,7 +160,18 @@ public class UIDoctorList extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+        if (e.getSource() == patientButton) {
+            new UIPatientList(main);
+            this.dispose();
+        }
+        if (e.getSource() == securityButton) {
+            new UISecurity();
+            this.dispose();
+        }
+        if (e.getSource() == logoutButton) {
+            new UIAdminPage(main);
+            this.dispose();
+        }
     }
 
 }
