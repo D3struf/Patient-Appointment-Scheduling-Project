@@ -15,6 +15,7 @@ public class UIOnlinePayment extends JFrame implements ActionListener {
     JButton submitButton;
     JComboBox<String> bank;
     JComboBox<String> type;
+    JTextField accnum;
 
     UIOnlinePayment(Main main) {
         this.main = main;
@@ -114,7 +115,7 @@ public class UIOnlinePayment extends JFrame implements ActionListener {
         username.setBackground(new Color(0xe8eaec));
         username.setBorder(BorderFactory.createEmptyBorder());
 
-        JTextField accnum = new JTextField();
+        accnum = new JTextField();
         accnum.setBounds(665, 488, 250, 35);
         accnum.setFont(new Font("Dialog", Font.PLAIN, 18));
         accnum.setForeground(Color.BLACK);
@@ -170,10 +171,19 @@ public class UIOnlinePayment extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitButton) {
-            String code = main.confirmationCode();
-            ImageIcon cash = new ImageIcon(getClass().getClassLoader().getResource("images/online.png"));
-            JOptionPane.showMessageDialog(null, "Payment Successful!\n\nYour Confirmation Code: " + code + "\nPlease take note of your Confirmation Code, Thank You!!\n", "Payment", JOptionPane.INFORMATION_MESSAGE, cash);
-            main.paymentMethod();
+            if (accnum.getText().isEmpty()) {
+                ImageIcon error = new ImageIcon(getClass().getClassLoader().getResource("images/wrong.png"));
+                JOptionPane.showMessageDialog(null, "Please fill up all fields!", "Online Payment", JOptionPane.INFORMATION_MESSAGE, error);
+                return;
+            }
+            else {
+                String code = main.confirmationCode();
+                ImageIcon cash = new ImageIcon(getClass().getClassLoader().getResource("images/online.png"));
+                JOptionPane.showMessageDialog(null, "Payment Successful!\n\nYour Confirmation Code: " + code + "\nPlease take note of your Confirmation Code, Thank You!!\n", "Payment", JOptionPane.INFORMATION_MESSAGE, cash);
+                main.paymentMethod();
+                new UIHomePage(main);
+                this.dispose();
+            }
         }
         if (e.getSource() == patientViewButton) {
             new UIPatientInformation(main);
