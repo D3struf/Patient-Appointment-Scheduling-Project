@@ -95,10 +95,6 @@ public class UIAdminPage extends JFrame implements ActionListener {
         bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(patientButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
