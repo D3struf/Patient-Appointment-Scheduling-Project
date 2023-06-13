@@ -76,9 +76,8 @@ public class Main {
         }
         obj.retrieve();
         obj.display();
-        new UIPatientList(obj);
-        // new UIWelcome();
-        // new UILogin(obj);
+        new UIWelcome();
+        new UILogin(obj);
     }
 
     // ===============================================
