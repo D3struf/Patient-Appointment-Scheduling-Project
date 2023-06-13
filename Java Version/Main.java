@@ -21,6 +21,8 @@ class Variables {
     public static final int RAND_SEED = 3;
     public static final int CHAR_NUM = 26;
     public static final int NUM_NUM = 10;
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "admin123";
 
 }
 
@@ -52,9 +54,10 @@ public class Main {
         Main obj = new Main();
         obj.retrieve();
         obj.display();
-        new UIWelcome();
-        new UILogin(obj);
-        obj.save();
+        new UIAdminPage(obj);
+        // new UIWelcome();
+        // new UILogin(obj);
+        // obj.save();
     }
 
     // ===============================================
