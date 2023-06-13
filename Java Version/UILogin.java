@@ -197,18 +197,27 @@ public class UILogin extends JFrame implements ActionListener {
             String username2 = String.valueOf(username.getText());
             String password2 = String.valueOf(password.getPassword());
 
-            boolean validation = main.login_Account(username2, password2);
-            System.out.println(validation);
-            if (validation) {
-                JOptionPane.showMessageDialog(null, "Login Successful!", "Patient Appointment Scheduling System",
+            // Check if admin
+            if (username2.equals(Variables.ADMIN_USERNAME) && password2.equals(Variables.ADMIN_PASSWORD)) {
+                JOptionPane.showMessageDialog(null, "Administrator Login Successful!", "Patient Appointment Scheduling System",
                         JOptionPane.INFORMATION_MESSAGE, success);
-                new UIHomePage(main);
+                new UIAdminPage(main);
                 this.dispose();
             }
             else {
-                JOptionPane.showMessageDialog(null, "Username or Password is incorrect!",
-                        "Patient Appointment Scheduling System", JOptionPane.ERROR_MESSAGE, wrong);
-                loginButton.setEnabled(true);
+                boolean validation = main.login_Account(username2, password2);
+                System.out.println(validation);
+                if (validation) {
+                    JOptionPane.showMessageDialog(null, "Login Successful!", "Patient Appointment Scheduling System",
+                            JOptionPane.INFORMATION_MESSAGE, success);
+                    new UIHomePage(main);
+                    this.dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Username or Password is incorrect!",
+                            "Patient Appointment Scheduling System", JOptionPane.ERROR_MESSAGE, wrong);
+                    loginButton.setEnabled(true);
+                }
             }
         }
         if (e.getSource() == createAccountButton) {

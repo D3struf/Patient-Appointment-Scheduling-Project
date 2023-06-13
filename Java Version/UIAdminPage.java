@@ -4,15 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UIAdminPage extends JFrame implements ActionListener {
-    public static void main(String[] args) {
-        new UIAdminPage();
-    }
+    // public static void main(String[] args) {
+    //     new UIAdminPage();
+    // }
+
+    private Main main;
+
+    JButton patientButton;
+    JButton doctorButton;
+    JButton securityButton;
+    JButton logoutButton;
 
     // Frame
-    UIAdminPage() {
+    UIAdminPage(Main main) {
+        this.main = main;
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/homepage.png"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/adminHomepage.jpg"));
 
         // Resize Image
         Image tempImage = bgImage.getImage();
@@ -24,52 +32,45 @@ public class UIAdminPage extends JFrame implements ActionListener {
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
 
-        JButton button = new JButton();
-        button.setText("Patients");
-        button.setFont(new Font("Dialog", Font.BOLD, 18));
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.BLUE);
-        button.setOpaque(true);
-        button.setFocusable(false);
-        button.addActionListener(this);
-        button.setBounds(60, 315, 250, 50);
+        patientButton = new JButton();
+        patientButton.setText("Patients");
+        patientButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        patientButton.setForeground(Color.WHITE);
+        patientButton.setBackground(Color.BLUE);
+        patientButton.setOpaque(true);
+        patientButton.setFocusable(false);
+        patientButton.addActionListener(this);
+        patientButton.setBounds(60, 315, 250, 50);
 
-        JButton button1 = new JButton();
-        button1.setText("Doctors");
-        button1.setFont(new Font("Dialog", Font.BOLD, 18));
-        button1.setForeground(Color.WHITE);
-        button1.setBackground(Color.BLUE);
-        button1.setOpaque(true);
-        button1.setFocusable(false);
-        button1.addActionListener(this);
-        button1.setBounds(60, 384, 250, 50);
+        doctorButton = new JButton();
+        doctorButton.setText("Doctors");
+        doctorButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        doctorButton.setForeground(Color.WHITE);
+        doctorButton.setBackground(Color.BLUE);
+        doctorButton.setOpaque(true);
+        doctorButton.setFocusable(false);
+        doctorButton.addActionListener(this);
+        doctorButton.setBounds(60, 384, 250, 50);
 
-        JButton button2 = new JButton();
-        button2.setText("Security");
-        button2.setFont(new Font("Dialog", Font.BOLD, 18));
-        button2.setForeground(Color.WHITE);
-        button2.setBackground(Color.BLUE);
-        button2.setOpaque(true);
-        button2.setFocusable(false);
-        button2.addActionListener(this);
-        button2.setBounds(60, 452, 250, 50);
+        securityButton = new JButton();
+        securityButton.setText("Security");
+        securityButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        securityButton.setForeground(Color.WHITE);
+        securityButton.setBackground(Color.BLUE);
+        securityButton.setOpaque(true);
+        securityButton.setFocusable(false);
+        securityButton.addActionListener(this);
+        securityButton.setBounds(60, 452, 250, 50);
 
-        JButton button3 = new JButton();
-        button3.setText("Logout");
-        button3.setFont(new Font("Dialog", Font.BOLD, 18));
-        button3.setForeground(Color.WHITE);
-        button3.setBackground(new Color(0xD62839));
-        button3.setOpaque(true);
-        button3.setFocusable(false);
-        button3.addActionListener(this);
-        button3.setBounds(60, 655, 250, 50);
-
-        JTextField username = new JTextField();
-        username.setBounds(1035, 23, 250, 35);
-        username.setFont(new Font("Dialog", Font.PLAIN, 18));
-        username.setForeground(Color.BLACK);
-        username.setBackground(new Color(0xe8eaec));
-        username.setBorder(BorderFactory.createEmptyBorder());
+        logoutButton = new JButton();
+        logoutButton.setText("Log out");
+        logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        logoutButton.setForeground(Color.WHITE);
+        logoutButton.setBackground(new Color(0xD62839));
+        logoutButton.setOpaque(true);
+        logoutButton.setFocusable(false);
+        logoutButton.addActionListener(this);
+        logoutButton.setBounds(60, 655, 250, 50);
 
         // JLayered for layers
         JLayeredPane bgImageLayer = new JLayeredPane();
@@ -90,11 +91,10 @@ public class UIAdminPage extends JFrame implements ActionListener {
 
         // add Objects
         this.add(bgImageLayer);
-        bgImageLayer.add(button, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button1, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button2, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(button3, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(patientButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
+        bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
@@ -106,7 +106,22 @@ public class UIAdminPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+        if (e.getSource() == patientButton) {
+            // new UIPatientList();
+            this.dispose();
+        }
+        if (e.getSource() == doctorButton) {
+            // new UIDoctorList();
+            this.dispose();
+        }
+        if (e.getSource() == securityButton) {
+            // new UISecurity();
+            this.dispose();
+        }
+        if (e.getSource() == logoutButton) {
+            new UILogin(main);
+            this.dispose();
+        }
     }
 
 }
