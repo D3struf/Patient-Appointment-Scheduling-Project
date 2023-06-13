@@ -5,12 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class UIDoctorList extends JFrame implements ActionListener {
-    // public static void main(String[] args) {
-    //     new UIDoctorList();
-    // }
-
     private Main main;
 
     JButton patientButton;
@@ -136,6 +134,18 @@ public class UIDoctorList extends JFrame implements ActionListener {
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(scrollPane, JLayeredPane.PALETTE_LAYER);
+
+        Encryption encrypt = new Encryption();
+        encrypt.retrieveKey();
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                // Save the file here
+                main.save();
+                encrypt.saveKey();
+                super.windowClosing(e);
+            }
+        });
     }
 
     private void loadDoctorLists() {
@@ -153,8 +163,8 @@ public class UIDoctorList extends JFrame implements ActionListener {
 
     private static void centerFrameOnScreen(JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (screenSize.width - frame.getWidth()) / 8;
-        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        int centerX = (screenSize.width - frame.getWidth()) / 16;
+        int centerY = (screenSize.height - frame.getHeight()) / 16;
         frame.setLocation(centerX, centerY);
     }
 

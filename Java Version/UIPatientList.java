@@ -5,12 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class UIPatientList extends JFrame implements ActionListener {
-    // public static void main(String[] args) {
-    //     new UIPatientList();
-    // }
-
     private Main main;
 
     JButton patientButton;
@@ -103,8 +101,8 @@ public class UIPatientList extends JFrame implements ActionListener {
         table.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(132);
         table.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(17);
-        table.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(25);
-        table.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(132);
+        table.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(100);
         table.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(96);
         table.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(132);
         table.getTableHeader().getColumnModel().getColumn(7).setPreferredWidth(115);
@@ -140,6 +138,18 @@ public class UIPatientList extends JFrame implements ActionListener {
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(scrollPane, JLayeredPane.PALETTE_LAYER);
+
+        Encryption encrypt = new Encryption();
+        encrypt.retrieveKey();
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                // Save the file here
+                main.save();
+                encrypt.saveKey();
+                super.windowClosing(e);
+            }
+        });
     }
 
     private void loadPatientList() {
@@ -160,8 +170,8 @@ public class UIPatientList extends JFrame implements ActionListener {
 
     private static void centerFrameOnScreen(JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (screenSize.width - frame.getWidth()) / 8;
-        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        int centerX = (screenSize.width - frame.getWidth()) / 16;
+        int centerY = (screenSize.height - frame.getHeight()) / 16;
         frame.setLocation(centerX, centerY);
     }
 

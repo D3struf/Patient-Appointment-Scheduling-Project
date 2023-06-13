@@ -2,13 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class UIAppSched extends JFrame implements ActionListener {
-
-    // public static void main(String[] args) {
-    //     new UIAppSched();
-    // }
-
     private Main main;
 
     JButton patientViewButton;
@@ -120,12 +117,24 @@ public class UIAppSched extends JFrame implements ActionListener {
         bgImageLayer.add(backButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(createButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(username, JLayeredPane.PALETTE_LAYER);
+
+        Encryption encrypt = new Encryption();
+        encrypt.retrieveKey();
+        this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                // Save the file here
+                main.save();
+                encrypt.saveKey();
+                super.windowClosing(e);
+            }
+        });
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (screenSize.width - frame.getWidth()) / 8;
-        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        int centerX = (screenSize.width - frame.getWidth()) / 16;
+        int centerY = (screenSize.height - frame.getHeight()) / 16;
         frame.setLocation(centerX, centerY);
     }
 

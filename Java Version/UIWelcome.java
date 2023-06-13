@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UIWelcome {
-
     // Frame
     JFrame welcomeFrame;
     JProgressBar progressBar;
@@ -175,8 +174,8 @@ public class UIWelcome {
 
     private static void centerFrameOnScreen(JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (screenSize.width - frame.getWidth()) / 8;
-        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        int centerX = (screenSize.width - frame.getWidth()) / 16;
+        int centerY = (screenSize.height - frame.getHeight()) / 16;
         frame.setLocation(centerX, centerY);
     }
 }

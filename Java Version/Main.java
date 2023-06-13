@@ -5,11 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 class Variables {
 
-    public static final String DATABASE_FILE = "./Java Version/database";
-    public static final String ACCOUNT_FILE = "./Java Version/database/account.txt";
-    public static final String PATIENT_FILE = "./Java Version/database/patient.txt";
-    public static final String DOCTOR_FILE = "./Java Version/database/doctor.txt";
-    public static final String FOLDER = "./Java Version/database/Schedules/";
+    public static final String DATABASE_FILE = "/database";
+    public static final String ACCOUNT_FILE = DATABASE_FILE + "/account.txt";
+    public static final String PATIENT_FILE = DATABASE_FILE + "/patient.txt";
+    public static final String DOCTOR_FILE = DATABASE_FILE + "/doctor.txt";
+    public static final String KEY_FILE = DATABASE_FILE + "/key.txt";
+    public static final String FOLDER = DATABASE_FILE + "/Schedules/";
     public static final String HOSPITAL_NAME = "TUP-Manila Medical Center";
     public static final int RESERVATION_FEE = 150;
     public static final int ENTER = 13;
@@ -23,6 +24,17 @@ class Variables {
     public static final int NUM_NUM = 10;
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "admin123";
+
+    // Determine the current working directory
+    static String currentDirectory = System.getProperty("user.dir");
+
+    // Construct the absolute paths using the current directory
+    static String databaseFolderPath = currentDirectory + File.separator + Variables.DATABASE_FILE;
+    static String accountFilePath = currentDirectory + File.separator + Variables.ACCOUNT_FILE;
+    static String patientFilePath = currentDirectory + File.separator + Variables.PATIENT_FILE;
+    static String doctorFilePath = currentDirectory + File.separator + Variables.DOCTOR_FILE;
+    static String keyFilePath = currentDirectory + File.separator + Variables.KEY_FILE;
+    static String schedulesFolderPath = currentDirectory + File.separator + Variables.FOLDER;
 
 }
 
@@ -47,20 +59,25 @@ public class Main {
     public static void main(String[] args) {
 
         // Create Directory
-        File folder_path = new File(Variables.FOLDER);
+        File folder_path = new File(Variables.databaseFolderPath);
         folder_path.mkdir();
-        File database_folder = new File(Variables.DATABASE_FILE);
+        File database_folder = new File(Variables.schedulesFolderPath);
         database_folder.mkdir();
 
         Main obj = new Main();
+        Encryption encrypt = new Encryption();
+        File scan = new File(Variables.keyFilePath);
+        if (scan.exists()) {
+            encrypt.retrieveKey();
+        }
+        else {
+            encrypt.setKey(70);
+            encrypt.saveKey();
+        }
         obj.retrieve();
         obj.display();
-        // new UIAdminPage(obj);
-        //new UIPatientList(obj);
-        //new UIDoctorList(obj);
-        // new UIWelcome();
+        new UIWelcome();
         new UILogin(obj);
-        obj.save();
     }
 
     // ===============================================
@@ -398,7 +415,7 @@ public class Main {
     }
 
     // ===============================================
-    // Patient Methods
+    // Patient Appointment Methods
     // ===============================================
 
     public APPOINTMENT[] generateAppointmentSchedules() {
@@ -419,7 +436,7 @@ public class Main {
     }
 
     private static int checkPatientSlotFile(String DTIME) {
-        String filePath = Variables.FOLDER + DTIME;
+        String filePath = Variables.schedulesFolderPath + DTIME;
         try (BufferedReader inFile = new BufferedReader(new FileReader(filePath));) {
             String slotNum;
             slotNum = inFile.readLine();
@@ -432,13 +449,12 @@ public class Main {
     }
 
     public static void savePatientSlotFile(String DTIME, int numPatient) {
-        String filePath = Variables.FOLDER + DTIME;
+        String filePath = Variables.schedulesFolderPath + DTIME;
         try (BufferedWriter outFile = new BufferedWriter(new FileWriter(filePath));) {
             outFile.write(Integer.toString(numPatient));
         }
         catch (IOException e) {
             System.out.println("Error opening/reading to file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -481,6 +497,64 @@ public class Main {
         current.accounts.setAppointmentDoctorSchedule(doc.getSchedule());
     }
 
+    public void updatePatientInformation (String username, String password, String name, int age, String sex, String bday,
+            String contact_number) {
+        for (LIST current : L) {
+            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
+                if (current.accounts.getUsername().equals(globalUsername)) {
+                    current.accounts.setUsername(username);
+                    current.accounts.setPassword(password);
+                    current.accounts.setName(name);
+                    current.accounts.setAge(age);
+                    current.accounts.setBday(bday);
+                    current.accounts.setContactNumber(contact_number);
+                }
+            }
+        }
+    }
+
+    public void appointmentSchedule(APPOINTMENT selectedSlot, DOCTOR selectedDoctor, String code) {
+        LIST currentAccount = getCurrentUserAccount();
+
+        selectedSlot.num_patients++;
+        updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code);
+        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.num_patients);
+    }
+
+    public String confirmationCode() {
+        Random random = new Random();
+        StringBuffer code = new StringBuffer();
+        int length = 5;
+
+        // Generate confirmation code
+        for (int i = 0; i < length; i++) {
+            if (i % 2 == 0) {
+                char randChar = (char) (random.nextInt(26) + 'A');
+                code.append(randChar);
+            }
+            else {
+                int randNum = random.nextInt(10);
+                code.append(randNum);
+            }
+        }
+        return code.toString();
+    }
+
+    public void paymentMethod() {
+        // Check if the user has already paid the appointment
+        LIST currentAccount = getCurrentUserAccount();
+
+        // Update Payment Status
+        if (currentAccount != null && currentAccount.accounts != null) {
+            currentAccount.accounts.setPaymentStatus(1);
+        }
+        return;
+    }
+    
+    // ===============================================
+    // Getter Methods
+    // ===============================================
+    
     public LIST getCurrentUserAccount() {
         for (LIST current : L) {
             if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
@@ -668,60 +742,6 @@ public class Main {
         return "";
     }
 
-    public void updatePatientInformation (String username, String password, String name, int age, String sex, String bday,
-            String contact_number) {
-        for (LIST current : L) {
-            if (current != null && current.accounts != null && current.accounts.getUsername() != null) {
-                if (current.accounts.getUsername().equals(globalUsername)) {
-                    current.accounts.setUsername(username);
-                    current.accounts.setPassword(password);
-                    current.accounts.setName(name);
-                    current.accounts.setAge(age);
-                    current.accounts.setBday(bday);
-                    current.accounts.setContactNumber(contact_number);
-                }
-            }
-        }
-    }
-
-    public void appointmentSchedule(APPOINTMENT selectedSlot, DOCTOR selectedDoctor, String code) {
-        LIST currentAccount = getCurrentUserAccount();
-
-        selectedSlot.num_patients++;
-        updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code);
-        savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.num_patients);
-    }
-
-    public String confirmationCode() {
-        Random random = new Random();
-        StringBuffer code = new StringBuffer();
-        int length = 5;
-
-        // Generate confirmation code
-        for (int i = 0; i < length; i++) {
-            if (i % 2 == 0) {
-                char randChar = (char) (random.nextInt(26) + 'A');
-                code.append(randChar);
-            }
-            else {
-                int randNum = random.nextInt(10);
-                code.append(randNum);
-            }
-        }
-        return code.toString();
-    }
-
-    public void paymentMethod() {
-        // Check if the user has already paid the appointment
-        LIST currentAccount = getCurrentUserAccount();
-
-        // Update Payment Status
-        if (currentAccount != null && currentAccount.accounts != null) {
-            currentAccount.accounts.setPaymentStatus(1);
-        }
-        return;
-    }
-
     public ArrayList<ACCOUNT> getAccountList() {
         ArrayList<ACCOUNT> accountList = new ArrayList<>();
 
@@ -748,9 +768,9 @@ public class Main {
     public void save() {
         Encryption encryptions = new Encryption(); // instantiation
 
-        try (BufferedWriter outFile = new BufferedWriter(new FileWriter(Variables.ACCOUNT_FILE));
-                BufferedWriter outFile2 = new BufferedWriter(new FileWriter(Variables.PATIENT_FILE));
-                BufferedWriter outFile3 = new BufferedWriter(new FileWriter(Variables.DOCTOR_FILE));) {
+        try (BufferedWriter outFile = new BufferedWriter(new FileWriter(Variables.accountFilePath));
+                BufferedWriter outFile2 = new BufferedWriter(new FileWriter(Variables.patientFilePath));
+                BufferedWriter outFile3 = new BufferedWriter(new FileWriter(Variables.doctorFilePath));) {
 
             outFile.write("Username, Password\n");
             outFile2.write("Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n");
@@ -810,15 +830,14 @@ public class Main {
         }
         catch (IOException e) {
             System.out.println("Error opening/writing to file: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     public void retrieve() {
         Encryption encryptions = new Encryption();
-        try (BufferedReader inFile = new BufferedReader(new FileReader(Variables.ACCOUNT_FILE));
-                BufferedReader inFile2 = new BufferedReader(new FileReader(Variables.PATIENT_FILE));
-                BufferedReader inFile3 = new BufferedReader(new FileReader(Variables.DOCTOR_FILE));) {
+        try (BufferedReader inFile = new BufferedReader(new FileReader(Variables.accountFilePath));
+                BufferedReader inFile2 = new BufferedReader(new FileReader(Variables.patientFilePath));
+                BufferedReader inFile3 = new BufferedReader(new FileReader(Variables.doctorFilePath));) {
             // Skip First Line
             inFile.readLine();
             inFile2.readLine();

@@ -1,11 +1,15 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Base64;
 
 public class Encryption {
     private static final int ByteFF = 0xFF;
-    private static int globalkey;
-    private int key;
+    public int globalkey;
 
     public String encodeToBase64(String encyptedString) {
         return Base64.getEncoder().encodeToString(encyptedString.getBytes());
@@ -38,14 +42,34 @@ public class Encryption {
     }
 
     // DITO LALAGAY YUNG PROMPT FOR USER TO EDIT KEY
+    Encryption() {
+        this.setKey(globalkey);
+    }
+
     public int getKey() {
-        return this.key;
+        return this.globalkey;
     }
 
     public void setKey(int key) {
-        globalkey = key;
+        this.globalkey = key;
     }
 
-    
+    public void saveKey() {
+        // Save the key here
+        try (BufferedWriter outFile = new BufferedWriter(new FileWriter(Variables.keyFilePath));) {
+            outFile.write(Integer.toString(globalkey));
+        } catch( IOException e) {
+            System.out.println("Error opening/writing to file: " + e.getMessage());
+        }
+    }
+
+    public void retrieveKey() {
+        try (BufferedReader inFile = new BufferedReader(new FileReader(Variables.keyFilePath));) {
+            String key = inFile.readLine();
+            setKey(Integer.parseInt(key));
+        } catch( IOException e) {
+            System.out.println("Error opening/writing to file: " + e.getMessage());
+        }
+    }
 
 }

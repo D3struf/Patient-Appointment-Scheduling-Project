@@ -4,10 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UISecurity extends JFrame implements ActionListener {
-    // public static void main(String[] args) {
-    //     new UISecurity();
-    // }
-    
     private Main main;
 
     JButton patientButton;
@@ -16,10 +12,15 @@ public class UISecurity extends JFrame implements ActionListener {
     JButton logoutButton;
     JButton submit;
     JTextField enKey;
+    String currentGlobalKey;
+    JTextField currentKey;
 
     // Frame
     UISecurity(Main main) {
         this.main = main;
+        Encryption encrypt = new Encryption();
+        encrypt.retrieveKey();
+        currentGlobalKey = Integer.toString(encrypt.getKey());
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
         ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/security.png"));
@@ -87,11 +88,13 @@ public class UISecurity extends JFrame implements ActionListener {
         submit.setBorder(BorderFactory.createEmptyBorder());
 
          // Text Fields
-        JTextField currentKey = new JTextField();
+        currentKey = new JTextField();
+        currentKey.setText(currentGlobalKey);
         currentKey.setBounds(640, 347, 250, 35);
         currentKey.setFont(new Font("Dialog", Font.PLAIN, 18));
         currentKey.setForeground(Color.BLACK);
         currentKey.setBackground(Color.WHITE);
+        currentKey.setEditable(false);
 
         enKey = new JTextField();
         enKey.setBounds(640, 473, 250, 35);
@@ -129,17 +132,33 @@ public class UISecurity extends JFrame implements ActionListener {
 
     private static void centerFrameOnScreen(JFrame frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int centerX = (screenSize.width - frame.getWidth()) / 8;
-        int centerY = (screenSize.height - frame.getHeight()) / 8;
+        int centerX = (screenSize.width - frame.getWidth()) / 16;
+        int centerY = (screenSize.height - frame.getHeight()) / 16;
         frame.setLocation(centerX, centerY);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ImageIcon success = new ImageIcon(getClass().getClassLoader().getResource("images/success.png"));
+        ImageIcon wrong = new ImageIcon(getClass().getClassLoader().getResource("images/wrong.png"));
+        
         if (e.getSource() == submit) {
-            Encryption encryption = new Encryption();
-            String key = enKey.getText();
-            encryption.setKey(Integer.parseInt(key));
+            if (enKey.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please Enter Encryption Key First",
+                            "Security", JOptionPane.ERROR_MESSAGE, wrong);
+            }
+            else {
+                Encryption encryption = new Encryption();
+                String key = enKey.getText();
+                encryption.setKey(Integer.parseInt(key));
+                currentGlobalKey = key;
+                encryption.saveKey();
+                JOptionPane.showMessageDialog(null, "Administrator Login Successful!", "Security",
+                    JOptionPane.INFORMATION_MESSAGE, success);
+                enKey.setText("");
+                new UIAdminPage(main);
+                this.dispose();
+            }
         }
         if (e.getSource() == patientButton) {
             new UIPatientList(main);
