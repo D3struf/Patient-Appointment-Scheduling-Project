@@ -100,11 +100,11 @@ public class UIPatientList extends JFrame implements ActionListener {
         table.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
         table.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(25);
         table.getTableHeader().getColumnModel().getColumn(1).setPreferredWidth(132);
-        table.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(17);
-        table.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(80);
-        table.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(100);
+        table.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(20);
+        table.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(40);
+        table.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(110);
         table.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(96);
-        table.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(132);
+        table.getTableHeader().getColumnModel().getColumn(6).setPreferredWidth(112);
         table.getTableHeader().getColumnModel().getColumn(7).setPreferredWidth(115);
         table.getTableHeader().getColumnModel().getColumn(8).setPreferredWidth(110);
 

@@ -76,8 +76,9 @@ public class Main {
         }
         obj.retrieve();
         obj.display();
-        new UIWelcome();
-        new UILogin(obj);
+        new UIPatientList(obj);
+        // new UIWelcome();
+        // new UILogin(obj);
     }
 
     // ===============================================
@@ -399,18 +400,14 @@ public class Main {
         // Validate Username
         for (LIST lists : L) {
             if (lists.accounts.username.equals(username)) {
-                System.out.println("username meron");
                 if (lists != null && lists.accounts.password.equals(password)) {
-                    System.out.println("password tama");
                     return true;
                 }
                 else {
-                    System.out.println("password mali");
                     return false;
                 }
             }
         }
-        System.out.println("username wala");
         return false;
     }
 
