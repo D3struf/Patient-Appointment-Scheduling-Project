@@ -3,24 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIAdminPage extends JFrame implements ActionListener {
-    // public static void main(String[] args) {
-    //     new UIAdminPage();
-    // }
-
-    private Main main;
-
-    JButton patientButton;
-    JButton doctorButton;
-    JButton securityButton;
-    JButton logoutButton;
+public class UIDoctorList extends JFrame implements ActionListener {
+    public static void main(String[] args) {
+        new UIDoctorList();
+    }
 
     // Frame
-    UIAdminPage(Main main) {
-        this.main = main;
+    UIDoctorList() {
 
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
-        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/adminHomepage.jpg"));
+        ImageIcon bgImage = new ImageIcon(getClass().getClassLoader().getResource("images/DoctorList1.png"));
 
         // Resize Image
         Image tempImage = bgImage.getImage();
@@ -32,7 +24,7 @@ public class UIAdminPage extends JFrame implements ActionListener {
         bgImageLabel.setIcon(bgImage);
         bgImageLabel.setBounds(0, -20, 1366, 768);
 
-        patientButton = new JButton();
+        JButton patientButton = new JButton();
         patientButton.setText("Patients");
         patientButton.setFont(new Font("Dialog", Font.BOLD, 18));
         patientButton.setForeground(Color.WHITE);
@@ -42,17 +34,17 @@ public class UIAdminPage extends JFrame implements ActionListener {
         patientButton.addActionListener(this);
         patientButton.setBounds(60, 315, 250, 50);
 
-        doctorButton = new JButton();
+        JButton doctorButton = new JButton();
         doctorButton.setText("Doctors");
         doctorButton.setFont(new Font("Dialog", Font.BOLD, 18));
         doctorButton.setForeground(Color.WHITE);
-        doctorButton.setBackground(Color.BLUE);
+        doctorButton.setBackground(new Color(0x698f9a));
         doctorButton.setOpaque(true);
         doctorButton.setFocusable(false);
         doctorButton.addActionListener(this);
         doctorButton.setBounds(60, 384, 250, 50);
 
-        securityButton = new JButton();
+        JButton securityButton = new JButton();
         securityButton.setText("Security");
         securityButton.setFont(new Font("Dialog", Font.BOLD, 18));
         securityButton.setForeground(Color.WHITE);
@@ -62,8 +54,8 @@ public class UIAdminPage extends JFrame implements ActionListener {
         securityButton.addActionListener(this);
         securityButton.setBounds(60, 452, 250, 50);
 
-        logoutButton = new JButton();
-        logoutButton.setText("Log out");
+        JButton logoutButton = new JButton();
+        logoutButton.setText("Back");
         logoutButton.setFont(new Font("Dialog", Font.BOLD, 18));
         logoutButton.setForeground(Color.WHITE);
         logoutButton.setBackground(new Color(0xD62839));
@@ -95,10 +87,6 @@ public class UIAdminPage extends JFrame implements ActionListener {
         bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
         bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(patientButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(doctorButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(securityButton, JLayeredPane.PALETTE_LAYER);
-        bgImageLayer.add(logoutButton, JLayeredPane.PALETTE_LAYER);
     }
 
     private static void centerFrameOnScreen(JFrame frame) {
@@ -110,22 +98,7 @@ public class UIAdminPage extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == patientButton) {
-            // new UIPatientList();
-            this.dispose();
-        }
-        if (e.getSource() == doctorButton) {
-            // new UIDoctorList();
-            this.dispose();
-        }
-        if (e.getSource() == securityButton) {
-            // new UISecurity();
-            this.dispose();
-        }
-        if (e.getSource() == logoutButton) {
-            new UILogin(main);
-            this.dispose();
-        }
+        // TODO Auto-generated method stub
     }
 
 }
