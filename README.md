@@ -1,7 +1,8 @@
 # Patient Appointment Scheduling Project
 This is an Information System to create an Appointment Online. It has a login function for patients that in need for checkups and will create a schedule for each of them.
 
-![Patient Appointment Scheduling Project](https://github.com/D3struf/Patient-Appointment-Scheduling-Project/assets/93712294/9333b05d-e960-4d51-abce-b67110999765)
+![Patient Appointment Scheduling Project](https://github.com/D3struf/Patient-Appointment-Scheduling-Project/assets/93712294/c7c93b8f-fa26-4cb7-881b-6885e15eaa20)
+
 
 ## Features
 - Login System
