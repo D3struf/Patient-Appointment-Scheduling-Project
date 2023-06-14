@@ -1,11 +1,12 @@
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 class Variables {
 
-    public static final String DATABASE_FILE = "/database";
+    public static final String DATABASE_FILE = "/Java Version/database";
     public static final String ACCOUNT_FILE = DATABASE_FILE + "/account.txt";
     public static final String PATIENT_FILE = DATABASE_FILE + "/patient.txt";
     public static final String DOCTOR_FILE = DATABASE_FILE + "/doctor.txt";
@@ -29,12 +30,12 @@ class Variables {
     static String currentDirectory = System.getProperty("user.dir");
 
     // Construct the absolute paths using the current directory
-    static String databaseFolderPath = "./Java Version" + Variables.DATABASE_FILE; //currentDirectory + File.separator + Variables.DATABASE_FILE;
-    static String accountFilePath = "./Java Version" + Variables.ACCOUNT_FILE; //currentDirectory + File.separator + Variables.ACCOUNT_FILE;
-    static String patientFilePath = "./Java Version" + Variables.PATIENT_FILE; //currentDirectory + File.separator + Variables.PATIENT_FILE;
-    static String doctorFilePath = "./Java Version" + Variables.DOCTOR_FILE; //currentDirectory + File.separator + Variables.DOCTOR_FILE;
-    static String keyFilePath = "./Java Version" + Variables.KEY_FILE; //currentDirectory + File.separator + Variables.KEY_FILE;
-    static String schedulesFolderPath = "./Java Version" + Variables.FOLDER; //currentDirectory + File.separator + Variables.FOLDER;
+    static String databaseFolderPath = currentDirectory + File.separator + Variables.DATABASE_FILE;
+    static String accountFilePath = currentDirectory + File.separator + Variables.ACCOUNT_FILE;
+    static String patientFilePath = currentDirectory + File.separator + Variables.PATIENT_FILE;
+    static String doctorFilePath = currentDirectory + File.separator + Variables.DOCTOR_FILE;
+    static String keyFilePath = currentDirectory + File.separator + Variables.KEY_FILE;
+    static String schedulesFolderPath = currentDirectory + File.separator + Variables.FOLDER;
 
 }
 

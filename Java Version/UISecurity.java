@@ -153,7 +153,7 @@ public class UISecurity extends JFrame implements ActionListener {
                 encryption.setKey(Integer.parseInt(key));
                 currentGlobalKey = key;
                 encryption.saveKey();
-                JOptionPane.showMessageDialog(null, "Administrator Login Successful!", "Security",
+                JOptionPane.showMessageDialog(null, "Encryption Changed Successfully!", "Security",
                     JOptionPane.INFORMATION_MESSAGE, success);
                 enKey.setText("");
                 new UIAdminPage(main);
