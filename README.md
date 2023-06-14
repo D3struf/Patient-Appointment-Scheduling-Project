@@ -10,6 +10,8 @@ This is an Information System to create an Appointment Online. It has a login fu
 - View and Edit Patient Information
 - View and Create Appointment Schedule
 - Payment Method
+- Administrator part
+- Encryption and Decryption
 - Database Oriented System
 
 ## Developers and Contributions
