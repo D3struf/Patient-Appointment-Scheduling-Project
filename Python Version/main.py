@@ -2,6 +2,8 @@ import os
 import random
 import datetime
 
+# from linkedlist.linked_list import LinkedList
+
 
 class Variables:
     DATABASE_FOLDER = "database"
@@ -45,25 +47,18 @@ globalUsername = ""
 
 
 class Main:
-
     def __init__(self):
-        self.L = LinkedList()
+        # self.L = LinkedList()
         self.doctors = []
-        self.listofDoctors()
+        listofDoctor()
 
-    L = []
-    doctors = []
-    globalUsername = ""
 
-    def display(self):
-        count = 0
-        for current in self.L:
-            print(str(count + 1) + ".) Username: " + current.accounts.username + " | Password: "
-                  + current.accounts.password + " | Name: " + current.accounts.name + " | Age: "
-                  + current.accounts.age + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday
-                  + " | Contact Number: " + current.accounts.contact_number)
-            current = current.next
-            count += 1
+def display():
+    global L
+    count = 0
+    for current in L:
+        print(str(count + 1) + ".) Username: " + current.accounts.username + " | Password: " + current.accounts.password + " | Name: " + current.accounts.name + " | Age: " + current.accounts.age + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number)
+        count += 1
 
 
 class Account:
@@ -85,157 +80,157 @@ class Account:
         self.payment_status = 0
 
     # Getter methods
-    def get_username(self):
+    def getUsername(self):
         return self.username
 
-    def get_password(self):
+    def getPassword(self):
         return self.password
 
-    def get_name(self):
+    def getName(self):
         return self.name
 
-    def get_age(self):
+    def getAge(self):
         return self.age
 
-    def get_sex(self):
+    def getSex(self):
         return self.sex
 
-    def get_bday(self):
+    def getBday(self):
         return self.bday
 
-    def get_contact_number(self):
+    def getContactNumber(self):
         return self.contact_number
 
-    def get_appointment_date(self):
+    def getAppointmentDate(self):
         return self.appointment_date
 
-    def get_appointment_doctor(self):
+    def getAppointmentDoctor(self):
         return self.appointment_doctor
 
-    def get_appointment_doctor_department(self):
+    def getAppointmentDoctorDepartment(self):
         return self.appointment_doctor_department
 
-    def get_appointment_doctor_schedule(self):
+    def getAppointmentDoctorSchedule(self):
         return self.appointment_doctor_schedule
 
-    def get_appointment_doctor_email(self):
+    def getAppointmentDoctorEmail(self):
         return self.appointment_doctor_email
 
-    def get_appointment_doctor_contact_number(self):
+    def getAppointmentDoctorContactNumber(self):
         return self.appointment_doctor_contact_number
 
-    def get_appointment_code(self):
+    def getAppointmentCode(self):
         return self.appointment_code
 
-    def get_payment_status(self):
+    def getPaymentStatus(self):
         return self.payment_status
 
     # Setter methods
-    def set_username(self, username):
+    def setUsername(self, username):
         self.username = username
 
-    def set_password(self, password):
+    def setPassword(self, password):
         self.password = password
 
-    def set_name(self, name):
+    def setName(self, name):
         self.name = name
 
-    def set_age(self, age):
+    def setAge(self, age):
         self.age = age
 
-    def set_sex(self, sex):
+    def setSex(self, sex):
         self.sex = sex
 
-    def set_bday(self, bday):
+    def setBday(self, bday):
         self.bday = bday
 
-    def set_contact_number(self, contact_number):
+    def setContactNumber(self, contact_number):
         self.contact_number = contact_number
 
-    def set_appointment_date(self, appointment_date):
+    def setAppointmentDate(self, appointment_date):
         self.appointment_date = appointment_date
 
-    def set_appointment_doctor(self, appointment_doctor):
+    def setAppointmentDoctor(self, appointment_doctor):
         self.appointment_doctor = appointment_doctor
 
-    def set_appointment_doctor_department(self, appointment_doctor_department):
+    def setAppointmentDoctorDepartment(self, appointment_doctor_department):
         self.appointment_doctor_department = appointment_doctor_department
 
-    def set_appointment_doctor_schedule(self, appointment_doctor_schedule):
+    def setAppointmentDoctorSchedule(self, appointment_doctor_schedule):
         self.appointment_doctor_schedule = appointment_doctor_schedule
 
-    def set_appointment_doctor_email(self, appointment_doctor_email):
+    def setAppointmentDoctorEmail(self, appointment_doctor_email):
         self.appointment_doctor_email = appointment_doctor_email
 
-    def set_appointment_doctor_contact_number(self, appointment_doctor_contact_number):
+    def setAppointmentDoctorContactNumber(self, appointment_doctor_contact_number):
         self.appointment_doctor_contact_number = appointment_doctor_contact_number
 
-    def set_appointment_code(self, appointment_code):
+    def setAppointmentCode(self, appointment_code):
         self.appointment_code = appointment_code
 
-    def set_payment_status(self, payment_status):
+    def setPaymentStatus(self, payment_status):
         self.payment_status = payment_status
 
 
 class Appointment:
-    def __init__(self, date, num_patients):
+    def __init__(self, date, numPatients):
         self.date = date
-        self.num_patients = num_patients
+        self.numPatients = numPatients
 
     # Getter methods
-    def get_date(self):
+    def getDate(self):
         return self.date
 
-    def get_num_patients(self):
-        return self.num_patients
+    def getNumPatients(self):
+        return self.numPatients
 
     # Setter methods
-    def set_date(self, date):
+    def setDate(self, date):
         self.date = date
 
-    def set_num_patients(self, num_patients):
-        self.num_patients = num_patients
+    def setNumPatients(self, numPatients):
+        self.numPatients = numPatients
 
 
 class Doctor:
-    def __init__(self, name, department, schedule, email, contact_number):
+    def __init__(self, name, department, schedule, email, contactNumber):
         self.name = name
         self.department = department
         self.schedule = schedule
         self.email = email
-        self.contact_number = contact_number
+        self.contactNumber = contactNumber
 
     # Getter methods
-    def get_name(self):
+    def getName(self):
         return self.name
 
-    def get_department(self):
+    def getDepartment(self):
         return self.department
 
-    def get_schedule(self):
+    def getSchedule(self):
         return self.schedule
 
-    def get_email(self):
+    def getEmail(self):
         return self.email
 
-    def get_contact_number(self):
-        return self.contact_number
+    def getContactNumber(self):
+        return self.contactNumber
 
     # Setter methods
-    def set_name(self, name):
+    def setName(self, name):
         self.name = name
 
-    def set_department(self, department):
+    def setDepartment(self, department):
         self.department = department
 
-    def set_schedule(self, schedule):
+    def setSchedule(self, schedule):
         self.schedule = schedule
 
-    def set_email(self, email):
+    def setEmail(self, email):
         self.email = email
 
-    def set_contact_number(self, contact_number):
-        self.contact_number = contact_number
+    def setContactNumber(self, contactNumber):
+        self.contactNumber = contactNumber
 
 
 class LIST:
@@ -245,6 +240,7 @@ class LIST:
 
 
 def add(self, x):
+    global L
     new_node = LIST()
     new_node.accounts = x
 
@@ -264,10 +260,11 @@ def isUsernameExists(self, username):
 
 
 def inputPatientInformation(self, username, password, name, age, sex, bday, contact_number):
+    global globalUsername
     if self.isUsernameExists(username):
         return False
 
-    # If does not exist, store in global variable
+    # If it does not exist, store in global variable
     globalUsername = username
 
     acc = Account(username, password, name, age, sex, bday, contact_number)
@@ -277,7 +274,8 @@ def inputPatientInformation(self, username, password, name, age, sex, bday, cont
 
 def login_Account(self, username, password):
     # If exists, store in global variable
-    self.globalUsername = username
+    global globalUsername
+    globalUsername = username
 
     # Validate Username
     for lists in self.L:
@@ -288,6 +286,22 @@ def login_Account(self, username, password):
                 return False
 
     return False
+
+
+# =================================================================
+#                   Patient Appointment Methods
+# =================================================================
+def generateAppointmentSchedules():
+    slot = [] * Variables.DAYS
+    tomorrow_date = datetime.datetime.now().date() + datetime.timedelta(days=1)
+
+    for i in range(Variables.DAYS):
+        patient_slot = Appointment(None, None)
+        patient_slot.date = tomorrow_date.strftime("%b %d %Y")
+        patient_slot.num_patients = checkPatientSlotFile(patient_slot.date)
+
+        slot[i] = patient_slot
+        tomorrow_date += datetime.timedelta(days=1)
 
 
 def checkPatientSlotFile(DTIME):
@@ -310,10 +324,215 @@ def savePatientSlotFile(DTIME, numPatient):
         print("Error opening/writing to file:", e)
 
 
+def appointmentCode():
+    randChar = chr(random.randint(65, 90))
+    randNum = str(random.randint(100, 999))
+    code = randChar
+    code += randNum
+    return code
+
+
+def appointmentDoctor():
+    global doctors
+    random_doctor = random.choice(doctors)
+    return random_doctor
+
+
+def listofDoctor():
+    global doctors
+    doctors.append(Doctor("Dr. John Smith", "OPD", "Monday to Tuesday - 9:00am to 5:00pm", "john.smith@tupmc.com", "09123456789"))
+    doctors.append(Doctor("Dr. Sarah Lee", "OPD", "Wednesday to Thursday - 10:00am to 6:00pm", "sarah.lee@hospital.com", "09987654321"))
+    doctors.append(Doctor("Dr. Alex Murray", "OPD", "Friday to Saturday - 9:00am to 5:00pm", "alex.murray@tupmc.com", "09918273645"))
+
+
+def updatePatientAppointment(current, sched, doc, code):
+    current.accounts.setAppointmentCode(code)
+    current.accounts.setAppointmentDate(sched.getDate())
+    current.accounts.setAppointmentDoctor(doc.getName())
+    current.accounts.setAppointmentDoctorContactNumber(doc.getContactNumber())
+    current.accounts.setAppointmentDoctorDepartment(doc.getDepartment())
+    current.accounts.setAppointmentDoctorEmail(doc.getEmail())
+    current.accounts.setAppointmentDoctorSchedule(doc.getSchedule())
+
+
+def updatePatientInformation(username, password, name, age, sex, bday, contactNumber):
+    global L
+    global globalUsername
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().isEqual(globalUsername):
+                current.accounts.setUsername(username)
+                current.accounts.setPassword(password)
+                current.accounts.setName(name)
+                current.accounts.setAge(age)
+                current.accounts.setBday(bday)
+                current.accounts.setSex(sex)
+                current.accounts.setContactNumber(contactNumber)
+
+
+def appointmentSchedule(selectedSlot, selectedDoctor, code):
+    currentAccount = getCurrentUserAccount()
+    selectedSlot.numPatients += 1
+    updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code)
+    savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.numPatients)
+
+
+def confirmationCode():
+    length = 5
+    code = ""
+    for i in range(length):
+        if i % 2 == 0:
+            randChar = chr(random.randint(65, 90))
+            code += randChar
+        else:
+            randNum = str(random.randint(0, 10))
+            code += randNum
+    return code
+
+
+def paymentMethod():
+    currentAccount = getCurrentUserAccount()
+    if currentAccount is not None and currentAccount.accounts is not None:
+        currentAccount.accounts.setPaymentStatus(1)
+
+
+# =============================================================================
+#                       Getter Methods
+# =============================================================================
+def getCurrentUserAccount():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current
+
+
+def getCurrentUserName():
+    return globalUsername
+
+
+def getCurrentPassword():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getPassword()
+
+
+def getCurrentSchedule():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDate()
+
+
+def getCurrentName():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getName()
+
+
+def getCurrentAge():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAge()
+
+
+def getCurrentContactNumber():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getContactNumber()
+
+
+def getCurrentSex():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getSex()
+
+
+def getCurrentBirthday():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getBday()
+
+
+def getCurrentPayment():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getPaymentStatus()
+
+
+def getCurrentAppointmentCode():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentCode()
+
+
+def getCurrentAppointmentDate():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDate()
+
+
+def getCurrentAppointmentDoctor():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDoctor()
+
+
+def getCurrentAppointmentDoctorDepartment():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDoctorDepartment()
+
+
+def getCurrentAppointmentDoctorSchedule():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDoctorSchedule()
+
+
+def getCurrentAppointmentDoctorEmail():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDoctorEmail()
+
+
+def getCurrentAppointmentDoctorContactNumber():
+    for current in L:
+        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
+            if current.accounts.getUsername().equals(globalUsername):
+                return current.accounts.getAppointmentDoctorContactNumber()
+
+
+def getAccountList():
+    accountList = []
+    for current in L:
+        accountList.append(current.accounts)
+    return accountList
+
+
+def getDoctorList():
+    doctorList = []
+    for current in doctors:
+        doctorList.append(current)
+    return doctorList
+
+
 # ================================================
 #                     MAIN
 # ================================================
 if __name__ == "__main__":
     os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-
+    print(getCurrentUserName())
     print("Running")

@@ -6,44 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Encryption.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Encryption.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Encryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main$ACCOUNT.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main$ACCOUNT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main$APPOINTMENT.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main$APPOINTMENT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main$DOCTOR.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main$DOCTOR.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main$LIST.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main$LIST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAdminPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAdminPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAdminPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAdminPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAppSched$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAppSched$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAppSched.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAppSched.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAppointmentSched$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAppointmentSched$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIAppointmentSched.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIAppointmentSched.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UICreate$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UICreate$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UICreate.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UICreate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIDoctorList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIDoctorList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIDoctorList.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIDoctorList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIHomePage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIHomePage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIHomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIHomePage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UILogin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UILogin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UILogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UILogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIOnlinePayment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIOnlinePayment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIOnlinePayment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIOnlinePayment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientInfo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientInfo$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientInformation$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientInformation$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientList$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientList$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPatientList.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPatientList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPayment$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPayment$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIPayment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIPayment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UISecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UISecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/UIWelcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/UIWelcome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Variables.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Variables.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/account.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/account.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/doctor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/doctor.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/patient.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/patient.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
