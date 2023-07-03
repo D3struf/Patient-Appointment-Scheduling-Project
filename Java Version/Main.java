@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 class Variables {
 
-    public static final String DATABASE_FILE = "/database";
+    public static final String DATABASE_FILE = "/Java Version/database";
     public static final String ACCOUNT_FILE = DATABASE_FILE + "/account.txt";
     public static final String PATIENT_FILE = DATABASE_FILE + "/patient.txt";
     public static final String DOCTOR_FILE = DATABASE_FILE + "/doctor.txt";
