@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Scheduling System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Scheduling System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python Version/Encryption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/Encryption.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,14 +44,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/johnp/OneDrive/Desktop/Scheduling System",
+    "last_opened_file_path": "C:/Users/johnp/OneDrive/Desktop/Scheduling System/Python Version",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Python Version" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Python Version" />
       <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Java Version" />
@@ -107,5 +113,16 @@
       <updated>1685357580614</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
