@@ -28,7 +28,7 @@ class UIWelcome:
         dev3 = Label(self.welcome_frame, text="Jeanne May Carolino", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
         dev4 = Label(self.welcome_frame, text="Almira Jill Garcia", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
 
-        # Style the Frame
+        # Style the Framegit brach
         self.welcome_frame.iconphoto(False, icon)
         self.welcome_frame.title("Patient Appointment Scheduling System")
         self.welcome_frame.configure(bg="white")
