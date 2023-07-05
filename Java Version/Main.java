@@ -915,7 +915,7 @@ public class Main {
                 account.setContactNumber(decryptedContactNumber);
                 account.setAppointmentDate(decryptedAppointmentDate);
                 account.setAppointmentCode(decryptedAppointmentCode);
-                account.setAge(Integer.parseInt(decryptedAge));
+                account.setAge(Integer.parseInt(decryptedAge));try
                 account.setAppointmentDoctor(decryptedAppointmentDoctor);
                 account.setAppointmentDoctorDepartment(decryptedAppointmentDoctorDepartment);
                 account.setAppointmentDoctorSchedule(decryptedAppointmentDoctorSchedule);
