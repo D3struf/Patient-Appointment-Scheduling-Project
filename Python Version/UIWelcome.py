@@ -1,12 +1,16 @@
 from tkinter import *
 from tkinter.ttk import Progressbar
 from PIL import ImageTk, Image
+from UILogin import UILogin
+
+
+window = Tk()
+welcomeFrame = Frame(window, bg="white")
+progress_bar = Progressbar(welcomeFrame, orient=HORIZONTAL, length=1366, mode='determinate')
 
 
 class UIWelcome:
     def __init__(self):
-        self.welcome_frame = Tk()
-
         # Load and resize images
         icon = ImageTk.PhotoImage(Image.open("images/logo.png").resize((200, 200)))
         bg_icon = ImageTk.PhotoImage(Image.open("images/bgicon.jpg").resize((683, 768)))
@@ -14,29 +18,29 @@ class UIWelcome:
         tup_icon = ImageTk.PhotoImage(Image.open("images/tup.png").resize((55, 55)))
 
         # Create labels with images
-        bg_image_label = Label(self.welcome_frame, image=bg_icon)
-        self.progress_bar = Progressbar(self.welcome_frame, orient=HORIZONTAL, length=1366, mode='determinate')
-        subject = Label(self.welcome_frame, text="  Programming Language", font=("Dialog", 18, "bold"), fg="white", bg="lightgray")
-        title = Label(self.welcome_frame, text="Patient Appointment", font=("Dialog", 55, "bold"), fg="#D62839", bg="white")
-        title2 = Label(self.welcome_frame, text="Scheduling System", font=("Dialog", 40, "bold"), fg="#D62839",bg="white")
-        java_logo = Label(self.welcome_frame, image=java_icon, bg="white")
-        java_text = Label(self.welcome_frame, text="Java 20", font=("Dialog", 24, "bold"), fg="gray", bg="white")
-        tup_logo = Label(self.welcome_frame, image=tup_icon, bg="white")
-        tup_text = Label(self.welcome_frame, text="TUP - Manila Students", font=("Dialog", 24, "bold"), fg="gray", bg="white")
-        dev1 = Label(self.welcome_frame, text="This program is created by the following Developers:", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
-        dev2 = Label(self.welcome_frame, text="Project Lead: John Paul Monter", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
-        dev3 = Label(self.welcome_frame, text="Jeanne May Carolino", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
-        dev4 = Label(self.welcome_frame, text="Almira Jill Garcia", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
+        bg_image_label = Label(welcomeFrame, image=bg_icon, borderwidth=0)
+        subject = Label(welcomeFrame, text=" Programming Language ", font=("Dialog", 18, "bold"), fg="white", bg="lightgray")
+        title = Label(welcomeFrame, text="Patient Appointment", font=("Dialog", 55, "bold"), fg="#D62839", bg="white")
+        title2 = Label(welcomeFrame, text="Scheduling System", font=("Dialog", 40, "bold"), fg="#D62839", bg="white")
+        java_logo = Label(welcomeFrame, image=java_icon, bg="white")
+        java_text = Label(welcomeFrame, text="Java 20", font=("Dialog", 24, "bold"), fg="gray", bg="white")
+        tup_logo = Label(welcomeFrame, image=tup_icon, bg="white")
+        tup_text = Label(welcomeFrame, text="TUP - Manila Students", font=("Dialog", 24, "bold"), fg="gray", bg="white")
+        dev1 = Label(welcomeFrame, text="This program is created by the following Developers:", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
+        dev2 = Label(welcomeFrame, text="Project Lead: John Paul Monter", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
+        dev3 = Label(welcomeFrame, text="Jeanne May Carolino", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
+        dev4 = Label(welcomeFrame, text="Almira Jill Garcia", font=("Dialog", 18, "bold"), fg="lightgray", bg="white")
 
-        # Style the Framegit brach
-        self.welcome_frame.iconphoto(False, icon)
-        self.welcome_frame.title("Patient Appointment Scheduling System")
-        self.welcome_frame.configure(bg="white")
-        self.welcome_frame.overrideredirect(True)
-        self.center_frame_on_screen()
-        self.welcome_frame.geometry("1366x768")
+        # Style the Frame
+        window.iconphoto(False, icon)
+        window.title("Patient Appointment Scheduling System")
+        window.configure(bg="white")
+        window.overrideredirect(True)
+        center_frame_on_screen()
+        window.geometry("1366x768")
 
         # Add objects
+        welcomeFrame.place(x=0, y=0, width=1366, height=768)
         subject.place(x=40, y=140)
         title.place(x=40, y=185)
         title2.place(x=40, y=270)
@@ -50,27 +54,30 @@ class UIWelcome:
         dev3.place(x=40, y=410)
         dev4.place(x=40, y=440)
 
-        self.progress_bar.place(x=0, y=758)
-        self.progress_fill()
+        progress_bar.place(x=0, y=758)
+        progress_fill()
 
-    def progress_fill(self):
-        counter = 0
-        while counter <= 100:
-            self.progress_bar['value'] = counter
-            self.welcome_frame.update_idletasks()
-            self.welcome_frame.after(100)
-            counter += 1
-        self.welcome_frame.destroy()
 
-    def center_frame_on_screen(self):
-        screen_width = self.welcome_frame.winfo_screenwidth()
-        screen_height = self.welcome_frame.winfo_screenheight()
-        x = (screen_width - 1366) // 2
-        y = (screen_height - 768) // 2
-        self.welcome_frame.geometry(f"1366x768+{x}+{y}")
+def progress_fill():
+    global progress_bar
+    counter = 0
+    while counter <= 100:
+        progress_bar['value'] = counter
+        welcomeFrame.update_idletasks()
+        welcomeFrame.after(100)
+        counter += 10
+
+
+def center_frame_on_screen():
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - 1366) // 2
+    y = (screen_height - 768) // 2
+    window.geometry(f"1366x768+{x}+{y}")
 
 
 if __name__ == '__main__':
     ui_welcome = UIWelcome()
-    ui_welcome.welcome_frame.mainloop()
+    UILogin(window)
+    window.mainloop()
 

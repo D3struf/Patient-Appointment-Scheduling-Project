@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="pray">
+    <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Python Version/UILogin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python Version/sample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Scheduling System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Scheduling System.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C Version/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C Version/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/account.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/account.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/doctor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/doctor.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/database/patient.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/database/patient.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java Version/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java Version/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python Version/Encryption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/Encryption.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python Version/UIWelcome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/UIWelcome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
+    </list>
+    <list id="754382f4-7d54-4db9-8014-4d06a6afe849" name="Changes by johnp" comment="">
+      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
+    </list>
+    <list id="d8f23be4-06a3-463a-bfe6-bd214cda86d1" name="Changes by PAUL HERE" comment="">
       <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +37,46 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/Python Version/main.py">
+      <ranges>
+        <range start1="5" end1="6" start2="5" end2="7" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="14" end1="15" start2="15" end2="16" changelist="d8f23be4-06a3-463a-bfe6-bd214cda86d1" />
+        <range start1="51" end1="52" start2="52" end2="53" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="57" end1="58" start2="58" end2="58" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="60" end1="61" start2="60" end2="61" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="242" end1="243" start2="242" end2="243" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="247" end1="249" start2="247" end2="249" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="251" end1="253" start2="251" end2="253" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="255" end1="256" start2="255" end2="256" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="262" end1="263" start2="262" end2="283" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="264" end1="265" start2="284" end2="285" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="271" end1="272" start2="291" end2="292" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="274" end1="274" start2="294" end2="319" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="275" end1="276" start2="320" end2="321" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="281" end1="282" start2="326" end2="327" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="284" end1="285" start2="329" end2="330" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="286" end1="287" start2="331" end2="332" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="288" end1="289" start2="333" end2="429" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="294" end1="294" start2="434" end2="493" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="295" end1="296" start2="494" end2="495" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="300" end1="302" start2="499" end2="501" changelist="d8f23be4-06a3-463a-bfe6-bd214cda86d1" />
+        <range start1="305" end1="305" start2="504" end2="510" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="308" end1="309" start2="513" end2="518" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="310" end1="313" start2="519" end2="528" changelist="d8f23be4-06a3-463a-bfe6-bd214cda86d1" />
+        <range start1="316" end1="316" start2="531" end2="532" changelist="d8f23be4-06a3-463a-bfe6-bd214cda86d1" />
+        <range start1="317" end1="318" start2="533" end2="533" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="319" end1="320" start2="534" end2="538" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="321" end1="322" start2="539" end2="543" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="337" end1="337" start2="558" end2="559" changelist="754382f4-7d54-4db9-8014-4d06a6afe849" />
+        <range start1="532" end1="532" start2="754" end2="898" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="536" end1="536" start2="902" end2="903" changelist="d8f23be4-06a3-463a-bfe6-bd214cda86d1" />
+        <range start1="537" end1="539" start2="904" end2="910" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="540" end1="540" start2="911" end2="916" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+        <range start1="541" end1="541" start2="917" end2="953" changelist="b9757218-99dd-4e51-add1-f263b0b9e837" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -45,8 +93,9 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/johnp/OneDrive/Desktop/Scheduling System&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -55,13 +104,16 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Python Version" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Python Version" />
       <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\Java Version" />
       <recent name="C:\Users\johnp\OneDrive\Desktop\Scheduling System\C Version" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.UIWelcome">
+  <component name="RunManager" selected="Python.sample">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Scheduling System" />
       <method v="2">
@@ -80,48 +132,6 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="UIHomepage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Patient-Appointment-Scheduling-Project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python Version" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python Version/UIHomepage.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="UILogin" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Patient-Appointment-Scheduling-Project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python Version" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python Version/UILogin.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
     <configuration name="UIWelcome (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Patient-Appointment-Scheduling-Project" />
@@ -148,18 +158,14 @@
       <module name="Patient-Appointment-Scheduling-Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\63977\PycharmProjects\pythonProject2\venv\Scripts\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10 (pythonProject2)" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Python Version" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python Version/main.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -178,7 +184,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\63977\Desktop\Jeanne's File\Patient-Appointment-Scheduling-Project\Python Version\sample.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Python Version/sample.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,10 +193,14 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.UIWelcome" />
+      <item itemvalue="Python.sample" />
+      <item itemvalue="Python.UIWelcome (1)" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.UIHomepage" />
-        <item itemvalue="Python.UILogin" />
+        <item itemvalue="Python.sample" />
         <item itemvalue="Python.UIWelcome (1)" />
       </list>
     </recent_temporary>
@@ -204,15 +214,6 @@
       <option name="presentableId" value="Default" />
       <updated>1685357580614</updated>
     </task>
-    <task id="LOCAL-00001" summary="pray">
-      <option name="closed" value="true" />
-      <created>1688389560892</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1688389560892</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,10 +226,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="kahit ano" />
-    <MESSAGE value="pray" />
-    <option name="LAST_COMMIT_MESSAGE" value="pray" />
   </component>
 </project>
