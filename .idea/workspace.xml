@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Patient-Appointment-Scheduling-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Patient-Appointment-Scheduling-Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Java Version/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java Version/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python Version/Encryption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/Encryption.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python Version/UIWelcome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/UIWelcome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
