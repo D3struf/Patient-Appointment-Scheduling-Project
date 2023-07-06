@@ -484,7 +484,7 @@ def takeAppointmentSchedule():
                 print("Your Appointment Code is %s" % code)
                 chosenSlot[choice - 1].numPatients += 1
 
-                updatePatientAppointment(current, chosenSlot[choice - 1], y, code)
+                updatePatientAppointment(chosenSlot[choice - 1], y, code)
                 savePatientSlotFile(current.accounts.getAppointmentDate(), chosenSlot[choice - 1].numPatients)
                 break
         else:
@@ -496,30 +496,29 @@ def takeAppointmentSchedule():
 
 
 def view_schedule():
-    p = L
-
-    while p is not None:
-        if p.accounts.username == global_Username:
+    for current in L:
+        if current.accounts.getUsername() == globalUsername:
             clear_screen()
             box()
-            gotoxy(30,4);print("================================================================")
-            gotoxy(30,5);print("                     Appointment Schedule                       ")
-            gotoxy(30,6);print("================================================================")
-            gotoxy(30,8);print("USERNAME:           %s" % p.accounts.username)
-            gotoxy(30,9);print("NAME:               %s" % p.accounts.name)
-            gotoxy(30,10);print("APPOINTMENT DATE:   %s" % p.accounts.appointment_date)
-            gotoxy(30,12);print("===========================CODE: %s===========================" % p.accounts.appointment_code)
-            gotoxy(30,14);print("DOCTOR DETAILS")
-            gotoxy(30,15);print("APPOINTMENT DOCTOR: %s" % p.accounts.appointment_doctor)
-            gotoxy(30,16);print("DEPARTMENT:         %s" % p.accounts.appointment_doctor_department)
-            gotoxy(30,17);print("SCHEDULE:           %s" % p.accounts.appointment_doctor_schedule)
-            gotoxy(30,18);print("EMAIL:              %s" % p.accounts.appointment_doctor_email)
-            gotoxy(30,19);print("CONTACT NUMBER:     %s" % p.accounts.appointment_doctor_contact_number)
-            gotoxy(30,20);print("================================================================\n\t")
-            gotoxy(30,22);print("================================================================")
+            print("================================================================")
+            print("                     Appointment Schedule                       ")
+            print("================================================================")
+            print(f"USERNAME:           {current.accounts.getUsername()}")
+            print(f"NAME:               {current.accounts.getName()}")
+            print(f"APPOINTMENT DATE:   {current.accounts.getAppointmentDate()}")
+            print(f"===========================CODE: =========================== {current.accounts.getAppointmentCode()}")
+            print("DOCTOR DETAILS")
+            print(f"APPOINTMENT DOCTOR: {current.accounts.getAppointmentDoctor()}")
+            print(f"DEPARTMENT:         {current.accounts.getAppointmentDoctorDepartment()}")
+            print(f"SCHEDULE:           {current.accounts.getAppointmentDoctorSchedule()}")
+            print(f"EMAIL:              {current.accounts.getAppointmentDoctorEmail()}")
+            print(f"CONTACT NUMBER:     {current.accounts.getAppointmentDoctorContactNumber()}")
+            print("================================================================\n\t")
             input("Press Enter to continue...")
+            print("================================================================")
             break
-        p = p.next
+
+
 def generateAppointmentSchedules():
     slot = [Appointment(None, None) for _ in range(Variables.DAYS)]
     tomorrow_date = datetime.datetime.now().date() + datetime.timedelta(days=1)
@@ -597,10 +596,12 @@ def listofDoctor():
     doctors.append(Doctor("Dr. Alex Murray", "OPD", "Friday to Saturday - 9:00am to 5:00pm", "alex.murray@tupmc.com", "09918273645"))
 
 
-def updatePatientAppointment(current, sched, doc, code):
-    current.accounts.setAppointmentCode(code)
-    current.accounts.setAppointmentDate(sched.getDate())
-    current.accounts.setAppointmentDoctor(doc.getName())
+def updatePatientAppointment(sched, doc, code):
+    current = getCurrentUserAccount()
+    print("MAGPRINTTTT KAAAA")
+    print(current.accounts.setAppointmentCode(code))
+    print(current.accounts.setAppointmentDate(sched.getDate()))
+    print(current.accounts.setAppointmentDoctor(doc.getName()))
     current.accounts.setAppointmentDoctorContactNumber(doc.getContactNumber())
     current.accounts.setAppointmentDoctorDepartment(doc.getDepartment())
     current.accounts.setAppointmentDoctorEmail(doc.getEmail())
@@ -714,7 +715,7 @@ def updatePaymentMethod(status):
 def getCurrentUserAccount():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current
 
 
@@ -725,105 +726,105 @@ def getCurrentUserName():
 def getCurrentPassword():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getPassword()
 
 
 def getCurrentSchedule():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDate()
 
 
 def getCurrentName():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getName()
 
 
 def getCurrentAge():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAge()
 
 
 def getCurrentContactNumber():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getContactNumber()
 
 
 def getCurrentSex():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getSex()
 
 
 def getCurrentBirthday():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getBday()
 
 
 def getCurrentPayment():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getPaymentStatus()
 
 
 def getCurrentAppointmentCode():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentCode()
 
 
 def getCurrentAppointmentDate():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDate()
 
 
 def getCurrentAppointmentDoctor():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDoctor()
 
 
 def getCurrentAppointmentDoctorDepartment():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDoctorDepartment()
 
 
 def getCurrentAppointmentDoctorSchedule():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDoctorSchedule()
 
 
 def getCurrentAppointmentDoctorEmail():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDoctorEmail()
 
 
 def getCurrentAppointmentDoctorContactNumber():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().equals(globalUsername):
+            if current.accounts.getUsername() == globalUsername:
                 return current.accounts.getAppointmentDoctorContactNumber()
 
 
@@ -1034,7 +1035,7 @@ if __name__ == "__main__":
         elif choice1 == 2:
             takeAppointmentSchedule()
         elif choice1 == 3:
-            print("View Schedule wala pa")
+            view_schedule()
         elif choice1 == 4:
             takePaymentMethod()
         elif choice1 == 5:
