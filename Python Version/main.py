@@ -44,6 +44,11 @@ class Variables:
 L = []
 doctors = []
 globalUsername = ""
+loginAdmin = False
+GREY = "\033[47m"
+STOP = "\033[0m"
+CYAN = "\033[48;5;44m"
+CYAN2 = "\033[48;5;43m"
 
 
 class Main:
@@ -57,13 +62,6 @@ def display():
     count = 0
     for current in L:
         print(str(count + 1) + ".) Username: " + current.accounts.username + " | Password: " + current.accounts.password + " | Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number)
-        count += 1
-
-
-def display_patient_list():
-    count = 0
-    for current in L:
-        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + ("Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
         count += 1
 
 
@@ -325,8 +323,14 @@ def takeLoginAccount():
 
 def login_Account(username, password):
     # If exists, store in global variable
+    global loginAdmin
     global globalUsername
     globalUsername = username
+
+    if Variables.ADMIN_USERNAME == username:
+        if Variables.ADMIN_PASSWORD == password:
+            loginAdmin = True
+            return 0
 
     # Validate Username
     for lists in L:
@@ -346,83 +350,94 @@ def pause():
     input("Please Enter to continue...")
 
 
-def gotoxy(x, y):
-    print("\033[%d;%dH" % (y, x), end='')
-
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def box():
-    print("==================================================")
-
-
 def menu(x):
     if x == 1:
-        clear_screen()
-        box()
-        os.system("COLOR 0E")
-        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-        print("=======================================")
-        print("[1] LOG IN ACCOUNT")
-        print("=======================================")
-        print("[2] CREATE ACCOUNT")
-        print("=======================================")
-        print("[3] EXIT")
-        print("=======================================")
-        select = int(input("Enter Choice: "))
-        print("=======================================")
-        print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
-        print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
+        print("\n")
+        print_color(CYAN2, "        E-SCHED MEDICAL         ", STOP)
+        print()
+        print_color(CYAN2, "      PATIENT APPOINTMENT       ", STOP)
+        print("\n")
+        print_color(GREY, "   1   ", STOP)
+        print_color(CYAN, "     LOG IN ACCOUNT      ", STOP)
+        print()
+        print_color(GREY, "   2   ", STOP)
+        print_color(CYAN, "     CREATE ACCOUNT      ", STOP)
+        print()
+        print_color(GREY, "   3   ", STOP)
+        print_color(CYAN, "     EXIT PROGRAM        ", STOP)
+        print("\n")
+        print_color(CYAN, " Enter Choice: ", STOP)
+        select = int(input(" "))
+        print("\n")
         return select
+
     elif x == 2:
-        print("=======================================")
-        print("[1] Cash")
-        print("=======================================")
-        print("[2] Online Transaction")
-        print("=======================================")
-        print("[3] Back Menu")
-        print("=======================================")
-        select = int(input("Enter Choice: "))
-        print("=======================================")
+        print("\n")
+        print_color(CYAN2, "     PAYMENT METHOD      ", STOP)
+        print()
+        print_color(CYAN2, "   MODE OF TRANSACTION   ", STOP)
+        print("\n")
+        print_color(GREY, "   1   ", STOP)
+        print_color(CYAN, "       CASH       ", STOP)
+        print()
+        print_color(GREY, "   2   ", STOP)
+        print_color(CYAN, "       ONLINE     ", STOP)
+        print()
+        print_color(GREY, "   3   ", STOP)
+        print_color(CYAN, "       BACK       ", STOP)
+        print("\n")
+        print_color(CYAN, " Enter Choice: ", STOP)
+        select = int(input(" "))
+        print("\n")
         return select
+
     elif x == 3:
-        clear_screen()
-        box()
-        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-        print("=======================================")
-        print("[1] View Patient Information")
-        print("=======================================")
-        print("[2] Schedule an Appointment")
-        print("=======================================")
-        print("[3] View Schedule")
-        print("=======================================")
-        print("[4] Payment for Appointment")
-        print("=======================================")
-        print("[5] Sign Out")
-        print("=======================================")
-        select = int(input("Enter Choice: "))
-        print("=======================================")
+        print("\n")
+        print_color(CYAN2, "             E-SCHED MEDICAL             ", STOP)
+        print()
+        print_color(CYAN2, "           PATIENT APPOINTMENT           ", STOP)
+        print("\n")
+        print_color(GREY, "   1   ", STOP)
+        print_color(CYAN, "     VIEW PATIENT INFORMATION     ", STOP)
+        print()
+        print_color(GREY, "   2   ", STOP)
+        print_color(CYAN, "     SCHEDULE AN APPOINTMENT      ", STOP)
+        print()
+        print_color(GREY, "   3   ", STOP)
+        print_color(CYAN, "     VIEW SCHEDULED APPOINTMENT   ", STOP)
+        print()
+        print_color(GREY, "   4   ", STOP)
+        print_color(CYAN, "     PAYMENT FOR APPOINTMENT      ", STOP)
+        print()
+        print_color(GREY, "   5   ", STOP)
+        print_color(CYAN, "     LOG OUT ACCOUNT              ", STOP)
+        print("\n")
+        print_color(CYAN, " Enter Choice: ", STOP)
+        select = int(input(" "))
+        print("\n")
         return select
+
     elif x == 4:
-        clear_screen()
-        box()
-        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-        print("=======================================")
-        print("[1] Display Patient List")
-        print("=======================================")
-        print("[2] Display Doctor List")
-        print("=======================================")
-        print("[3] Security Key")
-        print("=======================================")
-        print("[4] Log out")
-        print("=======================================")
-        select = int(input("Enter Choice: "))
-        print("=======================================")
+        print("\n")
+        print_color(CYAN2, "             E-SCHED MEDICAL             ", STOP)
+        print()
+        print_color(CYAN2, "           PATIENT APPOINTMENT           ", STOP)
+        print("\n")
+        print_color(GREY, "   1   ", STOP)
+        print_color(CYAN, "       DISPLAY PATIENT LIST       ", STOP)
+        print()
+        print_color(GREY, "   2   ", STOP)
+        print_color(CYAN, "       DISPLAY DOCTOR LIST        ", STOP)
+        print()
+        print_color(GREY, "   3   ", STOP)
+        print_color(CYAN, "       SECURITY KEY               ", STOP)
+        print()
+        print_color(GREY, "   4   ", STOP)
+        print_color(CYAN, "       LOG OUT ACCOUNT            ", STOP)
+        print("\n")
+        print_color(CYAN, " Enter Choice: ", STOP)
+        select = int(input(" "))
+        print("\n")
         return select
 
 
@@ -430,8 +445,6 @@ def display_patient_information():
     # Look for the username
     for current in L:
         if current.accounts.username == globalUsername:
-            clear_screen()
-            box()
             print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
             print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
             print("================================================================")
@@ -474,10 +487,10 @@ def takeAppointmentSchedule():
             chosenSlot = generateAppointmentSchedules()
 
             full = 0
-            choice = int(input("Enter Choice: "))
+            selects = int(input("Enter Choice: "))
             print("================================================================")
-            if 1 <= choice <= 3:
-                if chosenSlot[choice - 1].numPatients >= Variables.MAX_PATIENTS:
+            if 1 <= selects <= 3:
+                if chosenSlot[selects - 1].numPatients >= Variables.MAX_PATIENTS:
                     print("Sorry, the slots are already full")
                     print("Please choose another date")
                     full = 1
@@ -490,18 +503,18 @@ def takeAppointmentSchedule():
                     print("                     Appointment Schedule                       ")
                     print("================================================================")
                     print("You have Successfully created an Appointment Schedule")
-                    print("Your Appointment Schedule is on %s" % chosenSlot[choice - 1].date)
-                    print("Your Doctor is %s" % y.name)
-                    print("Your Appointment Code is %s" % code)
-                    chosenSlot[choice - 1].numPatients += 1
-                    updatePatientAppointment(chosenSlot[choice - 1], y, code)
-                    savePatientSlotFile(chosenSlot[choice - 1].date, chosenSlot[choice - 1].numPatients)
+                    print("Your Appointment Schedule is on ", chosenSlot[selects - 1].date)
+                    print("Your Doctor is ", y.name)
+                    print("Your Appointment Code is ", code)
+                    chosenSlot[selects - 1].numPatients += 1
+                    updatePatientAppointment(chosenSlot[selects - 1], y, code)
+                    savePatientSlotFile(chosenSlot[selects - 1].date, chosenSlot[selects - 1].numPatients)
                     break
             else:
                 print("Invalid Choice")
             print("================================================================")
             input("Press Enter to continue...")
-            if 1 <= choice <= 3 or full == 0:
+            if 1 <= selects <= 3 or full == 0:
                 break
 
 
@@ -557,12 +570,7 @@ def checkPatientSlotFile(DTIME):
     FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
-    # times = DTIME + ".txt"
-    # filePath = os.path.join(Variables.SCHEDULE_FOLDER, times)
-    # os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-    # try:
-        # folderPath = os.path.dirname(Variables.SCHEDULE_FOLDER)
-        # os.makedirs(filePath, exist_ok=True)
+
     with open(FilePath, "r") as file:
         if os.path.exists(FilePath):
             slotNum = file.readline()
@@ -570,8 +578,6 @@ def checkPatientSlotFile(DTIME):
                 return 0
             else:
                 return int(slotNum)
-    # except IOError as e:
-    #     print("Error opening/reading to file: ", e)
     return 0
 
 
@@ -580,12 +586,9 @@ def savePatientSlotFile(DTIME, numPatient):
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
 
-    # try:
     with open(FilePath, "w") as file:
         print(FilePath)
         file.write(str(numPatient))
-    # except IOError as e:
-    #     print("Error opening/writing to file:", e)
 
 
 def appointmentCode():
@@ -636,13 +639,6 @@ def updatePatientInformation(username, password, name, age, sex, bday, contactNu
                 current.accounts.setContactNumber(contactNumber)
 
 
-# def appointmentSchedule(selectedSlot, selectedDoctor, code):
-#     currentAccount = getCurrentUserAccount()
-#     selectedSlot.numPatients += 1
-#     updatePatientAppointment(selectedSlot, selectedDoctor, code)
-#     savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.numPatients)
-
-
 def confirmationCode():
     length = 5
     code = ""
@@ -674,26 +670,26 @@ def takePaymentMethod():
         print("================================================================")
         print("                   Mode of Transaction                          ")
 
-        choice = menu(2)
-        if 1 > choice > 3:
+        selected = menu(2)
+        if 1 > selected > 3:
             print("Invalid Input!, Try Again!!!")
             pause()
 
-        if choice == 1:
+        if selected == 1:
             print("Mode of Transaction is Cash")
             print(f"Go to the nearest {Variables.HOSPITAL_NAME} for your Payment!")
             pause()
             break
-        elif choice == 2:
+        elif selected == 2:
             print("================================================================")
             print("                 Mode of Transaction: Online                    ")
             print("================================================================")
             break
-        elif choice == 3:
+        elif selected == 3:
             return
 
     status = 1
-    if choice == 2:
+    if selected == 2:
         print(f"Reservation Fee: {Variables.RESERVATION_FEE}.00")
         input("Enter your Bank Name: ")
         input("Enter your Account Number: ")
@@ -861,13 +857,52 @@ def getDoctorList():
 
 
 # ================================================
+#                   Admin Methods
+# ================================================
+def display_patient_list():
+    sorted_list = sorted(L, key=lambda x: x.accounts.name)
+    count = 0
+    print("==============================================================================")
+    print("                                  ADMIN PAGE                                  ")
+    print("                                PATIENT'S LIST                                ")
+    print("==============================================================================")
+    for current in sorted_list:
+        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + (
+              "Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
+        count += 1
+
+
+def display_doctor_list():
+    print("==============================================================================")
+    print("                                  ADMIN PAGE                                  ")
+    print("                                 DOCTOR'S LIST                                ")
+    print("==============================================================================")
+    print("DOCTOR", f"\t\t\t\t\t""DEPARTMENT"f"\t\t\t""SCHEDULE"f"\t\t\t\t\t\t\t\t\t\t\t""EMAIL", f"\t\t\t\t\t\t\t""CONTACT NO.")
+    print("Dr. Alex Murray", f"\t\t""OPD", f"\t\t\t\t""Friday to Saturday - 9:00am to 5:00pm", f"\t\t\t\t""alex.murray@tupmc.com", f"\t\t\t""09918273645")
+    print("Dr. John Smith", f"\t\t\t""OPD", f"\t\t\t\t""Monday to Tuesday - 9:00am to 5:00pm", f"\t\t\t\t""john.smith@tupmc.com", f"\t\t\t""09123456789")
+    print("Dr. Sarah Lee", f"\t\t\t""OPD", f"\t\t\t\t""Wednesday to Thursday - 10:00am to 6:00pm", f"\t\t\t""sarah.lee@hospital.com", f"\t\t\t""09987654321")
+
+
+def security():
+    print("==============================================================================")
+    print("                                  ADMIN PAGE                                  ")
+    print("                                   SECURITY                                   ")
+    print("==============================================================================")
+    encryption = Encryption
+    print("Current Key: ", encryption.globalkey)
+    newKey = int(input("Enter a new key: "))
+    encryption.setKey(newKey)
+    encryption.saveKey()
+
+
+# ================================================
 #              File Handling Methods
 # ================================================
 def save():
     encryption = Encryption
     try:
         with open(Variables.ACCOUNT_FILE, 'w') as outFile, open(Variables.PATIENT_FILE, 'w') as outFile2, open(Variables.DOCTOR_FILE, 'w') as outFile3:
-            outFile.write("Username, Password\n")
+            outFile.write("Username,Password\n")
             outFile2.write("Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n")
             outFile3.write("Name,Department,Schedule,Email,Contact_Number,Payment_Status\n")
 
@@ -888,31 +923,6 @@ def save():
                 encryptedAppointmentDoctorEmail = encryption.encrypt(current.accounts.getAppointmentDoctorEmail())
                 encryptedAppointmentDoctorContactNumber = encryption.encrypt(current.accounts.getAppointmentDoctorContactNumber())
                 encryptedPaymentStatus = encryption.encrypt(str(current.accounts.getPaymentStatus()))
-                # textAccount = current.accounts.username + ',' + current.accounts.password
-                # print(textAccount)
-                # textPatient = current.accounts.name + ',' + current.accounts.sex + ',' + current.accounts.bday + ',' + current.accounts.contact_number + ',' + current.accounts.appointment_date + ',' + current.accounts.appointment_code + ',' + str(current.accounts.age)
-                # textDoctor = current.accounts.appointment_doctor + ',' + current.accounts.appointment_doctor_department + ',' + current.accounts.appointment_doctor_schedule + ',' + current.accounts.appointment_doctor_email + ',' + current.accounts.appointment_doctor_contact_number + ',' + str(current.accounts.payment_status)
-                # encryptedTextAccount = encryption.encryptDecrypt(textAccount)
-                # print(encryptedTextAccount)
-                # print(encryption.encryptDecrypt(encryptedTextAccount))
-                # encryptedTextPatient = encryption.encryptDecrypt(textPatient)
-                # encryptedTextDoctor = encryption.encryptDecrypt(textDoctor)
-                # Encode the Encrypted Text with Base64
-                # encodedUsername = encryption.encodeToBase64(encryptedUsername)
-                # encodedPassword = encryption.encodeToBase64(encryptedPassword)
-                # encodedName = encryption.encodeToBase64(encryptedName)
-                # encodedSex = encryption.encodeToBase64(encryptedSex)
-                # encodedBday = encryption.encodeToBase64(encryptedBday)
-                # encodedContactNumber = encryption.encodeToBase64(encryptedContactNumber)
-                # encodedAppointmentDate = encryption.encodeToBase64(encryptedAppointmentDate)
-                # encodedAppointmentCode = encryption.encodeToBase64(encryptedAppointmentCode)
-                # encodedAge = encryption.encodeToBase64(encryptedAge)
-                # encodedAppointmentDoctor = encryption.encodeToBase64(encryptedAppointmentDoctor)
-                # encodedAppointmentDoctorDepartment = encryption.encodeToBase64(encryptedAppointmentDoctorDepartment)
-                # encodedAppointmentDoctorSchedule = encryption.encodeToBase64(encryptedAppointmentDoctorSchedule)
-                # encodedAppointmentDoctorEmail = encryption.encodeToBase64(encryptedAppointmentDoctorEmail)
-                # encodedAppointmentDoctorContactNumber = encryption.encodeToBase64(encryptedAppointmentDoctorContactNumber)
-                # encodedPaymentStatus = encryption.encodeToBase64(encryptedPaymentStatus)
 
                 # Write to file
                 outFile.write(f"{encryptedUsername},{encryptedPassword}\n")
@@ -957,17 +967,13 @@ def retrieve():
 
                 account = Account(None, None, None, None, None, None, None)
                 account.setUsername(decryptedUsername)
-                print(decryptedUsername)
                 account.setPassword(decryptedPassword)
-                print(decryptedPassword)
                 account.setName(decryptedName)
-                print(decryptedName)
                 account.setSex(decryptedSex)
                 account.setBday(decryptedBday)
                 account.setContactNumber(decryptedContactNumber)
                 account.setAppointmentDate(decryptedAppointmentDate)
                 account.setAppointmentCode(decryptedAppointmentCode)
-                print(str(decryptedAge))
                 account.setAge(decryptedAge)
                 account.setAppointmentDoctor(decryptedAppointmentDoctor)
                 account.setAppointmentDoctorDepartment(decryptedAppointmentDoctorDepartment)
@@ -979,6 +985,69 @@ def retrieve():
 
     except IOError as e:
         print("Error opening/reading the file: ", e)
+
+
+# =================================================================
+#                           PROGRAM DESIGN
+# =================================================================
+def print_welcome_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░██░░░░░░░░██░███████░██░░░░░░░██████░░░███████░░████░░░░████░███████░░")
+    print("░░██░░░░░░░░██░██░░░░░░██░░░░░░██░░░░██░██░░░░░██░██░██░░██░██░██░░░░░░░")
+    print("░░██░░░██░░░██░██████░░██░░░░░░██░░░░░░░██░░░░░██░██░░░██░░░██░██████░░░")
+    print("░░██░██░░██░██░██░░░░░░██░░░░░░██░░░░██░██░░░░░██░██░░░░░░░░██░██░░░░░░░")
+    print("░░████░░░░████░███████░███████░░██████░░░███████░░██░░░░░░░░██░███████░░")
+    print("░░░░░░░░░░░░░░░░░░░░░░ Patient Scheduling System ░░░░░░░░░░░░░░░░░░░░░░░")
+
+    print("\n\t\t  Manage and Schedule Patient Appointments with ease.\n")
+    print("\t\t\t              Let's get started!\n")
+
+    print("\033[0m")  # Reset text color to default
+
+
+def print_bye_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░█████████░░░░███░░░░ ███░░█████████░░███░░")
+    print("░░░░███░░░░███░░░░███░░ ███░░░███░░░░░░░░███░░")
+    print("░░░░█████████░░░░░░░░███░░░░░░████████░░░███░░")
+    print("░░░░███░░░░███░░░░░░░███░░░░░░███░░░░░░░░░░░░░")
+    print("░░░░█████████░░░░░░░░███░░░░░░█████████░░███░░")
+    print("░░░░░░ Thank You for using our Program! ░░░░░░")
+    print("\n       Programmed By:       ")
+    print("         John Paul Monter           ")
+    print("         Jeanne May Carolino           ")
+    print("         Almira Jill Garcia              ")
+    print("\033[0m")  # Reset text color to default
+
+
+def print_admin_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░░░░░██░░░░██████░░░████░░████░████████░████░░░░██░░░░")
+    print("░░░░░░██░░██░░██░░░██░░██░████░██░░░░██░░░░██░██░░░██░░░░")
+    print("░░░░░██░░░░██░██░░░░██░██░░██░░██░░░░██░░░░██░░██░░██░░░░")
+    print("░░░░░████████░██░░░██░░██░░░░░░██░░░░██░░░░██░░░██░██░░░░")
+    print("░░░░░██░░░░██░██████░░░██░░░░░░██ ████████░██░░░░████░░░░")
+    print("░░░░░░░░░░░░░ Appointment Scheduling System ░░░░░░░░░░░░░")
+    print("\033[0m")  # Reset text color to default
+
+
+def print_patient_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░░██████░░░░░██░░░░████████░████████░░███████░████░░░░██░████████░░░░")
+    print("░░░░██░░░░██░░██░░██░░░░░██░░░░░░░██░░░░██░░░░░░░██░██░░░██░░░░██░░░░░░░")
+    print("░░░░███████░░██░░░░██░░░░██░░░░░░░██░░░░███████░░██░░██░░██░░░░██░░░░░░░")
+    print("░░░░██░░░░░░░████████░░░░██░░░░░░░██░░░░██░░░░░░░██░░░██░██░░░░██░░░░░░░")
+    print("░░░░██░░░░░░░██░░░░██░░░░██░░░░████████░░███████░██░░░░████░░░░██░░░░░░░")
+    print("░░░░░░░░░░░░░░░░░░░░░ Appointment Scheduling System ░░░░░░░░░░░░░░░░░░░░")
+    print("\033[0m")  # Reset text color to default
+
+
+def print_color(fcolor, text, last):
+    print(f"{fcolor}{text}{last}", end='')
 
 
 # ================================================
@@ -994,10 +1063,12 @@ if __name__ == "__main__":
         encrypt.setKey(70)
         encrypt.saveKey()
     retrieve()
+    print_welcome_message()
 
     inputPatientInformation("Johnpaul", "monter123", "John Paul", 19, "Male", "January 12, 2003", "09093698521")
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
+
     display()
 
     # ASK FOR USER
@@ -1013,44 +1084,48 @@ if __name__ == "__main__":
             Valid = takeInputPatientInformation()
         elif choice == 3:
             save()
-            print("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May\n\n\n\n")
+            print_bye_message()
             exit(0)
         if Valid:
             break
 
-    # Menu Driven for Patient Side
-    isValid = True
-    Valid = True
-    while isValid:
-        choice1 = menu(3)
-        if 1 > choice1 > 5:
-            input("Wrong Input Try Again!!! Press Enter")
-        if choice1 == 1:
-            display_patient_information()
-        elif choice1 == 2:
-            takeAppointmentSchedule()
-        elif choice1 == 3:
-            view_schedule()
-        elif choice1 == 4:
-            takePaymentMethod()
-        elif choice1 == 5:
-            save()
-            exit(0)
-
     # Menu Driven for Admin Side
-    isValid = True
-    Valid = True
-    while isValid:
-        choice1 = menu(4)
-        if 1 > choice1 > 4:
-            input("Wrong Input Try Again!!! Press Enter")
-        if choice1 == 1:
-            print("[1] Display Patient List")
-        elif choice1 == 2:
-            print("[2] Display Doctor List")
-        elif choice1 == 3:
-            print("[3] Security Key")
-        elif choice1 == 4:
-            print("[4] Log out")
-            save()
-            exit(0)
+    if loginAdmin:
+        isValid = True
+        Valid = True
+        while isValid:
+            print_admin_message()
+            choice1 = menu(4)
+            if 1 > choice1 > 4:
+                input("Wrong Input Try Again!!! Press Enter")
+            if choice1 == 1:
+                display_patient_list()
+            elif choice1 == 2:
+                display_doctor_list()
+            elif choice1 == 3:
+                security()
+            elif choice1 == 4:
+                save()
+                print_bye_message()
+                exit(0)
+    else:
+        # Menu Driven for Patient Side
+        isValid = True
+        Valid = True
+        while isValid:
+            print_patient_message()
+            choice1 = menu(3)
+            if 1 > choice1 > 5:
+                input("Wrong Input Try Again!!! Press Enter")
+            if choice1 == 1:
+                display_patient_information()
+            elif choice1 == 2:
+                takeAppointmentSchedule()
+            elif choice1 == 3:
+                view_schedule()
+            elif choice1 == 4:
+                takePaymentMethod()
+            elif choice1 == 5:
+                save()
+                print_bye_message()
+                exit(0)
