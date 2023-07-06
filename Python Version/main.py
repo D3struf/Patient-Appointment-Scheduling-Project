@@ -337,6 +337,10 @@ def login_Account(username, password):
 # =================================================================
 #                           MENU DRIVEN
 # =================================================================
+def pause():
+    input("Please Enter to continue...")
+
+
 def gotoxy(x, y):
     print("\033[%d;%dH" % (y, x), end='')
 
@@ -638,10 +642,70 @@ def confirmationCode():
     return code
 
 
-def paymentMethod():
+def takePaymentMethod():
     currentAccount = getCurrentUserAccount()
     if currentAccount is not None and currentAccount.accounts is not None:
-        currentAccount.accounts.setPaymentStatus(1)
+        if currentAccount.accounts.getAppointmentDate == 1:
+            print("You have already paid your Appointment")
+            pause()
+            return
+
+    while True:
+        print("================================================================")
+        print("                     Payment Method                             ")
+        print("================================================================")
+        print("                   Mode of Transaction                          ")
+
+        choice = menu(2)
+        if 1 > choice > 3:
+            print("Invalid Input!, Try Again!!!")
+            pause()
+
+        if choice == 1:
+            print("Mode of Transaction is Cash")
+            print(f"Go to the nearest {Variables.HOSPITAL_NAME} for your Payment!")
+            pause()
+            break
+        elif choice == 2:
+            print("================================================================")
+            print("                 Mode of Transaction: Online                    ")
+            print("================================================================")
+            break
+        elif choice == 3:
+            return
+
+    status = 0
+    if choice == 2:
+        print(f"Reservation Fee: {Variables.RESERVATION_FEE}.00")
+        bankName = input("Enter your Bank Name: ")
+        accountNumber = input("Enter your Account Number: ")
+        amount = int(input("Enter Amount: "))
+        if amount == Variables.RESERVATION_FEE:
+            temp = confirmationCode()
+            print(f"Your Confirmation Code is: {temp}")
+            print("Payment Successful")
+            print("Thank You for Using our Program!!")
+            pause()
+            status = 1
+        elif amount > Variables.RESERVATION_FEE:
+            temp = confirmationCode()
+            print(f"Your Confirmation Code is: {temp}")
+            print("Payment Successful")
+            print("Thank You for Using our Program!!")
+            pause()
+            status = 1
+        else:
+            print("Payment Failed")
+            pause()
+            return
+
+    updatePaymentMethod(status)
+
+
+def updatePaymentMethod(status):
+    currentAccount = getCurrentUserAccount()
+    if currentAccount is not None and currentAccount.accounts is not None:
+        currentAccount.accounts.setPaymentStatus(status)
 
 
 # =============================================================================
@@ -972,7 +1036,7 @@ if __name__ == "__main__":
         elif choice1 == 3:
             print("View Schedule wala pa")
         elif choice1 == 4:
-            print("Payment wala pa")
+            takePaymentMethod()
         elif choice1 == 5:
             # save()
             exit(0)
