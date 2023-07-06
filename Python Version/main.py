@@ -60,11 +60,35 @@ def display():
         count += 1
 
 
+
 def display_patient_list():
     count = 0
+    print("==============================================================================")
+    print("                                  ADMIN PAGE                                  ")
+    print("                                PATIENT'S LIST                                ")
+    print("==============================================================================")
     for current in L:
-        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + ("Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
-        count += 1
+        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + (
+              "Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
+    count += 1
+
+
+
+def display_doctor_list():
+    print("==============================================================================")
+    print("                                  ADMIN PAGE                                  ")
+    print("                                 DOCTOR'S LIST                                ")
+    print("==============================================================================")
+    print("DOCTOR",f"\t\t\t\t\t""DEPARTMENT"f"\t\t\t""SCHEDULE"f"\t\t\t\t\t\t\t\t\t\t\t""EMAIL",f"\t\t\t\t\t\t\t""CONTACT NO.")
+    print("Dr. John Smith",f"\t\t\t""OPD",f"\t\t\t\t""Monday to Tuesday - 9:00am to 5:00pm",f"\t\t\t\t""john.smith@tupmc.com",f"\t\t\t""09123456789")
+    print("Dr. Sarah Lee",f"\t\t\t""OPD",f"\t\t\t\t""Wednesday to Thursday - 10:00am to 6:00pm",f"\t\t\t""sarah.lee@hospital.com",f"\t\t\t""09987654321")
+    print("Dr. Alex Murray",f"\t\t""OPD",f"\t\t\t\t""Friday to Saturday - 9:00am to 5:00pm",f"\t\t\t\t""alex.murray@tupmc.com",f"\t\t\t""09918273645")
+
+
+def security():
+    encryption = Encryption
+    print("Current Key: ", encryption.globalkey)
+    int(input("Enter a new key: "))
 
 
 class Account:
@@ -347,7 +371,7 @@ def pause():
 
 
 def gotoxy(x, y):
-    print("\033[%d;%dH" % (y, x), end='')
+    sys.stdout.write(f"\033[{y};{x}H")
 
 
 def clear_screen():
@@ -1009,10 +1033,73 @@ def getDoctorList():
 #     except IOError as e:
 #         print("Error opening/reading the file: ", e)
 
+# =================================================================
+#                           PROGRAM DESIGN
+# =================================================================
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def print_welcome_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░██░░░░░░░░██░███████░██░░░░░░░██████░░░███████░░████░░░░████░███████░░")
+    print("░░██░░░░░░░░██░██░░░░░░██░░░░░░██░░░░██░██░░░░░██░██░██░░██░██░██░░░░░░░")
+    print("░░██░░░██░░░██░██████░░██░░░░░░██░░░░░░░██░░░░░██░██░░░██░░░██░██████░░░")
+    print("░░██░██░░██░██░██░░░░░░██░░░░░░██░░░░██░██░░░░░██░██░░░░░░░░██░██░░░░░░░")
+    print("░░████░░░░████░███████░███████░░██████░░░███████░░██░░░░░░░░██░███████░░")
+    print("░░░░░░░░░░░░░░░░░░░░░░ Patient Scheduling System ░░░░░░░░░░░░░░░░░░░░░░░")
+
+    print("\n\t\t  Manage and Schedule Patient Appointments with ease.\n")
+    print("\t\t\t              Let's get started!\n")
+
+    print("\033[0m")  # Reset text color to default
+
+
+def print_bye_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░█████████░░░░███░░░░ ███░░█████████░░███░░")
+    print("░░░░███░░░░███░░░░███░░ ███░░░███░░░░░░░░███░░")
+    print("░░░░█████████░░░░░░░░███░░░░░░████████░░░███░░")
+    print("░░░░███░░░░███░░░░░░░███░░░░░░███░░░░░░░░░░░░░")
+    print("░░░░█████████░░░░░░░░███░░░░░░█████████░░███░░")
+    print("░░░░░░ Thank You for using our Program! ░░░░░░")
+    print("\n       Programmed By:       ")
+    print("         John Paul Monter           ")
+    print("         Jeanne Mae Carolino           ")
+    print("         Almira Jill Garcia              ")
+    print("\033[0m")  # Reset text color to default
+
+
+def print_admin_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░░░░░██░░░░██████░░░████░░████░████████░████░░░░██░░░░")
+    print("░░░░░░██░░██░░██░░░██░░██░████░██░░░░██░░░░██░██░░░██░░░░")
+    print("░░░░░██░░░░██░██░░░░██░██░░██░░██░░░░██░░░░██░░██░░██░░░░")
+    print("░░░░░████████░██░░░██░░██░░░░░░██░░░░██░░░░██░░░██░██░░░░")
+    print("░░░░░██░░░░██░██████░░░██░░░░░░██ ████████░██░░░░████░░░░")
+    print("░░░░░░░░░░░░░ Appointment Scheduling System ░░░░░░░░░░░░░")
+    print("\033[0m")  # Reset text color to default
+
+
+def print_patient_message():
+    print("\033[1;36m")  # Set text color to cyan
+    print("\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
+    print("░░░░░██████░░░░░██░░░░████████░████████░░███████░████░░░░██░████████░░░░")
+    print("░░░░██░░░░██░░██░░██░░░░░██░░░░░░░██░░░░██░░░░░░░██░██░░░██░░░░██░░░░░░░")
+    print("░░░░███████░░██░░░░██░░░░██░░░░░░░██░░░░███████░░██░░██░░██░░░░██░░░░░░░")
+    print("░░░░██░░░░░░░████████░░░░██░░░░░░░██░░░░██░░░░░░░██░░░██░██░░░░██░░░░░░░")
+    print("░░░░██░░░░░░░██░░░░██░░░░██░░░░████████░░███████░██░░░░████░░░░██░░░░░░░")
+    print("░░░░░░░░░░░░░░░░░░░░░ Appointment Scheduling System ░░░░░░░░░░░░░░░░░░░░")
+    print("\033[0m")  # Reset text color to default
 # ================================================
 #                     MAIN
 # ================================================
+
+
 if __name__ == "__main__":
     os.makedirs(Variables.DATABASE_FOLDER, exist_ok=True)
     os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
@@ -1028,8 +1115,14 @@ if __name__ == "__main__":
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
     # save()
+    print_welcome_message()
+    print_bye_message()
+    print_admin_message()
+    print_patient_message()
     display()
     display_patient_list()
+    display_doctor_list()
+    security()
 
     # ASK FOR USER
     isValid = True
@@ -1085,3 +1178,8 @@ if __name__ == "__main__":
             print("[4] Log out")
             # save()
             exit(0)
+
+
+
+
+
