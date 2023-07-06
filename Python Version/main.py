@@ -1,5 +1,6 @@
 import os
 import random
+import time
 import datetime
 
 import Encryption
@@ -12,7 +13,7 @@ class Variables:
     PATIENT_FILE = DATABASE_FOLDER + "/patient.txt"
     DOCTOR_FILE = DATABASE_FOLDER + "/doctor.txt"
     KEY_FILE = DATABASE_FOLDER + "/key.txt"
-    SCHEDULE_FOLDER = DATABASE_FOLDER + "/Schedules"
+    SCHEDULE_FOLDER = os.path.join(DATABASE_FOLDER, "Schedules")
     HOSPITAL_NAME = "TUP-Manila Medical Center"
     RESERVATION_FEE = 150
     ENTER = 13
@@ -259,6 +260,26 @@ def isUsernameExists(username):
     return False
 
 
+def takeInputPatientInformation():
+    print("Please Fill up the Patient Information")
+    username = input("Enter Username: ")
+    password = input("Enter Password: ")
+    name = input("Enter Name: ")
+    age = int(input("Enter Age: "))
+    sex = input("Enter Sex: ")
+    bday = input("Enter Birthday: ")
+    contactNumber = input("Enter Contact Number: ")
+
+    if inputPatientInformation(username, password, name, age, sex, bday, contactNumber):
+        print("==============================================================================")
+        print("                          Account Created Successfully!!")
+        print("==============================================================================")
+        return True
+    else:
+        print("Please Enter Different Username!")
+        return False
+
+
 def inputPatientInformation(username, password, name, age, sex, bday, contact_number):
     global globalUsername
     if isUsernameExists(username):
@@ -272,6 +293,31 @@ def inputPatientInformation(username, password, name, age, sex, bday, contact_nu
     return True
 
 
+def takeLoginAccount():
+    global globalUsername
+    print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n")
+    print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n")
+    print("==============================================================================\n")
+    user = input("Enter Username: ")
+    password = input("Enter Password: ")
+    valid = login_Account(user, password)
+    if valid == 0:
+        print("==============================================================================\n")
+        print("                              Log in Successful!!\n")
+        print("==============================================================================\n")
+        return True
+    elif valid == 1:
+        print("==============================================================================\n")
+        print("                              Incorrect Password\n")
+        print("==============================================================================\n")
+        return False
+    else:
+        print("==============================================================================")
+        print("                              Incorrect Username                              ")
+        print("                           Create your Account First                          ")
+        print("==============================================================================")
+
+
 def login_Account(username, password):
     # If exists, store in global variable
     global globalUsername
@@ -281,47 +327,223 @@ def login_Account(username, password):
     for lists in L:
         if lists.accounts.username == username:
             if lists is not None and lists.accounts.password == password:
-                return True
+                return 0
             else:
-                return False
+                return 1
 
-    return False
+    return -1
+
+
+# =================================================================
+#                           MENU DRIVEN
+# =================================================================
+def gotoxy(x, y):
+    print("\033[%d;%dH" % (y, x), end='')
+
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def box():
+    print("==================================================")
+
+
+def menu(x):
+    choice = 0
+
+    if x == 1:
+        clear_screen()
+        box()
+        os.system("COLOR 0E")
+        gotoxy(35,5);print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+        gotoxy(35,6);print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+        gotoxy(41,8);print("=======================================")
+        gotoxy(51,9); print("[1] LOG IN ACCOUNT")
+        gotoxy(41,10);print("=======================================")
+        gotoxy(51,11);print("[2] CREATE ACCOUNT")
+        gotoxy(41,12);print("=======================================")
+        gotoxy(51,13);print("[3] EXIT")
+        gotoxy(41,14);print("=======================================")
+        gotoxy(51,15);print("ENTER CHOICE: ")
+        gotoxy(41,16);print("=======================================")
+        gotoxy(35,18);print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
+        gotoxy(35,19);print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
+        gotoxy(65,15);choice = int(input())
+        return choice
+    elif x == 2:
+        gotoxy(41,13);print("=======================================")
+        gotoxy(51,14);print("[1] Cash")
+        gotoxy(41,15);print("=======================================")
+        gotoxy(51,16);print("[2] Online Transaction")
+        gotoxy(41,17);print("=======================================")
+        gotoxy(51,18);print("[3] Back Menu")
+        gotoxy(41,19);print("=======================================")
+        gotoxy(51,20);print("Enter Choice: ")
+        gotoxy(41,21);print("=======================================")
+        gotoxy(68,20);choice = int(input())
+        return choice
+    else:
+        clear_screen()
+        box()
+        gotoxy(35, 5); print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+        gotoxy(35,6); print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+        gotoxy(41,8);print("=======================================")
+        gotoxy(46,9);print("[1] View Patient Information")
+        gotoxy(41,10);print("=======================================")
+        gotoxy(46,11);print("[2] Schedule an Appointment")
+        gotoxy(41,12);print("=======================================")
+        gotoxy(46,13);print("[3] View Schedule")
+        gotoxy(41,14);print("=======================================")
+        gotoxy(46,15);print("[4] Payment for Appointment")
+        gotoxy(41,16);print("=======================================")
+        gotoxy(46,17);print("[5] Sign Out")
+        gotoxy(41,18);print("=======================================")
+        gotoxy(46,19);print("Enter Choice: ")
+        gotoxy(41,20);print("=======================================")
+        gotoxy(65,19);choice = int(input())
+        return choice
+
+
+def display_patient_information():
+    # Look for the username
+    for current in L:
+        if current.accounts.username == globalUsername:
+            clear_screen()
+            box()
+            print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+            print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+            print("================================================================")
+            print("                     Patient Information                        ")
+            print("================================================================")
+            print(f"USERNAME:           {current.accounts.getUsername()}")
+            print(f"PASSWORD:           {current.accounts.getPassword()}")
+            print(f"NAME:               {current.accounts.getName()}")
+            print(f"AGE:                {current.accounts.getAge()}")
+            print(f"SEX:                {current.accounts.getSex()}")
+            print(f"BIRTHDAY:           {current.accounts.getBday()}")
+            print(f"CONTACT NUMBER:     {current.accounts.getContactNumber()}")
+            print("================================================================\n\t")
+            input("Press Enter to continue...")
+            print("================================================================\n")
+            break
 
 
 # =================================================================
 #                   Patient Appointment Methods
 # =================================================================
+def takeAppointmentSchedule():
+    clear_screen()
+    box()
+    print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+    print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+    print("================================================================")
+    print("                     Appointment Schedule                       ")
+    print("================================================================")
+
+    # Check if the user has already scheduled an appointment
+    for current in L:
+        if current.accounts.username == globalUsername:
+            if current.accounts.appointment_date != "":
+                print("You have already scheduled an appointment")
+                print("Check your appointment schedule in the View Schedule Menu")
+                print("================================================================")
+                input("Press Enter to continue...")
+                return
+            else:
+                break
+
+        print("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE")
+        chosenSlot = generateAppointmentSchedules()
+
+        full = 0
+        choice = int(input("Enter Choice: "))
+        print("================================================================")
+        if 1 <= choice <= 3:
+            if chosenSlot[choice - 1].numPatients >= Variables.MAX_PATIENTS:
+                print("Sorry, the slots are already full")
+                print("Please choose another date")
+                full = 1
+            else:
+                y = appointmentDoctor()
+                code = appointmentCode()
+                clear_screen()
+                box()
+                print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+                print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+                print("================================================================")
+                print("                     Appointment Schedule                       ")
+                print("================================================================")
+                print("You have Successfully created an Appointment Schedule")
+                print("Your Appointment Schedule is on %s" % chosenSlot[choice - 1].date)
+                print("Your Doctor is %s" % y.name)
+                print("Your Appointment Code is %s" % code)
+                chosenSlot[choice - 1].numPatients += 1
+
+                updatePatientAppointment(current, chosenSlot[choice - 1], y, code)
+                savePatientSlotFile(current.accounts.getAppointmentDate(), chosenSlot[choice - 1].numPatients)
+                break
+        else:
+            print("Invalid Choice")
+        print("================================================================")
+        input("Press Enter to continue...")
+        if 1 <= choice <= 3 or full == 0:
+            break
+
+
 def generateAppointmentSchedules():
-    slot = [] * Variables.DAYS
+    slot = [Appointment(None, None) for _ in range(Variables.DAYS)]
     tomorrow_date = datetime.datetime.now().date() + datetime.timedelta(days=1)
 
     for i in range(Variables.DAYS):
         patient_slot = Appointment(None, None)
-        patient_slot.date = tomorrow_date.strftime("%b %d %Y")
-        patient_slot.num_patients = checkPatientSlotFile(patient_slot.date)
+        patient_slot.date = tomorrow_date.strftime("%b-%d-%Y")
+        patient_slot.numPatients = checkPatientSlotFile(patient_slot.date)
 
         slot[i] = patient_slot
         tomorrow_date += datetime.timedelta(days=1)
 
+    index = 1
+    for i in range(Variables.DAYS):
+        print(f"{index}     {slot[i].date}     {slot[i].numPatients}     {slot[i].numPatients}/{Variables.MAX_PATIENTS}")
+        index += 1
+    return slot
+
 
 def checkPatientSlotFile(DTIME):
-    filePath = Variables.SCHEDULE_FOLDER + DTIME
-    try:
-        with open(filePath, "r") as file:
+    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, DTIME + ".txt")
+    if not os.path.exists(FilePath):
+        open(FilePath, "w").close()
+    # times = DTIME + ".txt"
+    # filePath = os.path.join(Variables.SCHEDULE_FOLDER, times)
+    # os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
+    # try:
+        # folderPath = os.path.dirname(Variables.SCHEDULE_FOLDER)
+        # os.makedirs(filePath, exist_ok=True)
+    with open(FilePath, "r") as file:
+        if os.path.exists(FilePath):
             slotNum = file.readline()
-            return int(slotNum)
-    except IOError as e:
-        print("Error opening/reading to file: ", e)
+            if slotNum == "":
+                return 0
+            else:
+                return int(slotNum)
+    # except IOError as e:
+    #     print("Error opening/reading to file: ", e)
     return 0
 
 
 def savePatientSlotFile(DTIME, numPatient):
-    filePath = Variables.SCHEDULE_FOLDER + DTIME
-    try:
-        with open(filePath, "w") as file:
-            file.write(str(numPatient))
-    except IOError as e:
-        print("Error opening/writing to file:", e)
+    print(f"number of patient: {numPatient}")
+    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
+    if not os.path.exists(FilePath):
+        open(FilePath, "w").close()
+
+    # try:
+    with open(FilePath, "w") as file:
+        print(FilePath)
+        file.write(str(numPatient))
+    # except IOError as e:
+    #     print("Error opening/writing to file:", e)
 
 
 def appointmentCode():
@@ -334,6 +556,7 @@ def appointmentCode():
 
 def appointmentDoctor():
     global doctors
+    listofDoctor()
     random_doctor = random.choice(doctors)
     return random_doctor
 
@@ -677,17 +900,54 @@ def getDoctorList():
 #                     MAIN
 # ================================================
 if __name__ == "__main__":
+    os.makedirs(Variables.DATABASE_FOLDER, exist_ok=True)
     os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-    encrypt = Encryption
-    if os.path.exists(Variables.KEY_FILE):
-        encrypt.retrieveKey()
-    else:
-        encrypt.setKey(70)
-        encrypt.saveKey()
+    # encrypt = Encryption
+    # if os.path.exists(Variables.KEY_FILE):
+    #     encrypt.retrieveKey()
+    # else:
+    #     encrypt.setKey(70)
+    #     encrypt.saveKey()
 
     # retrieve()
     inputPatientInformation("Johnpaul", "monter123", "John Paul", 19, "Male", "January 12, 2003", "09093698521")
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     # save()
     display()
-    print("Running")
+
+    # ASK FOR USER
+    isValid = True
+    Valid = True
+    while isValid:
+        choice = menu(1)
+        if 1 > choice > 3:
+            input("Wrong Input Try Again!!! Press Enter")
+        if choice == 1:
+            Valid = takeLoginAccount()
+        elif choice == 2:
+            Valid = takeInputPatientInformation()
+        elif choice == 3:
+            # save();
+            print("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May\n\n\n\n")
+            exit(0)
+        if Valid:
+            break
+
+    # Menu Driven for Patient Side
+    isValid = True
+    Valid = True
+    while isValid:
+        choice1 = menu(3)
+        if 1 > choice1 > 5:
+            input("Wrong Input Try Again!!! Press Enter")
+        if choice1 == 1:
+            display_patient_information()
+        elif choice1 == 2:
+            takeAppointmentSchedule()
+        elif choice1 == 3:
+            print("View Schedule wala pa")
+        elif choice1 == 4:
+            print("Payment wala pa")
+        elif choice1 == 5:
+            # save()
+            exit(0)
