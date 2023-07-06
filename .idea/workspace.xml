@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9757218-99dd-4e51-add1-f263b0b9e837" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+<<<<<<< HEAD
+=======
+      <change afterPath="$PROJECT_DIR$/Python Version/UILogin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python Version/sample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Scheduling System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Scheduling System.iml" afterDir="false" />
+>>>>>>> ad83a0221d6ae0477c9661f78bd20f6bb46cf1d6
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <list id="754382f4-7d54-4db9-8014-4d06a6afe849" name="Changes by johnp" comment="">
+      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
+    </list>
+    <list id="d8f23be4-06a3-463a-bfe6-bd214cda86d1" name="Changes by PAUL HERE" comment="">
+      <change beforePath="$PROJECT_DIR$/Python Version/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python Version/main.py" afterDir="false" />
+>>>>>>> 068a921abf7dae02865eeb4111fce8ce57c1301b
     </list>
     <list id="754382f4-7d54-4db9-8014-4d06a6afe849" name="Changes by johnp" comment="" />
     <option name="SHOW_DIALOG" value="false" />

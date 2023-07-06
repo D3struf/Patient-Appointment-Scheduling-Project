@@ -13,7 +13,7 @@ class Variables:
     PATIENT_FILE = DATABASE_FOLDER + "/patient.txt"
     DOCTOR_FILE = DATABASE_FOLDER + "/doctor.txt"
     KEY_FILE = DATABASE_FOLDER + "/key.txt"
-    SCHEDULE_FOLDER = DATABASE_FOLDER + "\\Schedules"
+    SCHEDULE_FOLDER = os.path.join(DATABASE_FOLDER, "Schedules")
     HOSPITAL_NAME = "TUP-Manila Medical Center"
     RESERVATION_FEE = 150
     ENTER = 13
@@ -479,7 +479,9 @@ def takeAppointmentSchedule():
                 print("Your Doctor is %s" % y.name)
                 print("Your Appointment Code is %s" % code)
                 chosenSlot[choice - 1].numPatients += 1
+
                 updatePatientAppointment(current, chosenSlot[choice - 1], y, code)
+                savePatientSlotFile(current.accounts.getAppointmentDate(), chosenSlot[choice - 1].numPatients)
                 break
         else:
             print("Invalid Choice")
@@ -488,9 +490,32 @@ def takeAppointmentSchedule():
         if 1 <= choice <= 3 or full == 0:
             break
 
-        savePatientSlotFile(current.accounts.getAppointmentDate(), chosenSlot[choice - 1].numPatients)
 
+def view_schedule():
+    p = L
 
+    while p is not None:
+        if p.accounts.username == global_Username:
+            clear_screen()
+            box()
+            gotoxy(30,4);print("================================================================")
+            gotoxy(30,5);print("                     Appointment Schedule                       ")
+            gotoxy(30,6);print("================================================================")
+            gotoxy(30,8);print("USERNAME:           %s" % p.accounts.username)
+            gotoxy(30,9);print("NAME:               %s" % p.accounts.name)
+            gotoxy(30,10);print("APPOINTMENT DATE:   %s" % p.accounts.appointment_date)
+            gotoxy(30,12);print("===========================CODE: %s===========================" % p.accounts.appointment_code)
+            gotoxy(30,14);print("DOCTOR DETAILS")
+            gotoxy(30,15);print("APPOINTMENT DOCTOR: %s" % p.accounts.appointment_doctor)
+            gotoxy(30,16);print("DEPARTMENT:         %s" % p.accounts.appointment_doctor_department)
+            gotoxy(30,17);print("SCHEDULE:           %s" % p.accounts.appointment_doctor_schedule)
+            gotoxy(30,18);print("EMAIL:              %s" % p.accounts.appointment_doctor_email)
+            gotoxy(30,19);print("CONTACT NUMBER:     %s" % p.accounts.appointment_doctor_contact_number)
+            gotoxy(30,20);print("================================================================\n\t")
+            gotoxy(30,22);print("================================================================")
+            input("Press Enter to continue...")
+            break
+        p = p.next
 def generateAppointmentSchedules():
     slot = [Appointment(None, None) for _ in range(Variables.DAYS)]
     tomorrow_date = datetime.datetime.now().date() + datetime.timedelta(days=1)
@@ -511,39 +536,39 @@ def generateAppointmentSchedules():
 
 
 def checkPatientSlotFile(DTIME):
-    FilePath = DTIME + ".txt"
-    filePath2 = os.path.join(Variables.SCHEDULE_FOLDER, FilePath)
+    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, DTIME + ".txt")
+    if not os.path.exists(FilePath):
+        open(FilePath, "w").close()
     # times = DTIME + ".txt"
     # filePath = os.path.join(Variables.SCHEDULE_FOLDER, times)
     # os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-    try:
+    # try:
         # folderPath = os.path.dirname(Variables.SCHEDULE_FOLDER)
         # os.makedirs(filePath, exist_ok=True)
-        with open(filePath2, "r") as file:
-            if os.path.exists(filePath2):
-                print(filePath2)
-                slotNum = file.readline()
-                return int(slotNum)
-            else:
+    with open(FilePath, "r") as file:
+        if os.path.exists(FilePath):
+            slotNum = file.readline()
+            if slotNum == "":
                 return 0
-    except IOError as e:
-        print("Error opening/reading to file: ", e)
+            else:
+                return int(slotNum)
+    # except IOError as e:
+    #     print("Error opening/reading to file: ", e)
     return 0
 
 
 def savePatientSlotFile(DTIME, numPatient):
-    FilePath = DTIME + ".txt"
-    filePath2 = os.path.join(Variables.SCHEDULE_FOLDER, FilePath)
-    # filePath = os.path.join(Variables.SCHEDULE_FOLDER, times)
-    # os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-    try:
-        # folderPath = os.path.dirname(Variables.SCHEDULE_FOLDER)
-        # filePath = os.path.join(Variables.SCHEDULE_FOLDER, DTIME + ".txt")
-        with open(filePath2, "w") as file:
-            print(filePath2)
-            file.write(str(numPatient))
-    except IOError as e:
-        print("Error opening/writing to file:", e)
+    print(f"number of patient: {numPatient}")
+    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
+    if not os.path.exists(FilePath):
+        open(FilePath, "w").close()
+
+    # try:
+    with open(FilePath, "w") as file:
+        print(FilePath)
+        file.write(str(numPatient))
+    # except IOError as e:
+    #     print("Error opening/writing to file:", e)
 
 
 def appointmentCode():

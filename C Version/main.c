@@ -573,32 +573,109 @@ DOCTOR appoint_Doctor()
     return doctors[num];
 }
 
+void payment_Method()
+{
+    // Check if the user has already paid the appointment
+    LIST *q;
+    q = L;
+    while (q != NULL)
+    {
+        if (strcmp(q->accounts.username, global_Username) == 0)
+        {
+            if (q->accounts.payment_status == 2)
+            {
+                printf("You have already paid your appointment\n");
+                system("pause");
+                return;
+            }
+            else
+            {
+                break;
+            }
+        }
+        q = q->next;
+    }
 
-def view_schedule():
+    int choice;
+    while(1)
+    {
+        system("cls");
+        printf("================================================================\n");
+        printf("                     Payment Method                             \n");
+        printf("================================================================\n");
+        printf("                   Mode of Transaction                          \n");
 
-    while p is not None:
-        if p.accounts.username == global_Username:
-            clear_screen()
-            box()
-            gotoxy(30,4);print("================================================================")
-            gotoxy(30,5);print("                     Appointment Schedule                       ")
-            gotoxy(30,6);print("================================================================")
-            gotoxy(30,8);print("USERNAME:           %s" % p.accounts.username)
-            gotoxy(30,9);print("NAME:               %s" % p.accounts.name)
-            gotoxy(30,10);print("APPOINTMENT DATE:   %s" % p.accounts.appointment_date)
-            gotoxy(30,12);print("===========================CODE: %s===========================" % p.accounts.appointment_code)
-            gotoxy(30,14);print("DOCTOR DETAILS")
-            gotoxy(30,15);print("APPOINTMENT DOCTOR: %s" % p.accounts.appointment_doctor)
-            gotoxy(30,16);print("DEPARTMENT:         %s" % p.accounts.appointment_doctor_department)
-            gotoxy(30,17);print("SCHEDULE:           %s" % p.accounts.appointment_doctor_schedule)
-            gotoxy(30,18);print("EMAIL:              %s" % p.accounts.appointment_doctor_email)
-            gotoxy(30,19);print("CONTACT NUMBER:     %s" % p.accounts.appointment_doctor_contact_number)
-            gotoxy(30,20);print("================================================================\n\t")
-            gotoxy(30,22);print("================================================================")
-            input("Press Enter to continue...")
-            break
-        p = p.next
+        switch(choice = menu(2))
+        {
+            case 1: printf("Mode of Transaction is Cash\n");
+                    printf("Go to the nearest %s for your payment\n", HOSPITAL_NAME);
+                    system("pause");
+                    break;
+            case 2: printf("================================================================\n");
+                    printf("                 Mode of Transaction: Online                    \n");
+                    printf("================================================================\n");
+                    break;
+            case 3: return;
+            default: printf("Invalid Input\n");
+                    system("pause");
+        }
+        if (choice > 0 && choice <= 3)
+            break;
+    }
 
+    // Prompt for payment details
+    int amount, status = 1;
+    char bank_name[101], account_number[101];
+    char *temp = malloc(sizeof(char) * 5);
+    if (choice == 2)
+    {
+        printf("Reservation Fee: %d.00\n", RESERVATION_FEE);
+        printf("Enter your Bank Name: ");
+        scanf("%s", bank_name);
+        printf("Enter your Account Number: ");
+        scanf("%s", account_number);
+        printf("Enter Amount: ");
+        scanf("%d", &amount);
+        if (amount == RESERVATION_FEE)
+        {
+            temp = confirmation_code();
+            printf("Your Confirmation Code is: %s\n", temp);
+            printf("Payment Successful\n");
+            printf("Thank You For Using our Program!!\n");
+            system("pause");
+            status = 2;
+        }
+        else if (amount > RESERVATION_FEE)
+        {
+            temp = confirmation_code();
+            printf("Your Confirmation Code is: %s\n", temp);
+            printf("Payment Successful\n");
+            printf("Change: %d.00\n", amount - RESERVATION_FEE);
+            printf("Thank You For Using our Program!!\n");
+            system("pause");
+            status = 2;
+        }
+        else
+        {
+            printf("Payment Failed\n");
+            system("pause");
+            return;
+        }
+    }
+    // Update the payment status
+    LIST *p;
+    p = L;
+
+    while (p != NULL)
+    {
+        if (strcmp(p->accounts.username, global_Username) == 0)
+        {
+            p->accounts.payment_status = status;
+            break;
+        }
+    }
+    return;
+}
 
 char *appointment_code()
 {
