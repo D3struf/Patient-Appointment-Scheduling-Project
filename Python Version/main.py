@@ -1,10 +1,8 @@
 import os
 import random
-import time
 import datetime
 
 import Encryption
-# from Encryption import Encryption
 
 
 class Variables:
@@ -65,7 +63,7 @@ def display():
 def display_patient_list():
     count = 0
     for current in L:
-        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + current.accounts.getPaymentStatus())
+        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + ("Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
         count += 1
 
 
@@ -361,59 +359,54 @@ def box():
 
 
 def menu(x):
-    choice = 0
-
     if x == 1:
         clear_screen()
         box()
         os.system("COLOR 0E")
-        gotoxy(35,5);print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-        gotoxy(35,6);print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-        gotoxy(41,8);print("=======================================")
-        gotoxy(51,9); print("[1] LOG IN ACCOUNT")
-        gotoxy(41,10);print("=======================================")
-        gotoxy(51,11);print("[2] CREATE ACCOUNT")
-        gotoxy(41,12);print("=======================================")
-        gotoxy(51,13);print("[3] EXIT")
-        gotoxy(41,14);print("=======================================")
-        gotoxy(51,15);print("ENTER CHOICE: ")
-        gotoxy(41,16);print("=======================================")
-        gotoxy(35,18);print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
-        gotoxy(35,19);print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
-        gotoxy(65,15);choice = int(input())
-        return choice
+        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+        print("=======================================")
+        print("[1] LOG IN ACCOUNT")
+        print("=======================================")
+        print("[2] CREATE ACCOUNT")
+        print("=======================================")
+        print("[3] EXIT")
+        print("=======================================")
+        select = int(input("Enter Choice: "))
+        print("=======================================")
+        print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
+        print("X|||||||||||||||||||||||||||||||||||||||||||||||||X")
+        return select
     elif x == 2:
-        gotoxy(41,13);print("=======================================")
-        gotoxy(51,14);print("[1] Cash")
-        gotoxy(41,15);print("=======================================")
-        gotoxy(51,16);print("[2] Online Transaction")
-        gotoxy(41,17);print("=======================================")
-        gotoxy(51,18);print("[3] Back Menu")
-        gotoxy(41,19);print("=======================================")
-        gotoxy(51,20);print("Enter Choice: ")
-        gotoxy(41,21);print("=======================================")
-        gotoxy(68,20);choice = int(input())
-        return choice
+        print("=======================================")
+        print("[1] Cash")
+        print("=======================================")
+        print("[2] Online Transaction")
+        print("=======================================")
+        print("[3] Back Menu")
+        print("=======================================")
+        select = int(input("Enter Choice: "))
+        print("=======================================")
+        return select
     elif x == 3:
         clear_screen()
         box()
-        gotoxy(35, 5); print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-        gotoxy(35,6); print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-        gotoxy(41,8);print("=======================================")
-        gotoxy(46,9);print("[1] View Patient Information")
-        gotoxy(41,10);print("=======================================")
-        gotoxy(46,11);print("[2] Schedule an Appointment")
-        gotoxy(41,12);print("=======================================")
-        gotoxy(46,13);print("[3] View Schedule")
-        gotoxy(41,14);print("=======================================")
-        gotoxy(46,15);print("[4] Payment for Appointment")
-        gotoxy(41,16);print("=======================================")
-        gotoxy(46,17);print("[5] Sign Out")
-        gotoxy(41,18);print("=======================================")
-        gotoxy(46,19);print("Enter Choice: ")
-        gotoxy(41,20);print("=======================================")
-        gotoxy(65,19);choice = int(input())
-        return choice
+        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+        print("=======================================")
+        print("[1] View Patient Information")
+        print("=======================================")
+        print("[2] Schedule an Appointment")
+        print("=======================================")
+        print("[3] View Schedule")
+        print("=======================================")
+        print("[4] Payment for Appointment")
+        print("=======================================")
+        print("[5] Sign Out")
+        print("=======================================")
+        select = int(input("Enter Choice: "))
+        print("=======================================")
+        return select
     elif x == 4:
         clear_screen()
         box()
@@ -426,12 +419,11 @@ def menu(x):
         print("=======================================")
         print("[3] Security Key")
         print("=======================================")
-        print("[4] Exit")
+        print("[4] Log out")
         print("=======================================")
-        print("Enter Choice: ")
+        select = int(input("Enter Choice: "))
         print("=======================================")
-        choice = int(input())
-        return choice
+        return select
 
 
 def display_patient_information():
@@ -523,6 +515,7 @@ def takeAppointmentSchedule():
 def view_schedule():
     for current in L:
         if current.accounts.getUsername() == globalUsername:
+
             clear_screen()
             box()
             print("================================================================")
@@ -531,7 +524,7 @@ def view_schedule():
             print(f"USERNAME:           {current.accounts.getUsername()}")
             print(f"NAME:               {current.accounts.getName()}")
             print(f"APPOINTMENT DATE:   {current.accounts.getAppointmentDate()}")
-            print(f"===========================CODE: =========================== {current.accounts.getAppointmentCode()}")
+            print(f"===========================CODE: {current.accounts.getAppointmentCode()}===========================")
             print("DOCTOR DETAILS")
             print(f"APPOINTMENT DOCTOR: {current.accounts.getAppointmentDoctor()}")
             print(f"DEPARTMENT:         {current.accounts.getAppointmentDoctorDepartment()}")
@@ -631,8 +624,6 @@ def updatePatientAppointment(sched, doc, code):
     current.accounts.setAppointmentDoctorDepartment(doc.getDepartment())
     current.accounts.setAppointmentDoctorEmail(doc.getEmail())
     current.accounts.setAppointmentDoctorSchedule(doc.getSchedule())
-    print(current.accounts.getAppointmentDate())
-    print("AYAW MO AH")
 
 
 def updatePatientInformation(username, password, name, age, sex, bday, contactNumber):
@@ -650,11 +641,11 @@ def updatePatientInformation(username, password, name, age, sex, bday, contactNu
                 current.accounts.setContactNumber(contactNumber)
 
 
-def appointmentSchedule(selectedSlot, selectedDoctor, code):
-    currentAccount = getCurrentUserAccount()
-    selectedSlot.numPatients += 1
-    updatePatientAppointment(currentAccount, selectedSlot, selectedDoctor, code)
-    savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.numPatients)
+# def appointmentSchedule(selectedSlot, selectedDoctor, code):
+#     currentAccount = getCurrentUserAccount()
+#     selectedSlot.numPatients += 1
+#     updatePatientAppointment(selectedSlot, selectedDoctor, code)
+#     savePatientSlotFile(currentAccount.accounts.getAppointmentDate(), selectedSlot.numPatients)
 
 
 def confirmationCode():
@@ -677,7 +668,7 @@ def takePaymentMethod():
             print("You have already paid your Appointment")
             pause()
             return
-        elif currentAccount.accounts.getAppointmentDate == "":
+        elif currentAccount.accounts.getAppointmentDate() == "":
             print("You Do Not have an Appointment Yet, Create First!!")
             pause()
             return
@@ -709,8 +700,8 @@ def takePaymentMethod():
     status = 1
     if choice == 2:
         print(f"Reservation Fee: {Variables.RESERVATION_FEE}.00")
-        bankName = input("Enter your Bank Name: ")
-        accountNumber = input("Enter your Account Number: ")
+        input("Enter your Bank Name: ")
+        input("Enter your Account Number: ")
         amount = int(input("Enter Amount: "))
         if amount == Variables.RESERVATION_FEE:
             temp = confirmationCode()
@@ -1035,6 +1026,7 @@ if __name__ == "__main__":
     # retrieve()
     inputPatientInformation("Johnpaul", "monter123", "John Paul", 19, "Male", "January 12, 2003", "09093698521")
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
+    inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
     # save()
     display()
     display_patient_list()
@@ -1076,3 +1068,20 @@ if __name__ == "__main__":
             # save()
             exit(0)
 
+    # Menu Driven for Admin Side
+    isValid = True
+    Valid = True
+    while isValid:
+        choice1 = menu(4)
+        if 1 > choice1 > 4:
+            input("Wrong Input Try Again!!! Press Enter")
+        if choice1 == 1:
+            print("[1] Display Patient List")
+        elif choice1 == 2:
+            print("[2] Display Doctor List")
+        elif choice1 == 3:
+            print("[3] Security Key")
+        elif choice1 == 4:
+            print("[4] Log out")
+            # save()
+            exit(0)
