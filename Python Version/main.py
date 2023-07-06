@@ -300,8 +300,8 @@ def inputPatientInformation(username, password, name, age, sex, bday, contact_nu
 
 def takeLoginAccount():
     global globalUsername
-    print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X\n")
-    print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X\n")
+    print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+    print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
     print("==============================================================================\n")
     user = input("Enter Username: ")
     password = input("Enter Password: ")
@@ -444,9 +444,9 @@ def display_patient_information():
             print(f"SEX:                {current.accounts.getSex()}")
             print(f"BIRTHDAY:           {current.accounts.getBday()}")
             print(f"CONTACT NUMBER:     {current.accounts.getContactNumber()}")
-            print("================================================================\n\t")
+            print("================================================================")
             input("Press Enter to continue...")
-            print("================================================================\n")
+            print("================================================================")
             break
 
 
@@ -454,8 +454,6 @@ def display_patient_information():
 #                   Patient Appointment Methods
 # =================================================================
 def takeAppointmentSchedule():
-    clear_screen()
-    box()
     print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
     print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
     print("================================================================")
@@ -465,9 +463,7 @@ def takeAppointmentSchedule():
     # Check if the user has already scheduled an appointment
     for current in L:
         if current.accounts.username == globalUsername:
-            print(current.accounts.getUsername())
             if current.accounts.getAppointmentDate() != "":
-                print(current.accounts.getAppointmentDate())
                 print("You have already scheduled an appointment")
                 print("Check your appointment schedule in the View Schedule Menu")
                 print("================================================================")
@@ -488,8 +484,6 @@ def takeAppointmentSchedule():
                 else:
                     y = appointmentDoctor()
                     code = appointmentCode()
-                    clear_screen()
-                    box()
                     print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
                     print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
                     print("================================================================")
@@ -500,7 +494,6 @@ def takeAppointmentSchedule():
                     print("Your Doctor is %s" % y.name)
                     print("Your Appointment Code is %s" % code)
                     chosenSlot[choice - 1].numPatients += 1
-                    print(current.accounts.getUsername())
                     updatePatientAppointment(chosenSlot[choice - 1], y, code)
                     savePatientSlotFile(chosenSlot[choice - 1].date, chosenSlot[choice - 1].numPatients)
                     break
@@ -515,9 +508,13 @@ def takeAppointmentSchedule():
 def view_schedule():
     for current in L:
         if current.accounts.getUsername() == globalUsername:
+            if current.accounts.getAppointmentDate() == "":
+                print("================================================================")
+                print("        You do not have an Appointment Yet, Create First        ")
+                print("================================================================")
+                pause()
+                return
 
-            clear_screen()
-            box()
             print("================================================================")
             print("                     Appointment Schedule                       ")
             print("================================================================")
@@ -531,7 +528,7 @@ def view_schedule():
             print(f"SCHEDULE:           {current.accounts.getAppointmentDoctorSchedule()}")
             print(f"EMAIL:              {current.accounts.getAppointmentDoctorEmail()}")
             print(f"CONTACT NUMBER:     {current.accounts.getAppointmentDoctorContactNumber()}")
-            print("================================================================\n\t")
+            print("================================================================")
             input("Press Enter to continue...")
             print("================================================================")
             break
@@ -558,7 +555,6 @@ def generateAppointmentSchedules():
 
 def checkPatientSlotFile(DTIME):
     FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
-    print(FilePath)
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
     # times = DTIME + ".txt"
@@ -581,7 +577,6 @@ def checkPatientSlotFile(DTIME):
 
 def savePatientSlotFile(DTIME, numPatient):
     FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
-    print(FilePath)
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
 
@@ -726,7 +721,6 @@ def takePaymentMethod():
 
 
 def updatePaymentMethod(status):
-    print(status)
     currentAccount = getCurrentUserAccount()
     if currentAccount is not None and currentAccount.accounts is not None:
         currentAccount.accounts.setPaymentStatus(status)
@@ -869,145 +863,122 @@ def getDoctorList():
 # ================================================
 #              File Handling Methods
 # ================================================
-# def save():
-#     encryption = Encryption
-#     try:
-#         with open(Variables.ACCOUNT_FILE, 'w') as outFile, open(Variables.PATIENT_FILE, 'w') as outFile2, open(Variables.DOCTOR_FILE, 'w') as outFile3:
-#             outFile.write("Username, Password\n")
-#             outFile2.write("Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n")
-#             outFile3.write("Name,Department,Schedule,Email,Contact_Number,Payment_Status\n")
-#
-#             for current in L:
-#                 # Encrypt all the data's
-#                 encryptedUsername = encryption.encrypt(current.accounts.getUsername())
-#                 encryptedPassword = encryption.encrypt(current.accounts.getPassword())
-#                 encryptedName = encryption.encrypt(current.accounts.getName())
-#                 encryptedSex = encryption.encrypt(current.accounts.getSex())
-#                 encryptedBday = encryption.encrypt(current.accounts.getBday())
-#                 encryptedContactNumber = encryption.encrypt(current.accounts.getContactNumber())
-#                 encryptedAppointmentDate = encryption.encrypt(current.accounts.getAppointmentDate())
-#                 encryptedAppointmentCode = encryption.encrypt(current.accounts.getAppointmentCode())
-#                 encryptedAge = encryption.encrypt(str(current.accounts.getAge()))
-#                 encryptedAppointmentDoctor = encryption.encrypt(current.accounts.getAppointmentDoctor())
-#                 encryptedAppointmentDoctorDepartment = encryption.encrypt(current.accounts.getAppointmentDoctorDepartment())
-#                 encryptedAppointmentDoctorSchedule = encryption.encrypt(current.accounts.getAppointmentDoctorSchedule())
-#                 encryptedAppointmentDoctorEmail = encryption.encrypt(current.accounts.getAppointmentDoctorEmail())
-#                 encryptedAppointmentDoctorContactNumber = encryption.encrypt(current.accounts.getAppointmentDoctorContactNumber())
-#                 encryptedPaymentStatus = encryption.encrypt(str(current.accounts.getPaymentStatus()))
-#
-#                 # Encode the Encrypted Text with Base64
-#                 # encodedUsername = encryption.encodeToBase64(encryptedUsername)
-#                 # encodedPassword = encryption.encodeToBase64(encryptedPassword)
-#                 # encodedName = encryption.encodeToBase64(encryptedName)
-#                 # encodedSex = encryption.encodeToBase64(encryptedSex)
-#                 # encodedBday = encryption.encodeToBase64(encryptedBday)
-#                 # encodedContactNumber = encryption.encodeToBase64(encryptedContactNumber)
-#                 # encodedAppointmentDate = encryption.encodeToBase64(encryptedAppointmentDate)
-#                 # encodedAppointmentCode = encryption.encodeToBase64(encryptedAppointmentCode)
-#                 # encodedAge = encryption.encodeToBase64(encryptedAge)
-#                 # encodedAppointmentDoctor = encryption.encodeToBase64(encryptedAppointmentDoctor)
-#                 # encodedAppointmentDoctorDepartment = encryption.encodeToBase64(encryptedAppointmentDoctorDepartment)
-#                 # encodedAppointmentDoctorSchedule = encryption.encodeToBase64(encryptedAppointmentDoctorSchedule)
-#                 # encodedAppointmentDoctorEmail = encryption.encodeToBase64(encryptedAppointmentDoctorEmail)
-#                 # encodedAppointmentDoctorContactNumber = encryption.encodeToBase64(encryptedAppointmentDoctorContactNumber)
-#                 # encodedPaymentStatus = encryption.encodeToBase64(encryptedPaymentStatus)
-#
-#                 # Write to file
-#                 outFile.write(f"{encryptedUsername},{encryptedPassword}\n")
-#                 outFile2.write(
-#                     f"{encryptedName},{encryptedSex},{encryptedBday},{encryptedContactNumber},{encryptedAppointmentDate},{encryptedAppointmentCode},{encryptedAge}\n")
-#                 outFile3.write(
-#                     f"{encryptedAppointmentDoctor},{encryptedAppointmentDoctorDepartment},{encryptedAppointmentDoctorSchedule},{encryptedAppointmentDoctorEmail},{encryptedAppointmentDoctorContactNumber},{encryptedPaymentStatus}\n")
-#     except IOError as e:
-#         print("Error opening/writing to file: ", e)
-#
-#
-# def retrieve():
-#     encryption = Encryption
-#     try:
-#         with open(Variables.ACCOUNT_FILE, 'r') as inFile, open(Variables.PATIENT_FILE, 'r') as inFile2, open(Variables.DOCTOR_FILE, 'r') as inFile3:
-#             inFile.readline()
-#             inFile2.readline()
-#             inFile3.readline()
-#             line1, line2, line3 = inFile.readline(), inFile2.readline(), inFile3.readline()
-#             while line1 and line2 and line3:
-#                 # Read the data from the file and split it
-#                 accountlist = line1.split(",")
-#                 patientlist = line2.split(",")
-#                 doctorlist = line3.split(",")
-#
-#                 # Decode the encrypted text using Base64
-#                 # decodeUsername = encryption.decodeToBase64(accountlist[0])
-#                 # decodePassword = encryption.decodeToBase64(accountlist[1])
-#                 # decodeName = encryption.decodeToBase64(patientlist[0])
-#                 # decodeSex = encryption.decodeToBase64(patientlist[1])
-#                 # decodeBday = encryption.decodeToBase64(patientlist[2])
-#                 # decodeContactNumber = encryption.decodeToBase64(patientlist[3])
-#                 # decodeAppointmentDate = encryption.decodeToBase64(patientlist[4])
-#                 # decodeAppointmentCode = encryption.decodeToBase64(patientlist[5])
-#                 # decodeAge = encryption.decodeToBase64(patientlist[6])
-#                 # decodeAppointmentDoctor = encryption.decodeToBase64(doctorlist[0])
-#                 # decodeAppointmentDoctorDepartment = encryption.decodeToBase64(doctorlist[1])
-#                 # decodeAppointmentDoctorSchedule = encryption.decodeToBase64(doctorlist[2])
-#                 # decodeAppointmentDoctorEmail = encryption.decodeToBase64(doctorlist[3])
-#                 # decodeAppointmentDoctorContactNumber = encryption.decodeToBase64(doctorlist[4])
-#                 # decodePaymentStatus = encryption.decodeToBase64(doctorlist[5])
-#
-#                 # Convert the decoded arrays to Strings
-#                 # convertToStringUsername = encryption.convertToString(decodeUsername)
-#                 # convertToStringPassword = encryption.convertToString(decodePassword)
-#                 # convertToStringName = encryption.convertToString(decodeName)
-#                 # convertToStringSex = encryption.convertToString(decodeSex)
-#                 # convertToStringBday = encryption.convertToString(decodeBday)
-#                 # convertToStringContactNumber = encryption.convertToString(decodeContactNumber)
-#                 # convertToStringAppointmentDate = encryption.convertToString(decodeAppointmentDate)
-#                 # convertToStringAppointmentCode = encryption.convertToString(decodeAppointmentCode)
-#                 # convertToStringAge = encryption.convertToString(decodeAge)
-#                 # convertToStringAppointmentDoctor = encryption.convertToString(decodeAppointmentDoctor)
-#                 # convertToStringAppointmentDoctorDepartment = encryption.convertToString(decodeAppointmentDoctorDepartment)
-#                 # convertToStringAppointmentDoctorSchedule = encryption.convertToString(decodeAppointmentDoctorSchedule)
-#                 # convertToStringAppointmentDoctorEmail = encryption.convertToString(decodeAppointmentDoctorEmail)
-#                 # convertToStringAppointmentDoctorContactNumber = encryption.convertToString(decodeAppointmentDoctorContactNumber)
-#                 # convertToStringPaymentStatus = encryption.convertToString(decodePaymentStatus)
-#
-#                 # Decrypt the Strings
-#                 decryptedUsername = encryption.decrypt(accountlist[0])
-#                 decryptedPassword = encryption.decrypt(accountlist[1])
-#                 decryptedName = encryption.decrypt(patientlist[0])
-#                 decryptedSex = encryption.decrypt(patientlist[1])
-#                 decryptedBday = encryption.decrypt(patientlist[2])
-#                 decryptedContactNumber = encryption.decrypt(patientlist[3])
-#                 decryptedAppointmentDate = encryption.decrypt(patientlist[4])
-#                 decryptedAppointmentCode = encryption.decrypt(patientlist[5])
-#                 decryptedAge = encryption.decrypt(patientlist[6])
-#                 decryptedAppointmentDoctor = encryption.decrypt(doctorlist[0])
-#                 decryptedAppointmentDoctorDepartment = encryption.decrypt(doctorlist[1])
-#                 decryptedAppointmentDoctorSchedule = encryption.decrypt(doctorlist[2])
-#                 decryptedAppointmentDoctorEmail = encryption.decrypt(doctorlist[3])
-#                 decryptedAppointmentDoctorContactNumber = encryption.decrypt(doctorlist[4])
-#                 decryptedPaymentStatus = encryption.decrypt(doctorlist[5])
-#
-#                 # Create the Account Objects
-#                 account = Account(None, None, None, None, None, None, None)
-#                 account.setUsername(decryptedUsername)
-#                 account.setPassword(decryptedPassword)
-#                 account.setName(decryptedName)
-#                 account.setSex(decryptedSex)
-#                 account.setBday(decryptedBday)
-#                 account.setContactNumber(decryptedContactNumber)
-#                 account.setAppointmentDate(decryptedAppointmentDate)
-#                 account.setAppointmentCode(decryptedAppointmentCode)
-#                 account.setAge(int(decryptedAge))
-#                 account.setAppointmentDoctor(decryptedAppointmentDoctor)
-#                 account.setAppointmentDoctorDepartment(decryptedAppointmentDoctorDepartment)
-#                 account.setAppointmentDoctorSchedule(decryptedAppointmentDoctorSchedule)
-#                 account.setAppointmentDoctorEmail(decryptedAppointmentDoctorEmail)
-#                 account.setAppointmentDoctorContactNumber(decryptedAppointmentDoctorContactNumber)
-#                 account.setPaymentStatus(int(decryptedPaymentStatus))
-#                 add(account)
-#
-#     except IOError as e:
-#         print("Error opening/reading the file: ", e)
+def save():
+    encryption = Encryption
+    try:
+        with open(Variables.ACCOUNT_FILE, 'w') as outFile, open(Variables.PATIENT_FILE, 'w') as outFile2, open(Variables.DOCTOR_FILE, 'w') as outFile3:
+            outFile.write("Username, Password\n")
+            outFile2.write("Name,Sex,Birthday,Contact_Number,Appointment_Date,Code,Age\n")
+            outFile3.write("Name,Department,Schedule,Email,Contact_Number,Payment_Status\n")
+
+            for current in L:
+                # Encrypt all the data's
+                encryptedUsername = encryption.encrypt(current.accounts.getUsername())
+                encryptedPassword = encryption.encrypt(current.accounts.getPassword())
+                encryptedName = encryption.encrypt(current.accounts.getName())
+                encryptedSex = encryption.encrypt(current.accounts.getSex())
+                encryptedBday = encryption.encrypt(current.accounts.getBday())
+                encryptedContactNumber = encryption.encrypt(current.accounts.getContactNumber())
+                encryptedAppointmentDate = encryption.encrypt(current.accounts.getAppointmentDate())
+                encryptedAppointmentCode = encryption.encrypt(current.accounts.getAppointmentCode())
+                encryptedAge = encryption.encrypt(str(current.accounts.getAge()))
+                encryptedAppointmentDoctor = encryption.encrypt(current.accounts.getAppointmentDoctor())
+                encryptedAppointmentDoctorDepartment = encryption.encrypt(current.accounts.getAppointmentDoctorDepartment())
+                encryptedAppointmentDoctorSchedule = encryption.encrypt(current.accounts.getAppointmentDoctorSchedule())
+                encryptedAppointmentDoctorEmail = encryption.encrypt(current.accounts.getAppointmentDoctorEmail())
+                encryptedAppointmentDoctorContactNumber = encryption.encrypt(current.accounts.getAppointmentDoctorContactNumber())
+                encryptedPaymentStatus = encryption.encrypt(str(current.accounts.getPaymentStatus()))
+                # textAccount = current.accounts.username + ',' + current.accounts.password
+                # print(textAccount)
+                # textPatient = current.accounts.name + ',' + current.accounts.sex + ',' + current.accounts.bday + ',' + current.accounts.contact_number + ',' + current.accounts.appointment_date + ',' + current.accounts.appointment_code + ',' + str(current.accounts.age)
+                # textDoctor = current.accounts.appointment_doctor + ',' + current.accounts.appointment_doctor_department + ',' + current.accounts.appointment_doctor_schedule + ',' + current.accounts.appointment_doctor_email + ',' + current.accounts.appointment_doctor_contact_number + ',' + str(current.accounts.payment_status)
+                # encryptedTextAccount = encryption.encryptDecrypt(textAccount)
+                # print(encryptedTextAccount)
+                # print(encryption.encryptDecrypt(encryptedTextAccount))
+                # encryptedTextPatient = encryption.encryptDecrypt(textPatient)
+                # encryptedTextDoctor = encryption.encryptDecrypt(textDoctor)
+                # Encode the Encrypted Text with Base64
+                # encodedUsername = encryption.encodeToBase64(encryptedUsername)
+                # encodedPassword = encryption.encodeToBase64(encryptedPassword)
+                # encodedName = encryption.encodeToBase64(encryptedName)
+                # encodedSex = encryption.encodeToBase64(encryptedSex)
+                # encodedBday = encryption.encodeToBase64(encryptedBday)
+                # encodedContactNumber = encryption.encodeToBase64(encryptedContactNumber)
+                # encodedAppointmentDate = encryption.encodeToBase64(encryptedAppointmentDate)
+                # encodedAppointmentCode = encryption.encodeToBase64(encryptedAppointmentCode)
+                # encodedAge = encryption.encodeToBase64(encryptedAge)
+                # encodedAppointmentDoctor = encryption.encodeToBase64(encryptedAppointmentDoctor)
+                # encodedAppointmentDoctorDepartment = encryption.encodeToBase64(encryptedAppointmentDoctorDepartment)
+                # encodedAppointmentDoctorSchedule = encryption.encodeToBase64(encryptedAppointmentDoctorSchedule)
+                # encodedAppointmentDoctorEmail = encryption.encodeToBase64(encryptedAppointmentDoctorEmail)
+                # encodedAppointmentDoctorContactNumber = encryption.encodeToBase64(encryptedAppointmentDoctorContactNumber)
+                # encodedPaymentStatus = encryption.encodeToBase64(encryptedPaymentStatus)
+
+                # Write to file
+                outFile.write(f"{encryptedUsername},{encryptedPassword}\n")
+                outFile2.write(f"{encryptedName},{encryptedSex},{encryptedBday},{encryptedContactNumber},{encryptedAppointmentDate},{encryptedAppointmentCode},{encryptedAge}\n")
+                outFile3.write(f"{encryptedAppointmentDoctor},{encryptedAppointmentDoctorDepartment},{encryptedAppointmentDoctorSchedule},{encryptedAppointmentDoctorEmail},{encryptedAppointmentDoctorContactNumber},{encryptedPaymentStatus}\n")
+    except IOError as e:
+        print("Error opening/writing to file: ", e)
+
+
+def retrieve():
+    encryption = Encryption
+    try:
+        with open(Variables.ACCOUNT_FILE, 'r') as inFile, open(Variables.PATIENT_FILE, 'r') as inFile2, open(Variables.DOCTOR_FILE, 'r') as inFile3:
+            inFile.readline()
+            inFile2.readline()
+            inFile3.readline()
+
+            for line1, line2, line3 in zip(inFile, inFile2, inFile3):
+                retrieveTextAccount = line1.strip()
+                account_values = retrieveTextAccount.split(',')
+                decryptedUsername = encryption.decrypt(account_values[0])
+                decryptedPassword = encryption.decrypt(account_values[1])
+
+                retrieveTextPatient = line2.strip()
+                patient_values = retrieveTextPatient.split(',')
+                decryptedName = encryption.decrypt(patient_values[0])
+                decryptedSex = encryption.decrypt(patient_values[1])
+                decryptedBday = encryption.decrypt(patient_values[2])
+                decryptedContactNumber = encryption.decrypt(patient_values[3])
+                decryptedAppointmentDate = encryption.decrypt(patient_values[4])
+                decryptedAppointmentCode = encryption.decrypt(patient_values[5])
+                decryptedAge = encryption.decrypt(patient_values[6])
+
+                retrieveTextDoctor = line3.strip()
+                doctor_values = retrieveTextDoctor.split(',')
+                decryptedAppointmentDoctor = encryption.decrypt(doctor_values[0])
+                decryptedAppointmentDoctorDepartment = encryption.decrypt(doctor_values[1])
+                decryptedAppointmentDoctorSchedule = encryption.decrypt(doctor_values[2])
+                decryptedAppointmentDoctorEmail = encryption.decrypt(doctor_values[3])
+                decryptedAppointmentDoctorContactNumber = encryption.decrypt(doctor_values[4])
+                decryptedPaymentStatus = encryption.decrypt(doctor_values[5])
+
+                account = Account(None, None, None, None, None, None, None)
+                account.setUsername(decryptedUsername)
+                print(decryptedUsername)
+                account.setPassword(decryptedPassword)
+                print(decryptedPassword)
+                account.setName(decryptedName)
+                print(decryptedName)
+                account.setSex(decryptedSex)
+                account.setBday(decryptedBday)
+                account.setContactNumber(decryptedContactNumber)
+                account.setAppointmentDate(decryptedAppointmentDate)
+                account.setAppointmentCode(decryptedAppointmentCode)
+                print(str(decryptedAge))
+                account.setAge(decryptedAge)
+                account.setAppointmentDoctor(decryptedAppointmentDoctor)
+                account.setAppointmentDoctorDepartment(decryptedAppointmentDoctorDepartment)
+                account.setAppointmentDoctorSchedule(decryptedAppointmentDoctorSchedule)
+                account.setAppointmentDoctorEmail(decryptedAppointmentDoctorEmail)
+                account.setAppointmentDoctorContactNumber(decryptedAppointmentDoctorContactNumber)
+                account.setPaymentStatus(int(decryptedPaymentStatus))
+                add(account)
+
+    except IOError as e:
+        print("Error opening/reading the file: ", e)
 
 
 # ================================================
@@ -1016,20 +987,18 @@ def getDoctorList():
 if __name__ == "__main__":
     os.makedirs(Variables.DATABASE_FOLDER, exist_ok=True)
     os.makedirs(Variables.SCHEDULE_FOLDER, exist_ok=True)
-    # encrypt = Encryption
-    # if os.path.exists(Variables.KEY_FILE):
-    #     encrypt.retrieveKey()
-    # else:
-    #     encrypt.setKey(70)
-    #     encrypt.saveKey()
+    encrypt = Encryption
+    if os.path.exists(Variables.KEY_FILE):
+        encrypt.retrieveKey()
+    else:
+        encrypt.setKey(70)
+        encrypt.saveKey()
+    retrieve()
 
-    # retrieve()
     inputPatientInformation("Johnpaul", "monter123", "John Paul", 19, "Male", "January 12, 2003", "09093698521")
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
-    # save()
     display()
-    display_patient_list()
 
     # ASK FOR USER
     isValid = True
@@ -1043,7 +1012,7 @@ if __name__ == "__main__":
         elif choice == 2:
             Valid = takeInputPatientInformation()
         elif choice == 3:
-            # save();
+            save()
             print("Programmed By: Monter, John Paul | Garcia, Almira Jill | Carolino, Jeanne May\n\n\n\n")
             exit(0)
         if Valid:
@@ -1065,7 +1034,7 @@ if __name__ == "__main__":
         elif choice1 == 4:
             takePaymentMethod()
         elif choice1 == 5:
-            # save()
+            save()
             exit(0)
 
     # Menu Driven for Admin Side
@@ -1083,5 +1052,5 @@ if __name__ == "__main__":
             print("[3] Security Key")
         elif choice1 == 4:
             print("[4] Log out")
-            # save()
+            save()
             exit(0)
