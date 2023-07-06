@@ -448,51 +448,51 @@ def takeAppointmentSchedule():
     # Check if the user has already scheduled an appointment
     for current in L:
         if current.accounts.username == globalUsername:
-            if current.accounts.appointment_date != "":
+            print(current.accounts.getUsername())
+            if current.accounts.getAppointmentDate() != "":
+                print(current.accounts.getAppointmentDate())
                 print("You have already scheduled an appointment")
                 print("Check your appointment schedule in the View Schedule Menu")
                 print("================================================================")
                 input("Press Enter to continue...")
                 return
+
+            print("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE")
+            chosenSlot = generateAppointmentSchedules()
+
+            full = 0
+            choice = int(input("Enter Choice: "))
+            print("================================================================")
+            if 1 <= choice <= 3:
+                if chosenSlot[choice - 1].numPatients >= Variables.MAX_PATIENTS:
+                    print("Sorry, the slots are already full")
+                    print("Please choose another date")
+                    full = 1
+                else:
+                    y = appointmentDoctor()
+                    code = appointmentCode()
+                    clear_screen()
+                    box()
+                    print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+                    print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+                    print("================================================================")
+                    print("                     Appointment Schedule                       ")
+                    print("================================================================")
+                    print("You have Successfully created an Appointment Schedule")
+                    print("Your Appointment Schedule is on %s" % chosenSlot[choice - 1].date)
+                    print("Your Doctor is %s" % y.name)
+                    print("Your Appointment Code is %s" % code)
+                    chosenSlot[choice - 1].numPatients += 1
+                    print(current.accounts.getUsername())
+                    updatePatientAppointment(chosenSlot[choice - 1], y, code)
+                    savePatientSlotFile(chosenSlot[choice - 1].date, chosenSlot[choice - 1].numPatients)
+                    break
             else:
+                print("Invalid Choice")
+            print("================================================================")
+            input("Press Enter to continue...")
+            if 1 <= choice <= 3 or full == 0:
                 break
-
-        print("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE")
-        chosenSlot = generateAppointmentSchedules()
-
-        full = 0
-        choice = int(input("Enter Choice: "))
-        print("================================================================")
-        if 1 <= choice <= 3:
-            if chosenSlot[choice - 1].numPatients >= Variables.MAX_PATIENTS:
-                print("Sorry, the slots are already full")
-                print("Please choose another date")
-                full = 1
-            else:
-                y = appointmentDoctor()
-                code = appointmentCode()
-                clear_screen()
-                box()
-                print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
-                print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
-                print("================================================================")
-                print("                     Appointment Schedule                       ")
-                print("================================================================")
-                print("You have Successfully created an Appointment Schedule")
-                print("Your Appointment Schedule is on %s" % chosenSlot[choice - 1].date)
-                print("Your Doctor is %s" % y.name)
-                print("Your Appointment Code is %s" % code)
-                chosenSlot[choice - 1].numPatients += 1
-
-                updatePatientAppointment(chosenSlot[choice - 1], y, code)
-                savePatientSlotFile(current.accounts.getAppointmentDate(), chosenSlot[choice - 1].numPatients)
-                break
-        else:
-            print("Invalid Choice")
-        print("================================================================")
-        input("Press Enter to continue...")
-        if 1 <= choice <= 3 or full == 0:
-            break
 
 
 def view_schedule():
@@ -539,7 +539,8 @@ def generateAppointmentSchedules():
 
 
 def checkPatientSlotFile(DTIME):
-    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, DTIME + ".txt")
+    FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
+    print(FilePath)
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
     # times = DTIME + ".txt"
@@ -561,8 +562,8 @@ def checkPatientSlotFile(DTIME):
 
 
 def savePatientSlotFile(DTIME, numPatient):
-    print(f"number of patient: {numPatient}")
     FilePath = os.path.join(os.getcwd(), Variables.SCHEDULE_FOLDER, (DTIME + ".txt"))
+    print(FilePath)
     if not os.path.exists(FilePath):
         open(FilePath, "w").close()
 
@@ -598,14 +599,15 @@ def listofDoctor():
 
 def updatePatientAppointment(sched, doc, code):
     current = getCurrentUserAccount()
-    print("MAGPRINTTTT KAAAA")
-    print(current.accounts.setAppointmentCode(code))
-    print(current.accounts.setAppointmentDate(sched.getDate()))
-    print(current.accounts.setAppointmentDoctor(doc.getName()))
+    current.accounts.setAppointmentCode(code)
+    current.accounts.setAppointmentDate(sched.getDate())
+    current.accounts.setAppointmentDoctor(doc.getName())
     current.accounts.setAppointmentDoctorContactNumber(doc.getContactNumber())
     current.accounts.setAppointmentDoctorDepartment(doc.getDepartment())
     current.accounts.setAppointmentDoctorEmail(doc.getEmail())
     current.accounts.setAppointmentDoctorSchedule(doc.getSchedule())
+    print(current.accounts.getAppointmentDate())
+    print("AYAW MO AH")
 
 
 def updatePatientInformation(username, password, name, age, sex, bday, contactNumber):
@@ -646,8 +648,12 @@ def confirmationCode():
 def takePaymentMethod():
     currentAccount = getCurrentUserAccount()
     if currentAccount is not None and currentAccount.accounts is not None:
-        if currentAccount.accounts.getAppointmentDate == 1:
+        if currentAccount.accounts.getPaymentStatus() == 2:
             print("You have already paid your Appointment")
+            pause()
+            return
+        elif currentAccount.accounts.getAppointmentDate == "":
+            print("You Do Not have an Appointment Yet, Create First!!")
             pause()
             return
 
@@ -675,7 +681,7 @@ def takePaymentMethod():
         elif choice == 3:
             return
 
-    status = 0
+    status = 1
     if choice == 2:
         print(f"Reservation Fee: {Variables.RESERVATION_FEE}.00")
         bankName = input("Enter your Bank Name: ")
@@ -687,14 +693,14 @@ def takePaymentMethod():
             print("Payment Successful")
             print("Thank You for Using our Program!!")
             pause()
-            status = 1
+            status = 2
         elif amount > Variables.RESERVATION_FEE:
             temp = confirmationCode()
             print(f"Your Confirmation Code is: {temp}")
             print("Payment Successful")
             print("Thank You for Using our Program!!")
             pause()
-            status = 1
+            status = 2
         else:
             print("Payment Failed")
             pause()
@@ -704,9 +710,11 @@ def takePaymentMethod():
 
 
 def updatePaymentMethod(status):
+    print(status)
     currentAccount = getCurrentUserAccount()
     if currentAccount is not None and currentAccount.accounts is not None:
         currentAccount.accounts.setPaymentStatus(status)
+        print(currentAccount.accounts.getPaymentStatus())
 
 
 # =============================================================================
