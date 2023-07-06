@@ -62,6 +62,13 @@ def display():
         count += 1
 
 
+def display_patient_list():
+    count = 0
+    for current in L:
+        print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + current.accounts.getPaymentStatus())
+        count += 1
+
+
 class Account:
     def __init__(self, username, password, name, age, sex, bday, contact_number):
         self.username = username
@@ -383,7 +390,7 @@ def menu(x):
         gotoxy(41,21);print("=======================================")
         gotoxy(68,20);choice = int(input())
         return choice
-    else:
+    elif x == 3:
         clear_screen()
         box()
         gotoxy(35, 5); print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
@@ -402,6 +409,24 @@ def menu(x):
         gotoxy(46,19);print("Enter Choice: ")
         gotoxy(41,20);print("=======================================")
         gotoxy(65,19);choice = int(input())
+        return choice
+    elif x == 4:
+        clear_screen()
+        box()
+        print("X|||||||||||||||||E-SCHED MEDICAL|||||||||||||||||X")
+        print("X|||||||||||||||PATIENT APPOINTMENT|||||||||||||||X")
+        print("=======================================")
+        print("[1] Display Patient List")
+        print("=======================================")
+        print("[2] Display Doctor List")
+        print("=======================================")
+        print("[3] Security Key")
+        print("=======================================")
+        print("[4] Exit")
+        print("=======================================")
+        print("Enter Choice: ")
+        print("=======================================")
+        choice = int(input())
         return choice
 
 
@@ -940,6 +965,7 @@ if __name__ == "__main__":
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     # save()
     display()
+    display_patient_list()
 
     # ASK FOR USER
     isValid = True
@@ -977,3 +1003,4 @@ if __name__ == "__main__":
         elif choice1 == 5:
             # save()
             exit(0)
+
