@@ -1077,7 +1077,7 @@ if __name__ == "__main__":
     inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
     inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
 
-    display()
+    #display()
 
     # ASK FOR USER
     isValid = True

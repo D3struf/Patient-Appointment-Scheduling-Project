@@ -22,20 +22,20 @@ def setKey(key):
     globalkey = key
 
 
-def encryptDecrypt(text):
-    inputBytes = []
-    for b in text:
-        inputBytes.append(ord(b))
-
-    result = [] * len(inputBytes)
-    for bb in inputBytes:
-        result.append(bb ^ globalkey)
-
-    converted = ""
-    for bbb in result:
-        converted += chr(bbb)
-
-    return converted
+# def encryptDecrypt(text):
+#     inputBytes = []
+#     for b in text:
+#         inputBytes.append(ord(b))
+#
+#     result = [] * len(inputBytes)
+#     for bb in inputBytes:
+#         result.append(bb ^ globalkey)
+#
+#     converted = ""
+#     for bbb in result:
+#         converted += chr(bbb)
+#
+#     return converted
 
 
 def encrypt(plain_text):
@@ -87,17 +87,17 @@ def decrypt(encrypted_text):
 #     return ''.join(decrypted)
 
 
-def convertToString(arrayofStrings):
-    result = ''.join(arrayofStrings)
-    return result
-
-
-def encodeToBase64(encryptedStrings):
-    return base64.b64encode(encryptedStrings.encode())
-
-
-def decodeToBase64(decryptedStrings):
-    return base64.b64decode(decryptedStrings)
+# def convertToString(arrayofStrings):
+#     result = ''.join(arrayofStrings)
+#     return result
+#
+#
+# def encodeToBase64(encryptedStrings):
+#     return base64.b64encode(encryptedStrings.encode())
+#
+#
+# def decodeToBase64(decryptedStrings):
+#     return base64.b64decode(decryptedStrings)
 
 
 def saveKey():
