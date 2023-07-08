@@ -26,17 +26,6 @@ class Variables:
     ADMIN_USERNAME = "admin"
     ADMIN_PASSWORD = "admin123"
 
-    # Determine the current working directory
-    # currentDirectory = os.getcwd()
-
-    # Construct the absolute paths using the current directory
-    # databaseFolderPath = os.path.join(currentDirectory, DATABASE_FOLDER)
-    # accountFilePath = os.path.join(currentDirectory, ACCOUNT_FILE)
-    # patientFilePath = os.path.join(currentDirectory, PATIENT_FILE)
-    # doctorFilePath = os.path.join(currentDirectory, DOCTOR_FILE)
-    # keyFilePath = os.path.join(currentDirectory, KEY_FILE)
-    # schedulesFolderPath = os.path.join(currentDirectory, FOLDER)
-
 
 # =================================================================
 #                           Global Variables
@@ -459,9 +448,7 @@ def display_patient_information():
             print(f"SEX:                {current.accounts.getSex()}")
             print(f"BIRTHDAY:           {current.accounts.getBday()}")
             print(f"CONTACT NUMBER:     {current.accounts.getContactNumber()}")
-            print("\n")
-            input("Press Enter to continue...")
-            print("\n")
+            pause()
             break
 
 
@@ -482,10 +469,10 @@ def takeAppointmentSchedule():
         if current.accounts.username == globalUsername:
             if current.accounts.getAppointmentDate() != "":
                 print_color(GREEN, " You have already scheduled an appointment ", STOP)
-                print("\n")
+                print("")
                 print("Check your appointment schedule in the View Schedule Menu")
-                print("\n")
-                input("Press Enter to continue...")
+                print("")
+                pause()
                 return
 
             print("       DATE         NUMBER OF PATIENTS          SLOTS AVAILABLE")
@@ -496,8 +483,11 @@ def takeAppointmentSchedule():
             print("================================================================")
             if 1 <= selects <= 3:
                 if chosenSlot[selects - 1].numPatients >= Variables.MAX_PATIENTS:
-                    print("Sorry, the slots are already full")
+                    print_color(RED, "Sorry, the slots are already full", STOP)
+                    print()
                     print("Please choose another date")
+                    print()
+                    pause()
                     full = 1
                 else:
                     y = appointmentDoctor()
@@ -519,8 +509,8 @@ def takeAppointmentSchedule():
                     break
             else:
                 print_color(RED, "Invalid Choice", STOP)
-            print("\n")
-            input("Press Enter to continue...")
+            print("")
+            pause()
             if 1 <= selects <= 3 or full == 0:
                 break
 
@@ -530,7 +520,7 @@ def view_schedule():
         if current.accounts.getUsername() == globalUsername:
             if current.accounts.getAppointmentDate() == "":
                 print("\n")
-                print(RED, " You do not have an Appointment Yet, Create First! ")
+                print(RED, " You do not have an Appointment Yet, Create First! ", STOP)
                 print("\n")
                 pause()
                 return
@@ -548,9 +538,7 @@ def view_schedule():
             print(f"SCHEDULE:           {current.accounts.getAppointmentDoctorSchedule()}")
             print(f"EMAIL:              {current.accounts.getAppointmentDoctorEmail()}")
             print(f"CONTACT NUMBER:     {current.accounts.getAppointmentDoctorContactNumber()}")
-            print("\n")
-            input("Press Enter to continue...")
-            print("\n")
+            pause()
             break
 
 
@@ -594,7 +582,6 @@ def savePatientSlotFile(DTIME, numPatient):
         open(FilePath, "w").close()
 
     with open(FilePath, "w") as file:
-        print(FilePath)
         file.write(str(numPatient))
 
 
@@ -631,21 +618,6 @@ def updatePatientAppointment(sched, doc, code):
     current.accounts.setAppointmentDoctorSchedule(doc.getSchedule())
 
 
-def updatePatientInformation(username, password, name, age, sex, bday, contactNumber):
-    global L
-    global globalUsername
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername().isEqual(globalUsername):
-                current.accounts.setUsername(username)
-                current.accounts.setPassword(password)
-                current.accounts.setName(name)
-                current.accounts.setAge(age)
-                current.accounts.setBday(bday)
-                current.accounts.setSex(sex)
-                current.accounts.setContactNumber(contactNumber)
-
-
 def confirmationCode():
     length = 5
     code = ""
@@ -664,31 +636,34 @@ def takePaymentMethod():
     if currentAccount is not None and currentAccount.accounts is not None:
         if currentAccount.accounts.getPaymentStatus() == 2:
             print_color(GREEN, " You have already paid your Appointment ", STOP)
+            print()
             pause()
             return
         elif currentAccount.accounts.getAppointmentDate() == "":
             print_color(RED, " You Do Not have an Appointment Yet, Create First!! ", STOP)
+            print()
             pause()
             return
 
     while True:
         selected = menu(2)
         if 1 > selected > 3:
-            print("Invalid Input!, Try Again!!!")
+            print_color(RED, "Invalid Input!, Try Again!!!", STOP)
+            print()
             pause()
 
         if selected == 1:
             print_color(GREY, " Mode of Transaction:", STOP)
             print_color(GREEN, " Cash ", STOP)
-            print("\n")
+            print()
             print(f"Go to the nearest {Variables.HOSPITAL_NAME} for your Payment!")
             pause()
             break
         elif selected == 2:
-            print("\n")
+            print("")
             print_color(GREY, " Mode of Transaction:", STOP)
             print_color(GREEN, " Online ", STOP)
-            print("\n")
+            print("")
             break
         elif selected == 3:
             return
@@ -703,6 +678,7 @@ def takePaymentMethod():
             temp = confirmationCode()
             print(f"Your Confirmation Code is: {temp}")
             print_color(GREEN, "Payment Successful", STOP)
+            print()
             print("Thank You for Using our Program!!")
             pause()
             status = 2
@@ -710,6 +686,7 @@ def takePaymentMethod():
             temp = confirmationCode()
             print(f"Your Confirmation Code is: {temp}")
             print_color(GREEN, "Payment Successful", STOP)
+            print()
             print("Thank You for Using our Program!!")
             pause()
             status = 2
@@ -728,137 +705,14 @@ def updatePaymentMethod(status):
         print(currentAccount.accounts.getPaymentStatus())
 
 
-# =============================================================================
-#                       Getter Methods
-# =============================================================================
+# ================================================
+#                  Getter Method
+# ================================================
 def getCurrentUserAccount():
     for current in L:
         if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
             if current.accounts.getUsername() == globalUsername:
                 return current
-
-
-def getCurrentUserName():
-    return globalUsername
-
-
-def getCurrentPassword():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getPassword()
-
-
-def getCurrentSchedule():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDate()
-
-
-def getCurrentName():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getName()
-
-
-def getCurrentAge():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAge()
-
-
-def getCurrentContactNumber():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getContactNumber()
-
-
-def getCurrentSex():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getSex()
-
-
-def getCurrentBirthday():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getBday()
-
-
-def getCurrentPayment():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getPaymentStatus()
-
-
-def getCurrentAppointmentCode():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentCode()
-
-
-def getCurrentAppointmentDate():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDate()
-
-
-def getCurrentAppointmentDoctor():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDoctor()
-
-
-def getCurrentAppointmentDoctorDepartment():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDoctorDepartment()
-
-
-def getCurrentAppointmentDoctorSchedule():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDoctorSchedule()
-
-
-def getCurrentAppointmentDoctorEmail():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDoctorEmail()
-
-
-def getCurrentAppointmentDoctorContactNumber():
-    for current in L:
-        if current is not None and current.accounts is not None and current.accounts.getUsername() is not None:
-            if current.accounts.getUsername() == globalUsername:
-                return current.accounts.getAppointmentDoctorContactNumber()
-
-
-def getAccountList():
-    accountList = []
-    for current in L:
-        accountList.append(current.accounts)
-    return accountList
-
-
-def getDoctorList():
-    doctorList = []
-    for current in doctors:
-        doctorList.append(current)
-    return doctorList
 
 
 # ================================================
@@ -876,6 +730,7 @@ def display_patient_list():
         print(str(count + 1) + ".) Name: " + current.accounts.name + " | Age: " + str(current.accounts.age) + " | Sex: " + current.accounts.sex + " | Birthday: " + current.accounts.bday + " | Contact Number: " + current.accounts.contact_number + "| Doctor: " + current.accounts.getAppointmentDoctor() + "| Payment Status: " + (
               "Paid" if current.accounts.getPaymentStatus() == 2 else "Unpaid"))
         count += 1
+    pause()
 
 
 def display_doctor_list():
@@ -888,6 +743,7 @@ def display_doctor_list():
     print("Dr. Alex Murray", f"\t\t""OPD", f"\t\t\t\t""Friday to Saturday - 9:00am to 5:00pm", f"\t\t\t\t""alex.murray@tupmc.com", f"\t\t\t""09918273645")
     print("Dr. John Smith", f"\t\t\t""OPD", f"\t\t\t\t""Monday to Tuesday - 9:00am to 5:00pm", f"\t\t\t\t""john.smith@tupmc.com", f"\t\t\t""09123456789")
     print("Dr. Sarah Lee", f"\t\t\t""OPD", f"\t\t\t\t""Wednesday to Thursday - 10:00am to 6:00pm", f"\t\t\t""sarah.lee@hospital.com", f"\t\t\t""09987654321")
+    pause()
 
 
 def security():
@@ -901,6 +757,10 @@ def security():
     newKey = int(input("Enter a new key: "))
     encryption.setKey(newKey)
     encryption.saveKey()
+    print()
+    print_color(GREEN, "New Key has been set successfully!", STOP)
+    print()
+    pause()
 
 
 # ================================================
@@ -1073,20 +933,17 @@ if __name__ == "__main__":
     retrieve()
     print_welcome_message()
 
-    inputPatientInformation("Johnpaul", "monter123", "John Paul", 19, "Male", "January 12, 2003", "09093698521")
-    inputPatientInformation("jeanne", "carolino123", "Jeanne May", 19, "Female", "January 12, 2003", "09093698521")
-    inputPatientInformation("miraii", "garcia123", "Almira Jill", 19, "Female", "January 12, 2003", "09093698521")
-
-    #display()
-
     # ASK FOR USER
     isValid = True
     Valid = True
     while isValid:
         choice = menu(1)
-        if 1 > choice > 3:
-            input("Wrong Input Try Again!!! Press Enter")
-        if choice == 1:
+        if choice > 3 or choice < 1:
+            print_color(RED, "Wrong Input Try Again!!!", STOP)
+            print()
+            pause()
+            Valid = False
+        elif choice == 1:
             Valid = takeLoginAccount()
         elif choice == 2:
             Valid = takeInputPatientInformation()
@@ -1104,8 +961,11 @@ if __name__ == "__main__":
         while isValid:
             print_admin_message()
             choice1 = menu(4)
-            if 1 > choice1 > 4:
-                input("Wrong Input Try Again!!! Press Enter")
+            if choice1 > 4 or choice1 < 1:
+                print_color(RED, "Wrong Input Try Again!!!", STOP)
+                print()
+                pause()
+                Valid = False
             if choice1 == 1:
                 display_patient_list()
             elif choice1 == 2:
@@ -1123,8 +983,11 @@ if __name__ == "__main__":
         while isValid:
             print_patient_message()
             choice1 = menu(3)
-            if 1 > choice1 > 5:
-                input("Wrong Input Try Again!!! Press Enter")
+            if choice1 > 5 or choice1 < 1:
+                print_color(RED, "Wrong Input Try Again!!!", STOP)
+                print()
+                pause()
+                Valid = False
             if choice1 == 1:
                 display_patient_information()
             elif choice1 == 2:
