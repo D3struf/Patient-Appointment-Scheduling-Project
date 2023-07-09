@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Patient-Appointment-Scheduling-Project.iml" filepath="$PROJECT_DIR$/.idea/Patient-Appointment-Scheduling-Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pythonProject/ShellSortVisualizer/.idea/ShellSortVisualizer.iml" filepath="$PROJECT_DIR$/../pythonProject/ShellSortVisualizer/.idea/ShellSortVisualizer.iml" />
     </modules>
   </component>
 </project>
